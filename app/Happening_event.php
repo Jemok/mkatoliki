@@ -24,7 +24,8 @@ class Happening_event extends Model
     protected $fillable = [
         'event_title',
         'event_body',
-        'event_excerpt'
+        'event_excerpt',
+        'event_date'
     ];
 
     /**

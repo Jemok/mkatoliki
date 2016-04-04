@@ -17,6 +17,7 @@ class CreateHappeningEventsTableMigration extends Migration
             $table->string('event_title');
             $table->text('event_body');
             $table->text('event_excerpt');
+            $table->dateTime('event_date');
             $table->integer('user_id')->unsigned();
             $table->timestamps();
 

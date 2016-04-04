@@ -40,7 +40,7 @@ class HappeningController extends Controller
         $happening->event_title = $request->get('event_title');
         $happening->event_body = $request->get('event_body');
         $happening->event_excerpt = $request->get('event_excerpt');
-
+        $happening->event_date = $request->get('event_date');
 
         if($this->currentUser()->happenings()->save($happening))
             return $this->response->created();
@@ -56,11 +56,11 @@ class HappeningController extends Controller
      */
     public function show($id)
     {
-        $jumuiya = $this->currentUser()->happenings()->find($id);
+        $happening = $this->currentUser()->happenings()->find($id);
 
-        if(!$jumuiya)
+        if(!$happening)
             throw new NotFoundHttpException;
-        return $jumuiya;
+        return $happening;
     }
 
 
@@ -73,14 +73,14 @@ class HappeningController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $jumuiya = $this->currentUser()->happenings()->find($id);
+        $happening = $this->currentUser()->happenings()->find($id);
 
-        if(!$jumuiya)
+        if(!$happening)
             throw new NotFoundHttpException;
 
-        $jumuiya->fill($request->all());
+        $happening->fill($request->all());
 
-        if($jumuiya->save())
+        if($happening->save())
             return $this->response->noContent();
         else
             return $this->response->error('Could_not_update_happening', 500);
@@ -94,12 +94,12 @@ class HappeningController extends Controller
      */
     public function destroy($id)
     {
-        $jumuiya = $this->currentUser()->happenings()->find($id);
+        $happening = $this->currentUser()->happenings()->find($id);
 
-        if(!$jumuiya)
+        if(!$happening)
             throw new NotFoundHttpException;
 
-        if($jumuiya->delete())
+        if($happening->delete())
             return $this->response->noContent();
         else
             return $this->response->error('Could_not_delete_happening', 500);
