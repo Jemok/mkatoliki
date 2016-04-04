@@ -40,6 +40,10 @@ mkatolikiApp.config(['$routeProvider', function($routeProvider){
            templateUrl: 'partials/reflections/index.html',
             controller: 'ReflectionController'
     }).
+    when('/happenings', {
+            templateUrl: 'partials/happenings/index.html',
+            controller: 'HappeningController'
+    }).
     otherwise({
             redirectTo: '/'
     });
