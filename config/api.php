@@ -18,7 +18,7 @@ return [
     |
     */
 
-    'standardsTree' => env('API_STANDARDS_TREE', 'x'),
+    'standardsTree' => env('API_STANDARDS_TREE', 'vnd'),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'name' => env('API_NAME', null),
+    'name' => env('API_NAME', 'mkatoliki api'),
 
     /*
     |--------------------------------------------------------------------------

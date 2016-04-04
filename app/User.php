@@ -46,4 +46,41 @@ class User extends Model implements AuthenticatableContract,
     {
         $this->attributes['password'] = \Hash::make($value);
     }
+
+    //This models relationships below
+
+    /**
+     * The one to many User to Reading relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function readings(){
+        return $this->hasMany(Reading::class);
+    }
+
+    /**
+     * The one to many User to Prayer relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+
+    public function prayers(){
+        return $this->hasMany(Prayer::class);
+    }
+
+    /**
+     * The User Jumauiya one to many relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jumuiyas(){
+
+        return $this->hasMany(Jumuiya::class);
+    }
+
+    /**
+     * The User Reflection one to many relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function reflections(){
+
+        return $this->hasMany(Reflection::class);
+    }
 }
