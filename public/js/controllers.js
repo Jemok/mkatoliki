@@ -336,6 +336,7 @@ mkatolikiAppControllers.controller('ReflectionController', ['$scope', '$http', '
         });
     }
 
+
     $scope.remove = function(reflectionId){
 
         if(confirm('Are you sure you want to remove this reading?')){
@@ -480,15 +481,16 @@ mkatolikiAppControllers.controller('HappeningController', ['$scope', '$http', 'u
 
     }
 
-
     $scope.load = function(happeningId){
 
         happeningService.getById(happeningId, function(response){
 
             $scope.currentHappeningId = response.happening.id;
-            $scope.currentTitle = response.reflection.event_title;
-            $scope.currentBody = response.reflection.event_body;
-            $scope.currentDate = response.reflection.event_date;
+            $scope.currentTitle = response.happening.event_title;
+            $scope.currentBody = response.happening.event_body;
+            $scope.currentExcerpt = response.happening.event_excerpt;
+            $scope.currentDate = response.happening.event_date;
+
 
 
 
@@ -501,6 +503,9 @@ mkatolikiAppControllers.controller('HappeningController', ['$scope', '$http', 'u
             alert('Some Errors Occurred, Try again later');
         });
     }
+
+
+
 
     $scope.update = function(){
 

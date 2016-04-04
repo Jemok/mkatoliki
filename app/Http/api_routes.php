@@ -94,5 +94,21 @@ $api->version('v1', function ($api) {
         $api->delete('reflections/{id}', 'App\Api\V1\Controllers\ReflectionController@destroy');
     });
 
+    /**------
+     *
+     * Happening Events api routes
+     *
+     *
+     *
+     */
+
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+        $api->post('happenings', 'App\Api\V1\Controllers\HappeningController@store');
+        $api->get('happenings', 'App\Api\V1\Controllers\HappeningController@index');
+        $api->get('happenings/{id}', 'App\Api\V1\Controllers\HappeningController@show');
+        $api->put('happenings/{id}', 'App\Api\V1\Controllers\HappeningController@update');
+        $api->delete('happenings/{id}', 'App\Api\V1\Controllers\HappeningController@destroy');
+    });
+
 
 });

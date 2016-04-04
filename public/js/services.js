@@ -362,6 +362,7 @@ mkatolikiAppServices.factory('happeningService', ['Restangular', 'userService', 
         Restangular.one('api/happenings', happeningId).get().then(function(response){
 
             onSuccess(response);
+
         }, function(response){
 
             onError(response);
