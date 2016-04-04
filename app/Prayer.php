@@ -15,4 +15,13 @@ class Prayer extends Model
         'title',
         'body'
     ];
+
+    /**
+     * Prayer User One to many relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(){
+
+        return $this->belongsTo(User::class);
+    }
 }

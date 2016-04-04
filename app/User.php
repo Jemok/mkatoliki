@@ -83,4 +83,13 @@ class User extends Model implements AuthenticatableContract,
 
         return $this->hasMany(Reflection::class);
     }
+
+    /**
+     * The user Happening_event one to many relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function happenings(){
+
+        return $this->hasMany(Happening_event::class);
+    }
 }

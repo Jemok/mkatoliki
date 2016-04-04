@@ -21,6 +21,19 @@ class Reading extends Model
 
     ];
 
+    /**
+     * Reading User One to many relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(){
+
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Format the mass time date before it is persisted
+     * @param $date
+     */
     public function setMassDayAttribute($date){
 
 
@@ -29,6 +42,11 @@ class Reading extends Model
 
     }
 
+    /**
+     * Format the mass time date after it is persisted
+     * @param $date
+     * @return string
+     */
     public function getMassDayAttribute($date){
 
         $dt = Carbon::parse($date);

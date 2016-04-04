@@ -26,4 +26,13 @@ class Happening_event extends Model
         'event_body',
         'event_excerpt'
     ];
+
+    /**
+     * Happening_event User One to many relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(){
+
+        return $this->belongsTo(User::class);
+    }
 }
