@@ -110,5 +110,19 @@ $api->version('v1', function ($api) {
         $api->delete('happenings/{id}', 'App\Api\V1\Controllers\HappeningController@destroy');
     });
 
+    /**------
+     *
+     * All new resources single api route
+     *
+     *
+     *
+     */
+
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+
+        $api->get('new-data/{client_date}', 'App\Api\V1\Controllers\NewDataController@index');
+
+    });
+
 
 });
