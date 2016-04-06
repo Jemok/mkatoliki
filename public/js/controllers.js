@@ -36,7 +36,7 @@ mkatolikiAppControllers.controller('SignupController', ['$scope', '$location' ,'
 
     $scope.signup = function(){
         userService.signup(
-            $scope.name, $scope.email, $scope.password,
+            $scope.name, $scope.email, $scope.password, $scope.phone_number,
             function(response){
                 alert('Great! You are now signed in! Welcome, ' +$scope.name + '!');
 
@@ -491,13 +491,7 @@ mkatolikiAppControllers.controller('HappeningController', ['$scope', '$http', 'u
             $scope.currentExcerpt = response.happening.event_excerpt;
             $scope.currentDate = response.happening.event_date;
 
-
-
-
             $('#updateHappeningModal').modal('toggle');
-
-
-
         }, function(){
 
             alert('Some Errors Occurred, Try again later');
@@ -549,7 +543,7 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
     var in10Days = new Date();
     in10Days.setDate(in10Days.getDate() + 10);
 
-   $scope.date1 = new Date('2016-03-29T21:00:00Z')
+  // $scope.date1 = new Date('2016-03-29T21:00:00Z')
     $scope.dates = {
         //date1: new Date('2016-03-28'),
         date2: new Date('2015-03-01T12:30:00Z'),

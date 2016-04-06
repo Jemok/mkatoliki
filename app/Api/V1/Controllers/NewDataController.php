@@ -55,11 +55,14 @@ class NewDataController extends Controller
 
         return $this->respond([
 
+            'data' => [
+
             'readings' => $this->readingTransformer->transformCollection($this->getNewReadings($client_date)),
             'prayers'  => $this->prayerTransformer->transformCollection($this->getNewPrayers($client_date)),
             'jumuiya'  => $this->jumuiyaTransformer->transformCollection($this->getNewJumuiya($client_date)),
             'reflections' =>  $this->reflectionTransformer->transformCollection($this->getNewReflections($client_date)),
             'happenings'  => $this->happeningTransformer->transformCollection($this->getNewHappenings($client_date))
+           ]
         ]);
 
    }

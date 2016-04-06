@@ -13,7 +13,8 @@ class Prayer extends Model
     protected $fillable = [
 
         'title',
-        'body'
+        'body',
+        'type'
     ];
 
     /**

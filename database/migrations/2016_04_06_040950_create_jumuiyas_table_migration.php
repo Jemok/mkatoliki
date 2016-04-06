@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMigrationJumuiyasTableMigration extends Migration
+class CreateJumuiyasTableMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -14,14 +14,19 @@ class CreateMigrationJumuiyasTableMigration extends Migration
     {
         Schema::create('jumuiyas', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('location');
+            $table->string('location');
             $table->timestamp('happening_on');
             $table->integer('user_id')->unsigned();
+            $table->integer('raw_jumuiya_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users');
+                ->references('id')
+                ->on('users');
+
+            $table->foreign('raw_jumuiya_id')
+                ->references('id')
+                ->on('raw_jumuiyas');
         });
     }
 

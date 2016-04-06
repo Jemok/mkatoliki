@@ -25,4 +25,13 @@ class Jumuiya extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Jumuiya Jumuiya Event relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function jumuiya(){
+
+       return $this->belongsTo(Raw_jumuiya::class);
+   }
+
 }

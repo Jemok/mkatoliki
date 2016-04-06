@@ -16,12 +16,13 @@ mkatolikiAppServices.factory('userService', ['$http', 'localStorageService', fun
         }
     }
 
-    function signup(name, email, password, onSuccess, onError){
+    function signup(name, email, password, phone_number, onSuccess, onError){
 
         $http.post('/api/auth/signup', {
             name: name,
             email: email,
-            password: password
+            password: password,
+            phone_number: phone_number
         }).
         then(function(response){
                 localStorageService.set('token', response.data.token);
@@ -361,6 +362,7 @@ mkatolikiAppServices.factory('happeningService', ['Restangular', 'userService', 
 
         Restangular.one('api/happenings', happeningId).get().then(function(response){
 
+            //console.log(response.happening);
             onSuccess(response);
 
         }, function(response){

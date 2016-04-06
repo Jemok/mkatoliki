@@ -49,7 +49,7 @@ class HappeningController extends Controller
     }
 
     /**
-     * Get a single happening resource from storage
+     * Get a single happening event resource
      * @param $id
      * @return mixed
      * @throws NotFoundHttpException
@@ -58,8 +58,9 @@ class HappeningController extends Controller
     {
         $happening = $this->currentUser()->happenings()->find($id);
 
-        if(!$happening)
+        if(!$happening){
             throw new NotFoundHttpException;
+        }
         return $happening;
     }
 

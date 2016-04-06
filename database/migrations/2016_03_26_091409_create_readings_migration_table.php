@@ -14,20 +14,29 @@ class CreateReadingsMigrationTable extends Migration
     {
         Schema::create('readings', function (Blueprint $table) {
             $table->increments('id');
+            $table->dateTime('reading_date');
 
-            //The first reading field
-            $table->text('first_reading');
+            //First Reading
+            $table->string('first_reading_title');
+            $table->string('first_reading_book');
+            $table->text('first_reading_body');
 
-            //The secong reading field
-            $table->text('second_reading');
+            //Second Readings
+            $table->string('second_reading_title');
+            $table->string('second_reading_book');
+            $table->text('second_reading_body');
 
-            //The responsorial psalm field
-            $table->text('responsorial');
+            //Responsorial
+            $table->text('responsorial_title');
+            $table->text('responsorial_body_one');
+            $table->text('responsorial_body_two');
+
 
             //The gospel field
-            $table->text('gospel');
+            $table->text('gospel_title');
+            $table->string('gospel_book');
+            $table->text('gospel_body');
 
-            $table->dateTime('mass_day');
 
             //The id of the user who created the entry
             $table->integer('user_id')->unsigned();

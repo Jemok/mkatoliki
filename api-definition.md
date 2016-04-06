@@ -53,11 +53,11 @@ Connection: close
 	}
 
 
-2. LOGIN A USER
+2(a). LOGIN A USER
 
-POST: /api/auth/login HTTP/1.1
+POST: /api/auth/login-phone HTTP/1.1
 HOST:  api.mkatoliki.com
-BODY: “email”, “password”
+BODY: “phone_number”, “password”
 Accept: application/json
 
 RESPONSE 200 OK
@@ -100,6 +100,29 @@ RESPONSE ERROR 422 (Unprocessable Entity)
 		“status_code” : 422
 			}
 	}
+
+2(b) Get the Authenticated user
+
+GET: /api/auth/user HTTP/1.1
+HOST:  api.mkatoliki.com
+token: “Bearer" token
+Accept: application/json
+
+HTTP/1.1 200 OK
+HOST: api.mkatoliki.com
+Connection: close
+
+		{
+          "user": {
+            "id": 1,
+            "name": "user",
+            "email": "user@mkatoliki.com",
+            "phone_number": "0712475071",
+            "phone_notification_token": "",
+            "created_at": "2016-04-06 04:28:57",
+            "updated_at": "2016-04-06 04:28:57"
+          }
+        }
 
 
 
