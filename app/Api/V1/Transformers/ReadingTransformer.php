@@ -15,10 +15,26 @@ class ReadingTransformer extends Transformer {
     {
         return [
 
-            'first_reading' => $reading['first_reading'],
-            'second_reading' => $reading['second_reading'],
-            'responsorial_psalm' => $reading['responsorial'],
-            'gospel'      => $reading['gospel']
+            'readings_date' => $reading['reading_date'],
+            'first_reading_title' => $reading['first_reading_title'],
+            'first_reading_verse' => $reading['first_reading_book'],
+            'first_reading_body' => $reading['first_reading_body'],
+
+
+            'second_reading_title' => $reading['second_reading_title'],
+            'second_reading_verse' => $reading['second_reading_book'],
+            'second_reading_body' => $reading['second_reading_body'],
+
+
+            'responsorial_psalm_tatle' => $reading['responsorial_title'],
+            'responsorial_psalm_verse' => $reading['responsorial_book'],
+            'responsorial_psalm_body_one' => $reading['responsorial_body_one'],
+            'responsorial_psalm_body_two' => $reading['responsorial_body_two'],
+
+            'gospel_title'      => $reading['gospel_title'],
+            'gospel_body'      => $reading['gospel_body'],
+
+
         ];
     }
 
