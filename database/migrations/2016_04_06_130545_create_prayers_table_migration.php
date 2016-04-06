@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateJumuiyasTableMigration extends Migration
+class CreatePrayersTableMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -12,21 +12,18 @@ class CreateJumuiyasTableMigration extends Migration
      */
     public function up()
     {
-        Schema::create('jumuiyas', function (Blueprint $table) {
+        Schema::create('prayers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('location');
-            $table->timestamp('happening_on');
+            $table->string('prayer_title');
+            $table->text('prayer_body');
+            $table->string('prayer_type');
             $table->integer('user_id')->unsigned();
-            $table->integer('raw_jumuiya_id')->unsigned();
+
             $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
-
-            $table->foreign('raw_jumuiya_id')
-                ->references('id')
-                ->on('raw_jumuiyas');
         });
     }
 
@@ -37,6 +34,6 @@ class CreateJumuiyasTableMigration extends Migration
      */
     public function down()
     {
-        Schema::drop('jumuiyas');
+        Schema::drop('prayers');
     }
 }

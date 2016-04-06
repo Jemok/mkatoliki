@@ -15,9 +15,10 @@ class PrayerTransformer extends Transformer {
     {
         return [
 
-            //'prayer_name' => $prayer['title'],
-            'prayer_body' => $prayer['body'],
-            //'prayer_type' => $prayer['prayer_type']
+            'id'          => $prayer['id'],
+            'prayer_title' => $prayer['prayer_title'],
+            'prayer_body' => $prayer['prayer_body'],
+            'prayer_type' => $prayer['prayer_type']
 
         ];
     }

@@ -37,8 +37,8 @@ class PrayerController extends Controller
     {
         $prayer = new Prayer;
 
-        $prayer->title = $request->get('prayer_title');
-        $prayer->body = $request->get('prayer_body');
+        $prayer->prayer_title = $request->get('prayer_title');
+        $prayer->prayer_body = $request->get('prayer_body');
         $prayer->prayer_type = $request->get('prayer_type');
 
         if($this->currentUser()->prayers()->save($prayer))

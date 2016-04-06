@@ -19,8 +19,13 @@ class CreateUsersTable extends Migration
             $table->string('phone_number');
             $table->string('password', 60);
             $table->string('phone_notification_token');
+            $table->integer('parish_id')->unsigned()->nullable();
+            $table->integer('station_id')->unsigned()->nullable();
             $table->rememberToken();
             $table->timestamps();
+
+
+
         });
     }
 

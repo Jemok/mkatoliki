@@ -68,4 +68,13 @@ class Reading extends Model
 
     }
 
+    /**
+     * A reading has a single reflection
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function reflection(){
+
+        return $this->hasOne(Reflection::class);
+    }
+
 }

@@ -15,6 +15,7 @@ class ReadingTransformer extends Transformer {
     {
         return [
 
+            'id'           => $reading['id'],
             'readings_date' => $reading['reading_date'],
             'first_reading_title' => $reading['first_reading_title'],
             'first_reading_verse' => $reading['first_reading_book'],

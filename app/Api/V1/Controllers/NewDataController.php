@@ -4,11 +4,18 @@ namespace App\Api\V1\Controllers;
 
 use App\Api\V1\Transformers\HappeningTransformer;
 use App\Api\V1\Transformers\JumuiyaTransformer;
+use App\Api\V1\Transformers\ParishTransformer;
 use App\Api\V1\Transformers\PrayerTransformer;
+use App\Api\V1\Transformers\RawJumuiyaTransformer;
 use App\Api\V1\Transformers\ReflectionTransformer;
+use App\Api\V1\Transformers\StationTransformer;
 use App\Happening_event;
 use App\Jumuiya;
+use App\Parish;
+use App\Prayer;
+use App\Raw_jumuiya;
 use App\Reflection;
+use App\Station;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -32,11 +39,21 @@ class NewDataController extends Controller
 
     protected $happeningTransformer;
 
+    protected $rawJumuiyaTransformer;
+
+    protected $parishesTransformer;
+
+    protected $stationTransformer;
+
    public function __construct(ReadingTransformer $readingTransformer,
                                PrayerTransformer $prayerTransformer,
                                JumuiyaTransformer $jumuiyaTransformer,
                                ReflectionTransformer $reflectionTransformer,
-                               HappeningTransformer $happeningTransformer
+                               HappeningTransformer $happeningTransformer,
+                               RawJumuiyaTransformer $rawJumuiyaTransformer,
+                               ParishTransformer $parishTransformer,
+                               StationTransformer $stationTransformer
+
 
     ){
 
@@ -49,6 +66,12 @@ class NewDataController extends Controller
        $this->reflectionTransformer = $reflectionTransformer;
 
        $this->happeningTransformer = $happeningTransformer;
+
+       $this->rawJumuiyaTransformer = $rawJumuiyaTransformer;
+
+       $this->parishesTransformer = $parishTransformer;
+
+       $this->stationTransformer = $stationTransformer;
    }
 
    public function index($client_date){
@@ -59,10 +82,18 @@ class NewDataController extends Controller
 
             'readings' => $this->readingTransformer->transformCollection($this->getNewReadings($client_date)),
             'prayers'  => $this->prayerTransformer->transformCollection($this->getNewPrayers($client_date)),
-            'jumuiya'  => $this->jumuiyaTransformer->transformCollection($this->getNewJumuiya($client_date)),
             'reflections' =>  $this->reflectionTransformer->transformCollection($this->getNewReflections($client_date)),
-            'happenings'  => $this->happeningTransformer->transformCollection($this->getNewHappenings($client_date))
-           ]
+            'happenings'  => $this->happeningTransformer->transformCollection($this->getNewHappenings($client_date)),
+            'raw_jumuiyas'  => $this->rawJumuiyaTransformer->transformCollection($this->getNewRawJumuiyas($client_date)),
+            'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getNewJumuiya($client_date)),
+            'parishes'       =>  $this->parishesTransformer->transformCollection($this->getNewParishes($client_date)),
+             'out-stations'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
+
+
+
+
+
+            ]
         ]);
 
    }
@@ -75,7 +106,7 @@ class NewDataController extends Controller
 
    public function getNewPrayers($date){
 
-        return Reflection::where('updated_at', '<', $date)->get()->toArray();
+        return Prayer::where('updated_at', '<', $date)->get()->toArray();
 
    }
 
@@ -96,6 +127,24 @@ class NewDataController extends Controller
         return Happening_event::where('updated_at', '<', $date)->get()->toArray();
 
    }
+
+    public function getNewRawJumuiyas($date){
+
+        return Raw_jumuiya::where('updated_at', '<', $date)->get()->toArray();
+
+    }
+
+    public function getNewParishes($date){
+
+        return Parish::where('updated_at', '<', $date)->get()->toArray();
+
+    }
+
+    public function getNewStations($date){
+
+        return Station::where('updated_at', '<', $date)->get()->toArray();
+
+    }
 
     public function respond($data, $headers = [])
     {

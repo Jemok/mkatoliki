@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateHappeningEventsTableMigration extends Migration
+class CreateJumuiyasTableMigration extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,21 @@ class CreateHappeningEventsTableMigration extends Migration
      */
     public function up()
     {
-        Schema::create('happening_events', function (Blueprint $table) {
+        Schema::create('jumuiyas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('event_title');
-            $table->text('event_body');
-            $table->text('event_excerpt');
-            $table->dateTime('event_date');
+            $table->string('location');
+            $table->timestamp('happening_on');
             $table->integer('user_id')->unsigned();
+            $table->integer('raw_jumuiya_id')->unsigned();
+            $table->text('more_details');
+            $table->string('day_event_name');
             $table->timestamps();
 
             $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users');
+                ->references('id')
+                ->on('users');
+
+
         });
     }
 
@@ -34,6 +37,6 @@ class CreateHappeningEventsTableMigration extends Migration
      */
     public function down()
     {
-        Schema::drop('happening_events');
+        Schema::drop('jumuiyas');
     }
 }

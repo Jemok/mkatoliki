@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePrayersTableMigration extends Migration
+class CreateStationsMigrationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,20 @@ class CreatePrayersTableMigration extends Migration
      */
     public function up()
     {
-        Schema::create('prayers', function (Blueprint $table) {
+        Schema::create('stations', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('prayer_title');
-            $table->text('prayer_body');
-            $table->string('prayer_type');
+            $table->string('station_name');
+            $table->integer('parish_id')->unsigned();
             $table->integer('user_id')->unsigned();
-
             $table->timestamps();
 
+            $table->foreign('parish_id')
+                ->references('id')
+                ->on('parishes');
+
             $table->foreign('user_id')
-                    ->references('id')
-                    ->on('users');
+                ->references('id')
+                ->on('users');
         });
     }
 
@@ -34,6 +36,6 @@ class CreatePrayersTableMigration extends Migration
      */
     public function down()
     {
-        Schema::drop('prayers');
+        Schema::drop('stations');
     }
 }

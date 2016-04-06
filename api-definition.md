@@ -112,17 +112,19 @@ HTTP/1.1 200 OK
 HOST: api.mkatoliki.com
 Connection: close
 
-		{
-          "user": {
-            "id": 1,
-            "name": "user",
-            "email": "user@mkatoliki.com",
-            "phone_number": "0712475071",
-            "phone_notification_token": "",
-            "created_at": "2016-04-06 04:28:57",
-            "updated_at": "2016-04-06 04:28:57"
-          }
-        }
+	{
+      "user": {
+        "id": 1,
+        "name": "user",
+        "email": "user@mkatoliki.com",
+        "phone_number": "0712675071",
+        "phone_notification_token": "",
+        "parish_id": 1,
+        "station_id": 1,
+        "created_at": "2016-04-06 13:50:00",
+        "updated_at": "2016-04-06 13:50:00"
+      }
+    }
 
 
 

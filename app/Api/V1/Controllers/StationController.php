@@ -6,65 +6,62 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Reflection;
 use Dingo\Api\Routing\Helpers;
+use App\Station;
 
-class ReflectionController extends Controller
+class StationController extends Controller
 {
-
     use Helpers;
     /**
-     * Display a listing of the reflection resource.
+     * Display a listing of the station resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Reflection::all()
+        return Station::all()
             ->toArray();
     }
 
 
     /**
-     * Store a newly created reflection resource in storage.
+     * Store a newly created station resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $reflection = new Reflection;
+        $station = new Station;
 
-        $reflection->reflection_body = $request->get('reflection_body');
-        $reflection->reflection_date = $request->get('reflection_date');
-        $reflection->reading_id = $request->get('reading_id');
+        $station->station_name = $request->get('station_name');
+        $station->parish_id    = $request->get('parish_id');
 
-        if($this->currentUser()->reflections()->save($reflection))
+        if($this->currentUser()->stations()->save($station))
             return $this->response->created();
         else
-            return $this->response->error('could_not_create_reflection', 500);
+            return $this->response->error('could_not_create_station', 500);
     }
 
     /**
-     * Display the specified reflection resource.
+     * Display the specified station resource.
      * @param $id
      * @return mixed
      * @throws NotFoundHttpException
      */
     public function show($id)
     {
-        $reflection = $this->currentUser()->reflections()->find($id);
+        $station = $this->currentUser()->stations()->find($id);
 
-        if(!$reflection)
+        if(!$station)
             throw new NotFoundHttpException;
-        return $reflection;
+        return $station;
     }
 
 
     /**
-     * Update the specified reflection resource in storage.
+     * Update the specified station resource in storage.
      * @param Request $request
      * @param $id
      * @return \Dingo\Api\Http\Response|void
@@ -72,36 +69,36 @@ class ReflectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $reflection = $this->currentUser()->reflections()->find($id);
+        $station = $this->currentUser()->stations()->find($id);
 
-        if(!$reflection)
+        if(!$station)
             throw new NotFoundHttpException;
 
-        $reflection->fill($request->all());
+        $station->fill($request->all());
 
-        if($reflection->save())
+        if($station->save())
             return $this->response->noContent();
         else
-            return $this->response->error('Could_not_update_reflection', 500);
+            return $this->response->error('Could_not_update_station', 500);
     }
 
     /**
-     * Remove the specified reflection resource from storage.
+     * Remove the specified station resource from storage.
      * @param $id
      * @return \Dingo\Api\Http\Response|void
      * @throws NotFoundHttpException
      */
     public function destroy($id)
     {
-        $reflection = $this->currentUser()->reflections()->find($id);
+        $station = $this->currentUser()->stations()->find($id);
 
-        if(!$reflection)
+        if(!$station)
             throw new NotFoundHttpException;
 
-        if($reflection->delete())
+        if($station->delete())
             return $this->response->noContent();
         else
-            return $this->response->error('Could_not_delete_reflection', 500);
+            return $this->response->error('Could_not_delete_station', 500);
     }
 
     /**

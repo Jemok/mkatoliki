@@ -14,7 +14,7 @@ $api->version('v1', function ($api) {
 
     $api->group(['middleware' => 'cors'], function ($api) {
         $api->post('auth/login', 'App\Api\V1\Controllers\AuthController@login');
-        $api->post('auth/user', 'App\Api\V1\Controllers\AuthControllerPhone@getAuthenticatedUser');
+        $api->get('auth/user', 'App\Api\V1\Controllers\AuthControllerPhone@getAuthenticatedUser');
         $api->post('auth/login-phone/', 'App\Api\V1\Controllers\AuthControllerPhone@login');
         $api->post('auth/signup', 'App\Api\V1\Controllers\AuthController@signup');
         $api->post('auth/recovery', 'App\Api\V1\Controllers\AuthController@recovery');
@@ -111,6 +111,57 @@ $api->version('v1', function ($api) {
         $api->put('happenings/{id}', 'App\Api\V1\Controllers\HappeningController@update');
         $api->delete('happenings/{id}', 'App\Api\V1\Controllers\HappeningController@destroy');
     });
+
+    /**------
+     *
+     * Parish api routes
+     *
+     *
+     *
+     */
+
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+        $api->post('parishes', 'App\Api\V1\Controllers\ParishController@store');
+        $api->get('parishes', 'App\Api\V1\Controllers\ParishController@index');
+        $api->get('parishes/{id}', 'App\Api\V1\Controllers\ParishController@show');
+        $api->put('parishes/{id}', 'App\Api\V1\Controllers\ParishController@update');
+        $api->delete('parishes/{id}', 'App\Api\V1\Controllers\ParishController@destroy');
+    });
+
+    /**------
+     *
+     * Parish api routes
+     *
+     *
+     *
+     */
+
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+        $api->post('stations', 'App\Api\V1\Controllers\StationController@store');
+        $api->get('stations', 'App\Api\V1\Controllers\StationController@index');
+        $api->get('stations/{id}', 'App\Api\V1\Controllers\StationController@show');
+        $api->put('stations/{id}', 'App\Api\V1\Controllers\StationController@update');
+        $api->delete('stations/{id}', 'App\Api\V1\Controllers\StationController@destroy');
+    });
+
+    /**------
+     *
+     * Parish api routes
+     *
+     *
+     *
+     */
+
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+        $api->post('raw-jumuiyas', 'App\Api\V1\Controllers\RawJumuiyaController@store');
+        $api->get('raw-jumuiyas', 'App\Api\V1\Controllers\RawJumuiyaController@index');
+        $api->get('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@show');
+        $api->put('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@update');
+        $api->delete('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@destroy');
+    });
+
+
+
 
     /**------
      *

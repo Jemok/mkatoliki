@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRawJumuiyasTable extends Migration
+class CreateUserParishesMigrationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateRawJumuiyasTable extends Migration
      */
     public function up()
     {
-        Schema::create('raw_jumuiyas', function (Blueprint $table) {
+        Schema::create('user_parishes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('jumuiya_name');
-            $table->string('jumuiya_image_link');
+            $table->integer('user_id')->unsigned();
+            $table->integer('parish_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateRawJumuiyasTable extends Migration
      */
     public function down()
     {
-        Schema::drop('raw_jumuiyas');
+        Schema::drop('user_parishes');
     }
 }

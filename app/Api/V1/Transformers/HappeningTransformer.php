@@ -14,10 +14,10 @@ class HappeningTransformer extends Transformer {
     public function transform($happening)
     {
         return [
-            'event_title' => $happening['event_title'],
-            'event_body'  => $happening['event_body'],
-            'event_excerpt' => $happening['event_excerpt'],
-            'event_date'   => $happening['event_date']
+            'happening_event_title' => $happening['event_title'],
+            'happening_event_body'  => $happening['event_body'],
+            'happening_event_excerpt' => $happening['event_excerpt'],
+            'happening_event_date'   => $happening['event_date']
         ];
     }
 

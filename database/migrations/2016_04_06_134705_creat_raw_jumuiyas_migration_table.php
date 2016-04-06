@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReflectionTableMigration extends Migration
+class CreatRawJumuiyasMigrationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,16 @@ class CreateReflectionTableMigration extends Migration
      */
     public function up()
     {
-        Schema::create('reflections', function (Blueprint $table) {
+        Schema::create('raw_jumuiyas', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('reflection_body');
+            $table->string('jumuiya_name');
+            $table->string('jumuiya_image_link');
             $table->integer('user_id')->unsigned();
-            $table->dateTime('reflection_date');
             $table->timestamps();
 
             $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users');
+                ->references('id')
+                ->on('users');
         });
     }
 
@@ -32,6 +32,6 @@ class CreateReflectionTableMigration extends Migration
      */
     public function down()
     {
-        Schema::drop('reflections');
+        Schema::drop('raw_jumuiyas');
     }
 }

@@ -13,7 +13,8 @@ class Reflection extends Model
     protected $fillable = [
 
         'reflection_body',
-        'reflection_date'
+        'reflection_date',
+        'reading_id'
     ];
 
     /**
@@ -23,5 +24,14 @@ class Reflection extends Model
     public function user(){
 
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * A reflection belongs to a single reading
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function reading(){
+
+        return $this->belongsTo(Reading::class);
     }
 }

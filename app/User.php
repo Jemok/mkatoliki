@@ -33,6 +33,8 @@ class User extends Model implements AuthenticatableContract,
         'email',
         'password',
         'phone_number',
+        'parish_id',
+        'station_id',
         'phone_notification_token'
     ];
 
@@ -106,5 +108,24 @@ class User extends Model implements AuthenticatableContract,
     public function raw_jumuiya(){
 
         return $this->hasMany(Raw_jumuiya::class);
+    }
+
+    /**
+     * The User Parish relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function parishes(){
+
+        return $this->hasMany(Parish::class);
+    }
+
+
+    /**
+     * The use stations relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function stations(){
+
+        return $this->hasMany(Station::class);
     }
 }

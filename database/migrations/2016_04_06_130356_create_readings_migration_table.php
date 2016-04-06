@@ -30,6 +30,7 @@ class CreateReadingsMigrationTable extends Migration
             $table->string('responsorial_title');
             $table->string('responsorial_book');
             $table->text('responsorial_body_one');
+            $table->string('responsorial_body_one_verse');
             $table->text('responsorial_body_two');
 
             //The gospel field
@@ -45,7 +46,7 @@ class CreateReadingsMigrationTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')
-                  ->references('id')->on('users');
+                ->references('id')->on('users');
         });
     }
 
