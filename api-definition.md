@@ -1,4 +1,4 @@
-		MKATOLIKI  API DEFINITION AND RESPONSE FORMATS
+# MKATOLIKI  API DEFINITION AND RESPONSE FORMATS
 
 THE ARCHANGEL INTERACTIVE AGENCY
 PREPARED BY: JAMES KAROKI
@@ -15,14 +15,14 @@ NB: API server does not handle logout.
 
 DEFINITION
 
-1. REGISTER A NEW USER
+##1. REGISTER A NEW USER
 
-POST :  /api/auth/signup HTTP /1.1
+    POST :  /api/auth/signup HTTP /1.1
 HOST:  api.matoliki.com
 BODY: “name”, “email”, “phone_number”, “password”
 Accept:  application/json
 
-RESPONSE 200  OK
+### RESPONSE 200  OK
 
 HTTP /1.1 200 OK
 HOST: api.mkatoliki.com
@@ -32,7 +32,7 @@ Connection: close
 		“token” : “jwt.token”
 	}
 
-RESPONSE  ERROR 422 (Unprocessable entity)
+### RESPONSE  ERROR 422 (Unprocessable entity)
 
 HTTP /1.1 422 Unprocessable entity
 HOST: api.mkatoliki.com
@@ -60,7 +60,7 @@ HOST:  api.mkatoliki.com
 BODY: “phone_number”, “password”
 Accept: application/json
 
-RESPONSE 200 OK
+###RESPONSE 200 OK
 
 HTTP/1.1 200 OK
 HOST: api.mkatoliki.com
@@ -70,7 +70,7 @@ Connection: close
 			“token”, “jwt.token”
 		}
 
-RESPONSE ERROR 401 (Unauthorized)
+###RESPONSE ERROR 401 (Unauthorized)
 
 HTTP/1.1 401 Unauthorized
 HOST: api.mkatoliki.com
@@ -84,7 +84,7 @@ Connection: clsose
 		}
 
 
-RESPONSE ERROR 422 (Unprocessable Entity)
+###RESPONSE ERROR 422 (Unprocessable Entity)
 	{
                 “error” : {
 		“message” : “422 Unprocessable Entity”,
@@ -128,14 +128,14 @@ Connection: close
 
 
 
-3(a) DAILY READING RESOURCE
+##3(a) DAILY READING RESOURCE
 
 GET /api/readings/{client_last_date_to_the_server}
 HOST: api.mkatoliki.com
 token: “Bearer” jwt.token
 Accept: application/json
 
-RESPONSE 200 OK
+###RESPONSE 200 OK
 
 HTTP/1.1 200 OK
 HOST: api.mkatoliki.com
@@ -176,7 +176,7 @@ Connection: close
 
 
 
-3(b) DAILY READING RESPONSE ERROR
+###3(b) DAILY READING RESPONSE ERROR
 
 HTTP /1.1 404 NOT FOUND
 HOST: api.mkatoliki.com
@@ -198,14 +198,14 @@ Connection: close
 	}
 
 
-4 PRAYER RESOURCE
+##4 PRAYER RESOURCE
 
 GET /api/prayers/{client_last_date_to_server}
 HOST: api.mkatoliki.com
 token: “Bearer” jwt.token
 Accept: application/json
 
-RESPONSE 200 OK
+###RESPONSE 200 OK
 
 HTTP/1.1 200 OK
 HOST: api.mkatoliki.com
@@ -244,7 +244,7 @@ Connection: close
 
 
 
-4(b) PRAYER RESPONSE ERROR
+###4(b) PRAYER RESPONSE ERROR
 
 HTTP /1.1 404 NOT FOUND
 HOST: api.mkatoliki.com
@@ -267,14 +267,14 @@ Connection: close
 
 
 
-5. JUMUIYA RESOURCE
+##5. JUMUIYA RESOURCE
 
 GET /api/jumuiya/{client_last_date_to_server}
 HOST: api.mkatoliki.com
 token: “Bearer” jwt.token
 Accept: application/json
 
-RESPONSE OK
+###RESPONSE OK
 
 HTTP /1.1 200 OK
 HOST: api.mkatoliki.com
@@ -315,7 +315,7 @@ Connection: close
 
 
 
-5(b) JUMUIYA RESPONSE ERROR
+###5(b) JUMUIYA RESPONSE ERROR
 
 HTTP /1.1 404 NOT FOUND
 HOST: api.mkatoliki.com
@@ -338,7 +338,7 @@ Connection: close
 
 
 
-6. HAPPENING TODAY RESOURCE
+##6. HAPPENING TODAY RESOURCE
 
 GET /api/happenings/{client_last_date_to_server}
 HOST: api.mkatoliki.com
@@ -379,7 +379,7 @@ Connection: close
 
 
 
-6(b) HAPPENING RESPONSE ERROR
+###6(b) HAPPENING RESPONSE ERROR
 
 HTTP /1.1 404 NOT FOUND
 HOST: api.mkatoliki.com
@@ -402,7 +402,7 @@ Connection: close
 
 
 
-7. REFLECTION RESOURCE
+##7. REFLECTION RESOURCE
 
 GET /api/reflections/{client_last_date_to_server}
 HOST: api.mkatoliki.com
@@ -438,7 +438,7 @@ Connection: close
 
 
 
-7(b) REFLECTION RESPONSE ERROR
+###7(b) REFLECTION RESPONSE ERROR
 
 HTTP /1.1 404 NOT FOUND
 HOST: api.mkatoliki.com
@@ -459,9 +459,7 @@ Connection: close
 		}
 	}
 
-UPDATED
-
-8. NEW DATA RESOURCE COLLECTION
+##8. NEW DATA RESOURCE COLLECTION
 
 GET /api/new-data/{client_last_date_to_server}
 HOST: api.mkatoliki.com
