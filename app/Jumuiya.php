@@ -13,7 +13,8 @@ class Jumuiya extends Model
     protected $fillable = [
 
         'location',
-        'happening_on'
+        'happening_on',
+        'raw_jumuiya_id'
     ];
 
     /**

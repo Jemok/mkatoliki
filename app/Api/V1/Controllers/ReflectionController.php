@@ -37,7 +37,8 @@ class ReflectionController extends Controller
     {
         $reflection = new Reflection;
 
-        $reflection->body = $request->get('body');
+        $reflection->reflection_body = $request->get('reflection_body');
+        $reflection->reflaction_date = $request->get('reflection_date');
 
         if($this->currentUser()->reflections()->save($reflection))
             return $this->response->created();

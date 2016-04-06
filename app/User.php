@@ -98,4 +98,13 @@ class User extends Model implements AuthenticatableContract,
 
         return $this->hasMany(Happening_event::class);
     }
+
+    /**
+     * Raw Jumuiya User relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function raw_jumuiya(){
+
+        return $this->hasMany(Raw_jumuiya::class);
+    }
 }

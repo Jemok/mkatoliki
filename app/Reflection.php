@@ -12,7 +12,7 @@ class Reflection extends Model
      */
     protected $fillable = [
 
-        'body',
+        'reflection_body',
         'reflection_date'
     ];
 

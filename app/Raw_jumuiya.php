@@ -32,4 +32,14 @@ class Raw_jumuiya extends Model
         return $this->hasMany(Jumuiya::class);
     }
 
+    /**
+     * Raw Jumuiya User Reltionship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
+    public function user(){
+
+        return $this->belongsTo(User::class);
+    }
+
 }

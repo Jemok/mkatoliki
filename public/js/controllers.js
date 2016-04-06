@@ -544,6 +544,9 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
     in10Days.setDate(in10Days.getDate() + 10);
 
   // $scope.date1 = new Date('2016-03-29T21:00:00Z')
+
+     $scope.date1 = "";
+
     $scope.dates = {
         //date1: new Date('2016-03-28'),
         date2: new Date('2015-03-01T12:30:00Z'),
@@ -575,7 +578,14 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
     $scope.getDate = function(){
 
 
+        if($scope.date1 === ""){
+
+            return "";
+        }
+
         return $scope.date1.getTime();
+
+
     }
 
 
@@ -647,31 +657,31 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
         });
     }
 
-    $scope.update = function(){
-
-        mainService.update(
-
-        $scope.currentReadingId,
-        {
-            first_reading: $scope.currentFirstReading,
-            second_reading: $scope.currentSecondReading,
-            responsorial: $scope.currentResponsorial,
-            gospel: $scope.currentGospel
-        },
-        function(response){
-
-            $('#updateReadingModal').modal('toggle');
-
-            $scope.currentReadingReset();
-            $scope.refresh();
-
-        }, function(response){
-
-                alert('Some errors occurred while updating')
-            }
-
-        );
-    }
+//    $scope.update = function(){
+//
+//        mainService.update(
+//
+//        $scope.currentReadingId,
+//        {
+//            first_reading: $scope.currentFirstReading,
+//            second_reading: $scope.currentSecondReading,
+//            responsorial: $scope.currentResponsorial,
+//            gospel: $scope.currentGospel
+//        },
+//        function(response){
+//
+//            $('#updateReadingModal').modal('toggle');
+//
+//            $scope.currentReadingReset();
+//            $scope.refresh();
+//
+//        }, function(response){
+//
+//                alert('Some errors occurred while updating')
+//            }
+//
+//        );
+//    }
 
     $scope.remove = function(readingId){
 
@@ -692,11 +702,26 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
         mainService.create({
 
-            first_reading: $scope.currentFirstReading,
-            second_reading: $scope.currentSecondReading,
-            responsorial: $scope.currentResponsorial,
-            gospel: $scope.currentGospel,
-            mass_day: $scope.currentMassDay
+            reading_date: $scope.currentReadingDate,
+            first_reading_title: $scope.currentFirstReadingTitle,
+            first_reading_book: $scope.currentFirstReadingBook,
+            first_reading_body: $scope.currentFirstReadingBody,
+
+
+            second_reading_title: $scope.currentSecondReadingTitle,
+            second_reading_book: $scope.currentSecondReadingBook,
+            second_reading_body: $scope.currentSecondReadingBody,
+
+
+            responsorial_title: $scope.currentResponsorialTitle,
+            responsorial_book: $scope.currentResponsorialBook,
+            responsorial_body_one: $scope.currentResponsorialBodyOne,
+            responsorial_body_two: $scope.currentResponsorialBodyTwo,
+
+
+            gospel_title: $scope.currentGospelTitle,
+            gospel_book: $scope.currentGospelBook,
+            gospel_body: $scope.currentGospelBody
 
         }, function(){
 
@@ -730,11 +755,28 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
     }
 
     $scope.currentReadingReset = function(){
-        $scope.currentFirstReading = "";
-        $scope.currentSecondReading = "";
-        $scope.currentResponsorial = "";
-        $scope.currentGospel = "";
-        $scope.currentMassDay = "";
+        $scope.currentReadingDate = "";
+
+        $scope.currentFirstReadingTitle = "";
+        $scope.currentFirstReadingBook = "";
+        $scope.currentFirstReadingBody = "";
+
+        $scope.currentSecondReadingTitle = "";
+        $scope.currentSecondReadingBook = "";
+        $scope.currentSecondReadingBody = "";
+
+        $scope.currentResponsorialTitle = "";
+        $scope.currentResponsorialBook = "";
+        $scope.currentResponsorialBodyOne = "";
+        $scope.currentResponsorialBodyTwo = "";
+
+
+
+        $scope.currentGospelTitle = "";
+        $scope.currentGospelBook = "";
+        $scope.currentGospelBody = "";
+
+
     }
 
 

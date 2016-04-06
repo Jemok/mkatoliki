@@ -12,9 +12,9 @@ class Prayer extends Model
      */
     protected $fillable = [
 
-        'title',
-        'body',
-        'type'
+        'prayer_title',
+        'prayer_body',
+        'prayer_type'
     ];
 
     /**

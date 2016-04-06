@@ -13,11 +13,24 @@ class Reading extends Model
      */
     protected $fillable = [
 
-        'first_reading',
-        'second_reading',
-        'responsorial',
-        'gospel',
-        'mass_day'
+        'reading_date',
+
+        'first_reading_title',
+        'first_reading_book',
+        'first_reading_body',
+
+        'second_reading_title',
+        'second_reading_book',
+        'first_reading_body',
+
+        'responsorial_title',
+        'responsorial_book',
+        'responsorial_body_one',
+        'responsorial_body_two',
+
+        'gospel_title',
+        'gospel_book',
+        'gospel_body'
 
     ];
 
@@ -31,23 +44,23 @@ class Reading extends Model
     }
 
     /**
-     * Format the mass time date before it is persisted
+     * Format the reading time date before it is persisted
      * @param $date
      */
-    public function setMassDayAttribute($date){
+    public function setReadingAttribute($date){
 
 
 
-        $this->attributes['mass_day'] = Carbon::parse($date);
+        $this->attributes['reading_date'] = Carbon::parse($date);
 
     }
 
     /**
-     * Format the mass time date after it is persisted
+     * Format the reading date after it is persisted
      * @param $date
      * @return string
      */
-    public function getMassDayAttribute($date){
+    public function getReadingDateAttribute($date){
 
         $dt = Carbon::parse($date);
 

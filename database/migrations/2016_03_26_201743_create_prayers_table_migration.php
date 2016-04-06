@@ -14,7 +14,7 @@ class CreatePrayersTableMigration extends Migration
     {
         Schema::create('prayers', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('prayer_title');
+            $table->string('prayer_title');
             $table->text('prayer_body');
             $table->string('prayer_type');
             $table->integer('user_id')->unsigned();

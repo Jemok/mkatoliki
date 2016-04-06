@@ -27,14 +27,14 @@ class CreateReadingsMigrationTable extends Migration
             $table->text('second_reading_body');
 
             //Responsorial
-            $table->text('responsorial_title');
+            $table->string('responsorial_title');
+            $table->string('responsorial_book');
             $table->text('responsorial_body_one');
             $table->text('responsorial_body_two');
 
-
             //The gospel field
-            $table->text('gospel_title');
-            $table->string('gospel_book');
+            $table->string('gospel_title');
+            $table->text('gospel_book');
             $table->text('gospel_body');
 
 
