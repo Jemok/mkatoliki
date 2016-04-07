@@ -76,10 +76,14 @@ class NewDataController extends Controller
 
    public function index($client_date){
 
+       $server_date  = new \DateTime();
+
        if($client_date == "0000-00-00 00:00:00"){
 
            return $this->respond([
-
+               'meta' => [
+                   'to_server_last_date'  => $server_date
+               ],
                'data' => [
 
                    'readings' => $this->readingTransformer->transformCollection($this->getAllReadings($client_date)),
@@ -96,6 +100,9 @@ class NewDataController extends Controller
        }else{
         return $this->respond([
 
+            'meta' => [
+                'to_server_last_date'  => $server_date
+            ],
             'data' => [
 
             'readings' => $this->readingTransformer->transformCollection($this->getNewReadings($client_date)),
@@ -105,10 +112,7 @@ class NewDataController extends Controller
             'raw_jumuiyas'  => $this->rawJumuiyaTransformer->transformCollection($this->getNewRawJumuiyas($client_date)),
             'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getNewJumuiya($client_date)),
             'parishes'       =>  $this->parishesTransformer->transformCollection($this->getNewParishes($client_date)),
-             'out-stations'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
-
-
-
+            'out-stations'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
 
 
             ]
@@ -120,19 +124,19 @@ class NewDataController extends Controller
 
    public function getNewReadings($date){
 
-       return Reading::where('updated_at', '<', $date)->get()->toArray();
+       return Reading::where('updated_at', '>', $date)->get()->toArray();
 
    }
 
    public function getNewPrayers($date){
 
-        return Prayer::where('updated_at', '<', $date)->get()->toArray();
+        return Prayer::where('updated_at', '>', $date)->get()->toArray();
 
    }
 
    public function getNewJumuiya($date){
 
-        return Jumuiya::where('updated_at', '<', $date)->get()->toArray();
+        return Jumuiya::where('updated_at', '>', $date)->get()->toArray();
 
    }
 
@@ -144,25 +148,25 @@ class NewDataController extends Controller
 
    public function getNewHappenings($date){
 
-        return Happening_event::where('updated_at', '<', $date)->get()->toArray();
+        return Happening_event::where('updated_at', '>', $date)->get()->toArray();
 
    }
 
     public function getNewRawJumuiyas($date){
 
-        return Raw_jumuiya::where('updated_at', '<', $date)->get()->toArray();
+        return Raw_jumuiya::where('updated_at', '>', $date)->get()->toArray();
 
     }
 
     public function getNewParishes($date){
 
-        return Parish::where('updated_at', '<', $date)->get()->toArray();
+        return Parish::where('updated_at', '>', $date)->get()->toArray();
 
     }
 
     public function getNewStations($date){
 
-        return Station::where('updated_at', '<', $date)->get()->toArray();
+        return Station::where('updated_at', '>', $date)->get()->toArray();
 
     }
 
