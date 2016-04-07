@@ -14,6 +14,7 @@ class HappeningTransformer extends Transformer {
     public function transform($happening)
     {
         return [
+            'id'                    => $happening['id'],
             'happening_event_title' => $happening['event_title'],
             'happening_event_body'  => $happening['event_body'],
             'happening_event_excerpt' => $happening['event_excerpt'],

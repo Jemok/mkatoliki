@@ -14,7 +14,7 @@ class JumuiyaTransformer extends Transformer {
     public function transform($jumuiya)
     {
         return [
-
+            'id'                => $jumuiya['id'],
             'jumuiya_location'  => $jumuiya['location'],
             'jumuiya_event_date' => $jumuiya['happening_on'],
             'raw_jumuiya_id'          => $jumuiya['raw_jumuiya_id']

@@ -14,6 +14,7 @@ class RawJumuiyaTransformer extends Transformer {
     public function transform($raw_jumuiya)
     {
         return [
+            'id'       => $raw_jumuiya['id'],
             'jumuiya_name' => $raw_jumuiya['jumuiya_name'],
             'jumuiya_image_link'  => $raw_jumuiya['jumuiya_image_link'],
         ];
