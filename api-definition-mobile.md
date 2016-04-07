@@ -99,7 +99,7 @@ HTTP/1.1 401 Unauthorized
 HOST: api.mkatoliki.com
 Connection: clsose
 
-                     {
+         {
 		 “error” :{
 				“message” :  “Unauthorized”,
 				“status_code” : 401
@@ -209,7 +209,7 @@ Connection: close
 2(e)
  Get the collection of all parishes and outstations
 
- GET: /api/auth/user/parishes-outstations HTTP/1.1
+ GET: /api/parishes-outstations HTTP/1.1
  HOST:  api.mkatoliki.com
  token: “Bearer" token
  Accept: application/json
@@ -254,7 +254,32 @@ Connection: close
    }
  }
 
+2(f)
 
+POST: /api/auth/user/parish-station HTTP/1.1
+HOST:  api.mkatoliki.com
+BODY: “parish_id”, “station_id”
+Accept: application/json
+
+RESPONSE OK 200
+No Content
+
+RESPONSE 401 Unauthorized
+
+        {
+		 “error” :{
+				“message” :  “Unauthorized”,
+				“status_code” : 401
+			}
+		}
+RESPONSE 500 Internal Server Error
+
+        {
+		 “error” :{
+				“message” :  “could_not_create_user_parish_station”,
+				“status_code” : 500
+			}
+		}
 
 
 3. NEW DATA RESOURCE COLLECTION

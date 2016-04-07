@@ -2,6 +2,9 @@
 
 namespace App\Api\V1\Controllers;
 
+use App\Reflection;
+use App\User_parishes;
+use App\User_stations;
 use JWTAuth;
 use Validator;
 use Config;
@@ -89,6 +92,35 @@ class AuthControllerPhone extends Controller
 
         return response()->json(compact('token'));
 
+    }
+
+    /**
+     * @param Request $request
+     */
+    public function setParishAndStation(Request $request){
+
+        $user_parish = new User_parishes;
+        $user_station = new User_stations;
+
+        $user_parish->parish_id = $request->get('parish_id');
+
+        $user_station->station_id = $request->get('station_id');
+
+
+        if($this->currentUser()->user_parishes()->save($user_parish) && $this->currentUser()->user_stations()->save($user_station))
+            return $this->response->created();
+        else
+            return $this->response->error('could_not_create_user_parish_station', 500);
+
+    }
+
+    /**
+     * Returns the currently logged in user
+     * @return mixed
+     */
+    public function currentUser(){
+
+        return JWTAuth::parseToken()->authenticate();
     }
 
 }
