@@ -27,7 +27,7 @@ class ReadingTransformer extends Transformer {
             'second_reading_body' => $reading['second_reading_body'],
 
 
-            'responsorial_psalm_tatle' => $reading['responsorial_title'],
+            'responsorial_psalm_title' => $reading['responsorial_title'],
             'responsorial_psalm_verse' => $reading['responsorial_book'],
             'responsorial_psalm_body_one' => $reading['responsorial_body_one'],
             'responsorial_psalm_body_two' => $reading['responsorial_body_two'],
