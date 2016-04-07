@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CraetePrayerTypesTableMigration' => $baseDir . '/database/migrations/2016_04_07_062319_craete_prayer_types_table_migration.php',
     'CreatRawJumuiyasMigrationTable' => $baseDir . '/database/migrations/2016_04_06_134705_creat_raw_jumuiyas_migration_table.php',
     'CreateHappeningEventsTableMigration' => $baseDir . '/database/migrations/2016_04_06_131254_create_happening_events_table_migration.php',
     'CreateJumuiyasTableMigration' => $baseDir . '/database/migrations/2016_04_06_131906_create_jumuiyas_table_migration.php',
@@ -90,7 +91,9 @@ return array(
     'Hamcrest\\Type\\IsString' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Type/IsString.php',
     'Hamcrest\\Util' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
+    'HappeningEventsTableSeeder' => $baseDir . '/database/seeds/HappeningEventsTableSeeder.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
+    'JumuiyasTableSeeder' => $baseDir . '/database/seeds/JumuiyasTableSeeder.php',
     'PHPUnit_Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit_Extensions_GroupTestSuite' => $vendorDir . '/phpunit/phpunit/src/Extensions/GroupTestSuite.php',
     'PHPUnit_Extensions_PhptTestCase' => $vendorDir . '/phpunit/phpunit/src/Extensions/PhptTestCase.php',
@@ -486,6 +489,12 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'ParishesTableSeeder' => $baseDir . '/database/seeds/ParishesTableSeeder.php',
+    'PrayerTypesTableSeeder' => $baseDir . '/database/seeds/PrayerTypesTableSeeder.php',
+    'PrayersTableSeeder' => $baseDir . '/database/seeds/PrayersTableSeeder.php',
+    'RawJumuiyasTableSeeder' => $baseDir . '/database/seeds/RawJumuiyasTableSeeder.php',
+    'ReadingsTableSeeder' => $baseDir . '/database/seeds/ReadingsTableSeeder.php',
+    'ReflectionsTableSeeder' => $baseDir . '/database/seeds/ReflectionsTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',
@@ -523,6 +532,11 @@ return array(
     'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => $vendorDir . '/sebastian/recursion-context/src/InvalidArgumentException.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'SessionHandlerInterface' => $vendorDir . '/symfony/http-foundation/Resources/stubs/SessionHandlerInterface.php',
+    'StationsTableSeeder' => $baseDir . '/database/seeds/StationsTableSeeder.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UserParishesTableSeeder' => $baseDir . '/database/seeds/UserParishesTableSeeder.php',
+    'UserStationsTableSeeder' => $baseDir . '/database/seeds/UserStationsTableSeeder.php',
+    'UserTableSeeder' => $baseDir . '/database/seeds/UserTableSeeder.php',
+    'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
 );

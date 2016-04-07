@@ -36,6 +36,7 @@ class User extends Model implements AuthenticatableContract,
         'parish_id',
         'station_id',
         'phone_notification_token'
+
     ];
 
     /**

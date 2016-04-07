@@ -18,7 +18,8 @@ class Parish extends Model
      */
     protected $fillable = [
 
-        'parish_name'
+        'parish_name',
+        'user_id'
 
     ];
 

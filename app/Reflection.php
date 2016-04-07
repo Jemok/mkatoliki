@@ -14,7 +14,8 @@ class Reflection extends Model
 
         'reflection_body',
         'reflection_date',
-        'reading_id'
+        'reading_id',
+        'user_id'
     ];
 
     /**

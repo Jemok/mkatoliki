@@ -14,7 +14,8 @@ class Prayer extends Model
 
         'prayer_title',
         'prayer_body',
-        'prayer_type'
+        'prayer_type_id',
+        'user_id'
     ];
 
     /**

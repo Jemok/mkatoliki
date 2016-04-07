@@ -39,7 +39,12 @@ class AuthController extends Controller
             return $this->response->error('could_not_create_token', 500);
         }
 
-        return response()->json(compact('token'));
+        if(isset($token)){
+
+            $user = \Auth::user();
+        }
+
+        return response()->json(compact('token', 'user'));
     }
 
     public function signup(Request $request)
@@ -69,6 +74,8 @@ class AuthController extends Controller
         
         return $this->response->created();
     }
+
+
 
     public function recovery(Request $request)
     {

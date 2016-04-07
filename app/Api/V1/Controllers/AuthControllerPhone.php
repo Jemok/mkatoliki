@@ -41,6 +41,11 @@ class AuthControllerPhone extends Controller
             return $this->response->error('could_not_create_token', 500);
         }
 
+        if(isset($token)){
+
+            $user = \Auth::user();
+        }
+
 
         return response()->json(compact('token', 'user'));
     }
@@ -69,6 +74,21 @@ class AuthControllerPhone extends Controller
 
         // the token is valid and we have found the user via the sub claim
         return response()->json(compact('user'));
+    }
+
+    /**
+     * The logout method
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request){
+
+        $token = $request->input('token');
+
+        JWTAuth::invalidate($token);
+
+        return response()->json(compact('token'));
+
     }
 
 }

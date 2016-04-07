@@ -25,11 +25,14 @@ return [
     | in the signup method.
     |
     */
+
+
+
     'signup_fields_rules' => [
     	'name' => 'required',
     	'email' => 'required|email|unique:users',
     	'password' => 'required|min:6',
-        'phone_number' => 'max:15',
+        'phone_number' => 'max:15|unique:users',
 
     ],
 

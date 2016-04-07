@@ -30,7 +30,8 @@ class Reading extends Model
 
         'gospel_title',
         'gospel_book',
-        'gospel_body'
+        'gospel_body',
+        'user_id'
 
     ];
 

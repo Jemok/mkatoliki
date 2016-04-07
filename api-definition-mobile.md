@@ -30,8 +30,19 @@ HOST: api.mkatoliki.com
 Connection: close
 
 	{
-		“token” : “jwt.token”
-	}
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAwXC9hcGlcL2F1dGhcL3NpZ251cCIsImlhdCI6MTQ1OTk5MDQ2OSwiZXhwIjoxNDU5OTk0MDY5LCJuYmYiOjE0NTk5OTA0NjksImp0aSI6ImNlNDkzYjQwOTNiMTVmNjk5M2U1N2FjYzllZTRlOTAxIn0.nXsuuWU07o8YguGZvyM15fslNUUbnyiggAQ9nfLlxgQ",
+      "user": {
+        "id": 5,
+        "name": "Jemo",
+        "email": "user@email.com",
+        "phone_number": "0712879467",
+        "phone_notification_token": "",
+        "parish_id": null,
+        "station_id": null,
+        "created_at": "2016-04-07 00:54:29",
+        "updated_at": "2016-04-07 00:54:29"
+      }
+    }
 
 RESPONSE  ERROR 422 (Unprocessable entity)
 
@@ -68,8 +79,19 @@ HOST: api.mkatoliki.com
 Connection: close
 
 		{
-			“token”, “jwt.token”
-		}
+          "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAwXC9hcGlcL2F1dGhcL3NpZ251cCIsImlhdCI6MTQ1OTk5MDQ2OSwiZXhwIjoxNDU5OTk0MDY5LCJuYmYiOjE0NTk5OTA0NjksImp0aSI6ImNlNDkzYjQwOTNiMTVmNjk5M2U1N2FjYzllZTRlOTAxIn0.nXsuuWU07o8YguGZvyM15fslNUUbnyiggAQ9nfLlxgQ",
+          "user": {
+            "id": 5,
+            "name": "Jemo",
+            "email": "user@email.com",
+            "phone_number": "0712879467",
+            "phone_notification_token": "",
+            "parish_id": null,
+            "station_id": null,
+            "created_at": "2016-04-07 00:54:29",
+            "updated_at": "2016-04-07 00:54:29"
+          }
+        }
 
 RESPONSE ERROR 401 (Unauthorized)
 
@@ -382,6 +404,24 @@ Connection: close
     ]
   }
 }
+
+4. LOGOUT ENDPOINT
+
+POST: /api/auth/logout HTTP/1.1
+HOST:  api.mkatoliki.com
+Authorization: "Bearer" jwt.token
+Accept: application/json
+
+RESPONSE 200 OK
+
+HTTP/1.1 200 OK
+HOST: api.mkatoliki.com
+Connection: close
+
+		{
+			“token”, “expired_jwt.token”
+		}
+
 
 NB::
 

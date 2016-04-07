@@ -19,6 +19,8 @@ $api->version('v1', function ($api) {
         $api->post('auth/signup', 'App\Api\V1\Controllers\AuthController@signup');
         $api->post('auth/recovery', 'App\Api\V1\Controllers\AuthController@recovery');
         $api->post('auth/reset', 'App\Api\V1\Controllers\AuthController@reset');
+        $api->get('auth/logout', 'App\Api\V1\Controllers\AuthControllerPhone@logout');
+
     });
 
 

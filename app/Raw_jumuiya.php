@@ -19,7 +19,8 @@ class Raw_jumuiya extends Model
     protected $fillable = [
 
         'jumuiya_name',
-        'jumuiya_image_link'
+        'jumuiya_image_link',
+        'user_id'
 
     ];
 

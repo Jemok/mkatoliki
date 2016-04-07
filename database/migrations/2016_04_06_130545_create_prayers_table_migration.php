@@ -17,6 +17,7 @@ class CreatePrayersTableMigration extends Migration
             $table->string('prayer_title');
             $table->text('prayer_body');
             $table->string('prayer_type');
+            $table->integer('prayer_type_id');
             $table->integer('user_id')->unsigned();
 
             $table->timestamps();

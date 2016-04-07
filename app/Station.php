@@ -20,7 +20,8 @@ class Station extends Model
     protected $fillable = [
 
         'station_name',
-        'parish_id'
+        'parish_id',
+        'user_id'
 
     ];
 }
