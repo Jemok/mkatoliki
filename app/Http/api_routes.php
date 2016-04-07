@@ -33,6 +33,7 @@ $api->version('v1', function ($api) {
 	// example of free route
 	$api->get('free', function() {
 		return \App\User::all();
+
 	});
 
     /**------
@@ -160,6 +161,20 @@ $api->version('v1', function ($api) {
         $api->get('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@show');
         $api->put('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@update');
         $api->delete('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@destroy');
+    });
+
+    /**------
+     *
+     * Parish cum Out-stations route
+     *
+     *
+     *
+     */
+
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+
+        $api->get('parishes-outstations', 'App\Api\V1\Controllers\ParishOutStationController@index');
+
     });
 
 

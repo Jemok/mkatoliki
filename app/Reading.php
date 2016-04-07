@@ -14,6 +14,7 @@ class Reading extends Model
     protected $fillable = [
 
         'reading_date',
+        'reading_day',
 
         'first_reading_title',
         'first_reading_book',
@@ -45,23 +46,21 @@ class Reading extends Model
     }
 
     /**
-     * Format the reading time date before it is persisted
+     * Format the reading time day before it is persisted
      * @param $date
      */
-    public function setReadingAttribute($date){
+    public function setReadingDayAttribute($date){
 
-
-
-        $this->attributes['reading_date'] = Carbon::parse($date);
+        $this->attributes['reading_day'] = Carbon::parse($date)->addHours(3);
 
     }
 
     /**
-     * Format the reading date after it is persisted
+     * Format the reading day after it is persisted
      * @param $date
      * @return string
      */
-    public function getReadingDateAttribute($date){
+    public function getReadingDayAttribute($date){
 
         $dt = Carbon::parse($date);
 

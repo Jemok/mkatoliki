@@ -79,14 +79,14 @@ class NewDataController extends Controller
                ],
                'data' => [
 
-                   'readings' => $this->readingTransformer->transformCollection($this->getAllReadings($client_date)),
-                   'prayers'  => $this->prayerTransformer->transformCollection($this->getAllPrayers($client_date)),
-                   'reflections' =>  $this->reflectionTransformer->transformCollection($this->getAllReflections($client_date)),
-                   'happenings'  => $this->happeningTransformer->transformCollection($this->getAllHappenings($client_date)),
-                   'raw_jumuiyas'  => $this->rawJumuiyaTransformer->transformCollection($this->getAllRawJumuiyas($client_date)),
-                   'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getAllJumuiya($client_date)),
-                   'parishes'       =>  $this->parishesTransformer->transformCollection($this->getAllParishes($client_date)),
-                   'out-stations'       =>  $this->stationTransformer->transformCollection($this->getAllStations($client_date)),
+                   'readings' => $this->readingTransformer->transformCollection($this->getAllReadings()),
+                   'prayers'  => $this->prayerTransformer->transformCollection($this->getAllPrayers()),
+                   'reflections' =>  $this->reflectionTransformer->transformCollection($this->getAllReflections()),
+                   'happenings'  => $this->happeningTransformer->transformCollection($this->getAllHappenings()),
+                   'raw_jumuiyas'  => $this->rawJumuiyaTransformer->transformCollection($this->getAllRawJumuiyas()),
+                   'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getAllJumuiya()),
+                   'parishes'       =>  $this->parishesTransformer->transformCollection($this->getAllParishes()),
+                   'out-stations'       =>  $this->stationTransformer->transformCollection($this->getAllStations()),
                    'prayer_types'     => $this->prayerTypeTransformer->transformCollection($this->getAllPrayerTypes())
                ]
            ]);
@@ -142,7 +142,7 @@ class NewDataController extends Controller
 
    public function getNewReflections($date){
 
-        return Reflection::where('updated_at', '<', $date)->get()->toArray();
+        return Reflection::where('updated_at', '>', $date)->get()->toArray();
 
    }
 

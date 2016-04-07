@@ -14,7 +14,9 @@ class CreateReadingsMigrationTable extends Migration
     {
         Schema::create('readings', function (Blueprint $table) {
             $table->increments('id');
+
             $table->dateTime('reading_date');
+            $table->dateTime('reading_day');
 
             //First Reading
             $table->string('first_reading_title');

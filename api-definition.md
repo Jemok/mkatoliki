@@ -126,8 +126,6 @@ Connection: close
       }
     }
 
-
-
 ##3(a) DAILY READING RESOURCE
 
 GET /api/readings/{client_last_date_to_the_server}

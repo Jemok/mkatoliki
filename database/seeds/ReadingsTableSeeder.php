@@ -23,6 +23,8 @@ class ReadingsTableSeeder extends Seeder
             Reading::create([
 
                 'reading_date' => $faker->dateTime,
+                'reading_day'  => '2016-04-22 21:00:00',
+
                 'first_reading_title'  => $faker->sentence(1),
                 'first_reading_book' => $faker->word,
                 'first_reading_body' => $faker->paragraph(10),

@@ -206,6 +206,57 @@ Connection: close
     }
 
 
+2(e)
+ Get the collection of all parishes and outstations
+
+ GET: /api/auth/user/parishes-outstations HTTP/1.1
+ HOST:  api.mkatoliki.com
+ token: “Bearer" token
+ Accept: application/json
+
+ HTTP/1.1 200 OK
+ HOST: api.mkatoliki.com
+ Connection: close
+
+ {
+   "data": {
+     "parishes": [
+       {
+         "id": 1,
+         "parish_name": "Aut."
+       },
+       {
+         "id": 2,
+         "parish_name": "Sit et."
+       },
+       {
+         "id": 3,
+         "parish_name": "Sunt nesciunt."
+       }
+     ],
+     "out-stations": [
+       {
+         "id": 1,
+         "station_name": "Porro totam.",
+         "parish_id": 25
+       },
+       {
+         "id": 2,
+         "station_name": "Alias aliquam.",
+         "parish_id": 25
+       },
+       {
+         "id": 3,
+         "station_name": "Reiciendis.",
+         "parish_id": 11
+       }
+     ]
+   }
+ }
+
+
+
+
 3. NEW DATA RESOURCE COLLECTION
 
 

@@ -585,7 +585,6 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
         return $scope.date1.getTime();
 
-
     }
 
 
@@ -703,6 +702,7 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
         mainService.create({
 
             reading_date: $scope.currentReadingDate,
+            reading_day: $scope.currentReadingDate,
             first_reading_title: $scope.currentFirstReadingTitle,
             first_reading_book: $scope.currentFirstReadingBook,
             first_reading_body: $scope.currentFirstReadingBody,
@@ -756,6 +756,7 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
     $scope.currentReadingReset = function(){
         $scope.currentReadingDate = "";
+
 
         $scope.currentFirstReadingTitle = "";
         $scope.currentFirstReadingBook = "";
