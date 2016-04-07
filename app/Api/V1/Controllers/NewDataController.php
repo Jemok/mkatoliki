@@ -6,6 +6,7 @@ use App\Api\V1\Transformers\HappeningTransformer;
 use App\Api\V1\Transformers\JumuiyaTransformer;
 use App\Api\V1\Transformers\ParishTransformer;
 use App\Api\V1\Transformers\PrayerTransformer;
+use App\Api\V1\Transformers\PrayerTypeTransformer;
 use App\Api\V1\Transformers\RawJumuiyaTransformer;
 use App\Api\V1\Transformers\ReflectionTransformer;
 use App\Api\V1\Transformers\StationTransformer;
@@ -23,6 +24,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Api\V1\Transformers\ReadingTransformer;
 use App\Reading;
+use App\Prayer_types;
 
 class NewDataController extends Controller
 {
@@ -30,20 +32,16 @@ class NewDataController extends Controller
      * @var \App\Api\V1\Transformers\ReadingTransformer
      */
     protected  $readingTransformer;
-
     protected $prayerTransformer;
-
     protected $jumuiyaTransformer;
-
     protected $reflectionTransformer;
-
     protected $happeningTransformer;
-
     protected $rawJumuiyaTransformer;
-
     protected $parishesTransformer;
-
     protected $stationTransformer;
+    protected $prayerTypeTransformer;
+    protected $userParishesTransformer;
+    protected $userOutstationsTransformer;
 
    public function __construct(ReadingTransformer $readingTransformer,
                                PrayerTransformer $prayerTransformer,
@@ -52,26 +50,21 @@ class NewDataController extends Controller
                                HappeningTransformer $happeningTransformer,
                                RawJumuiyaTransformer $rawJumuiyaTransformer,
                                ParishTransformer $parishTransformer,
-                               StationTransformer $stationTransformer
+                               StationTransformer $stationTransformer,
+                               PrayerTypeTransformer $prayerTypeTransformer
 
 
     ){
 
        $this->readingTransformer = $readingTransformer;
-
        $this->prayerTransformer = $prayerTransformer;
-
        $this->jumuiyaTransformer = $jumuiyaTransformer;
-
        $this->reflectionTransformer = $reflectionTransformer;
-
        $this->happeningTransformer = $happeningTransformer;
-
        $this->rawJumuiyaTransformer = $rawJumuiyaTransformer;
-
        $this->parishesTransformer = $parishTransformer;
-
        $this->stationTransformer = $stationTransformer;
+       $this->prayerTypeTransformer = $prayerTypeTransformer;
    }
 
    public function index($client_date){
@@ -94,6 +87,7 @@ class NewDataController extends Controller
                    'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getAllJumuiya($client_date)),
                    'parishes'       =>  $this->parishesTransformer->transformCollection($this->getAllParishes($client_date)),
                    'out-stations'       =>  $this->stationTransformer->transformCollection($this->getAllStations($client_date)),
+                   'prayer_types'     => $this->prayerTypeTransformer->transformCollection($this->getAllPrayerTypes())
                ]
            ]);
 
@@ -113,7 +107,7 @@ class NewDataController extends Controller
             'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getNewJumuiya($client_date)),
             'parishes'       =>  $this->parishesTransformer->transformCollection($this->getNewParishes($client_date)),
             'out-stations'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
-
+            'prayer_types'    =>   $this->prayerTypeTransformer->transformCollection($this->getNewPrayerTypes($client_date))
 
             ]
         ]);
@@ -127,6 +121,12 @@ class NewDataController extends Controller
        return Reading::where('updated_at', '>', $date)->get()->toArray();
 
    }
+
+    public function getNewPrayerTypes($date){
+
+        return Prayer_types::where('updated_at', '>', $date)->get()->toArray();
+
+    }
 
    public function getNewPrayers($date){
 
@@ -180,6 +180,12 @@ class NewDataController extends Controller
     public function getAllReadings(){
 
         return Reading::all()->toArray();
+
+    }
+
+    public function getAllPrayerTypes(){
+
+        return Prayer_types::all()->toArray();
 
     }
 

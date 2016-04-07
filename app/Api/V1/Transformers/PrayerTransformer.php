@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: root
- * Date: 4/4/16
- * Time: 11:26 PM
+ * Date: 4/7/16
+ * Time: 12:07 PM
  */
 
 namespace App\Api\V1\Transformers;
@@ -23,4 +23,4 @@ class PrayerTransformer extends Transformer {
         ];
     }
 
-} 
+}

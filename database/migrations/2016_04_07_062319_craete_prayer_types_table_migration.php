@@ -31,3 +31,5 @@ class CraetePrayerTypesTableMigration extends Migration
         Schema::drop('prayer_types');
     }
 }
+
+

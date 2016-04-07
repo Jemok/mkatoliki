@@ -221,6 +221,13 @@ HOST api.mkatoliki.com
 Connection: close
 
 {
+  "meta": {
+    "to_server_last_date": {
+      "date": "2016-04-07 12:21:37",
+      "timezone_type": 3,
+      "timezone": "Africa/Khartoum"
+    }
+  },
   "data": {
     "readings": [
       {
@@ -401,6 +408,23 @@ Connection: close
         "station_name": "station_name",
         "parish_id": 1 (NB: foreing_key for relationship with the parish table)
       }
+    ],
+    "prayer_types": [
+          {
+            "id": 1,
+            "prayer_type_name": "Sapiente consectetur.",
+            "prayer_type_description": "Quo laudantium reiciendis animi deleniti iste. Quo aliquam neque ut blanditiis qui. Modi maiores a eos aut exercitationem sed dignissimos. Exercitationem pariatur aut nihil qui omnis sed cum numquam. Ratione sed dicta et consequatur ut est veritatis. Necessitatibus sunt et aut quibusdam. Est qui est iste sint explicabo optio nulla. Ratione porro et illo eum beatae nobis. Numquam nemo voluptatibus optio ea eos repellat ipsa. Autem omnis vel error aut commodi magni. Aliquam magnam in deserunt harum eveniet aperiam. Sed distinctio est consequatur saepe qui libero mollitia. Aspernatur itaque eos harum rerum. Facilis et harum dolore voluptatibus suscipit libero qui."
+          },
+          {
+            "id": 2,
+            "prayer_type_name": "Ducimus.",
+            "prayer_type_description": "Ut quidem ratione ratione eum tenetur vel qui reiciendis. Tenetur delectus maiores nesciunt mollitia. Mollitia magnam unde harum cumque eaque sunt. Est sunt velit quia voluptates corrupti. Exercitationem dolores quidem necessitatibus quibusdam. Saepe saepe hic temporibus exercitationem vitae hic saepe. Quia porro qui vitae cumque at voluptas. Sunt explicabo rerum modi laborum qui ad asperiores. Eum recusandae et veniam. Dolorum quia laborum in esse vel et. Dolorum aspernatur praesentium cumque vero praesentium laborum tempora."
+          },
+          {
+            "id": 3,
+            "prayer_type_name": "Recusandae.",
+            "prayer_type_description": "Itaque at atque eum reiciendis dolor. Esse id voluptas rerum. Ut ut quia ut exercitationem rem dolor. Cum consequuntur ratione atque. Harum deserunt ipsum sit eos in nihil et dolores. Est provident omnis ad. Et quia dolorum sapiente eligendi. Eos rerum unde rerum veritatis quisquam eveniet. Fugiat beatae est consequatur quia illum qui est. Tenetur modi ex et quam qui. Cum at recusandae ut incidunt at. Quas assumenda sunt doloremque nobis."
+          }
     ]
   }
 }
