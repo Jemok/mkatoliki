@@ -76,6 +76,24 @@ class NewDataController extends Controller
 
    public function index($client_date){
 
+       if($client_date == "0000-00-00 00:00:00"){
+
+           return $this->respond([
+
+               'data' => [
+
+                   'readings' => $this->readingTransformer->transformCollection($this->getAllReadings($client_date)),
+                   'prayers'  => $this->prayerTransformer->transformCollection($this->getAllPrayers($client_date)),
+                   'reflections' =>  $this->reflectionTransformer->transformCollection($this->getAllReflections($client_date)),
+                   'happenings'  => $this->happeningTransformer->transformCollection($this->getAllHappenings($client_date)),
+                   'raw_jumuiyas'  => $this->rawJumuiyaTransformer->transformCollection($this->getAllRawJumuiyas($client_date)),
+                   'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getAllJumuiya($client_date)),
+                   'parishes'       =>  $this->parishesTransformer->transformCollection($this->getAllParishes($client_date)),
+                   'out-stations'       =>  $this->stationTransformer->transformCollection($this->getAllStations($client_date)),
+               ]
+           ]);
+
+       }else{
         return $this->respond([
 
             'data' => [
@@ -95,6 +113,8 @@ class NewDataController extends Controller
 
             ]
         ]);
+
+       }
 
    }
 
@@ -149,5 +169,55 @@ class NewDataController extends Controller
     public function respond($data, $headers = [])
     {
         return Response::json($data, '200', $headers);
+    }
+
+    /************************************************************************************************/
+
+    public function getAllReadings(){
+
+        return Reading::all()->toArray();
+
+    }
+
+    public function getAllPrayers(){
+
+        return Prayer::all()->toArray();
+
+    }
+
+    public function getAllJumuiya(){
+
+        return Jumuiya::all()->toArray();
+
+    }
+
+    public function getAllReflections(){
+
+        return Reflection::all()->toArray();
+
+    }
+
+    public function getAllHappenings(){
+
+        return Happening_event::all()->toArray();
+
+    }
+
+    public function getAllRawJumuiyas(){
+
+        return Raw_jumuiya::all()->toArray();
+
+    }
+
+    public function getAllParishes(){
+
+        return Parish::all()->toArray();
+
+    }
+
+    public function getAllStations(){
+
+        return Station::all()->toArray();
+
     }
 }

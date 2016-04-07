@@ -16,7 +16,8 @@ class ReflectionTransformer extends Transformer {
         return [
             'id' =>  $reflection['id'],
             'reflection_body' => $reflection['reflection_body'],
-            //'reflection_date'  => $reflection['reflection_date'],
+            'reflection_date'  => $reflection['reflection_date'],
+            'reading_id'       => $reflection['reading_id']
         ];
     }
 

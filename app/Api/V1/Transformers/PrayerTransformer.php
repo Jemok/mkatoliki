@@ -18,7 +18,7 @@ class PrayerTransformer extends Transformer {
             'id'          => $prayer['id'],
             'prayer_title' => $prayer['prayer_title'],
             'prayer_body' => $prayer['prayer_body'],
-            'prayer_type' => $prayer['prayer_type']
+            'prayer_type_id' => $prayer['prayer_type_id']
 
         ];
     }
