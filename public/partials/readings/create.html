@@ -3,10 +3,10 @@
         <header class="row row__filter">
             <form class="search">
                 <input type="text" value="Name ..." class="f__input">
-                <input type="date" value="Date ..." class="f__input">
+                <input type="date" value="Date ..." class="f__input" data-ng-model="currentReadingDate">
             </form>
             <div class="create">
-                <button type="submit" class="cta">Save</button><a href="#/readings-create" id="createNew" class="cta">Create New</a></div>
+                <button  class="cta" data-ng-click="create()">Save</button><a href="#/readings-create" id="createNew" class="cta">Create New</a></div>
         </header>
     </div>
 </div>
@@ -15,28 +15,28 @@
     <div class="row create__readings">
         <div class="reading">
             <h4 class="rd__label">1st Reading</h4>
-            <input type="text" value="Verse" class="f__input rd__verse">
-            <textarea name="" class="f__input rd__summary">Summary</textarea>
-            <textarea name="" class="f__input rd__reading">The Reading </textarea>
+            <input type="text" value="Verse" class="f__input rd__verse" data-ng-model="currentFirstReadingBook">
+            <textarea name="" class="f__input rd__summary" data-ng-model="currentFirstReadingTitle">Summary</textarea>
+            <textarea name="" class="f__input rd__reading" data-ng-model="currentFirstReadingBody">The Reading </textarea>
         </div>
         <div class="reading">
             <h4 class="rd__label">Responsorial Psalm</h4>
-            <input type="text" value="Verse" class="f__input rd__verse">
-            <textarea name="" class="f__input rd__summary">The Responsorial Psalm</textarea>
-            <input type="text" value="Responsorial's Verse" class="f__input rd__verse">
-            <textarea name="" class="f__input rd__reading">The Reading</textarea>
+            <input type="text" value="Verse" class="f__input rd__verse" data-ng-model="currentResponsorialBook">
+            <textarea name="" class="f__input rd__summary" data-ng-model="currentResponsorialBodyOne">The Responsorial Psalm</textarea>
+            <input type="text" value="Responsorial's Verse" class="f__input rd__verse" data-ng-model="currentResponsorialPsalmVerse">
+            <textarea class="f__input rd__reading" data-ng-model="currentResponsorialBodyTwo">The Reading</textarea>
         </div>
         <div class="reading">
             <h4 class="rd__label">2nd Reading</h4>
-            <input type="text" value="Verse" class="f__input rd__verse">
-            <textarea name="" class="f__input rd__summary">Summary</textarea>
-            <textarea name="" class="f__input rd__reading">The Reading</textarea>
+            <input type="text" value="Verse" class="f__input rd__verse" data-ng-model="currentSecondReadingBook">
+            <textarea name="" class="f__input rd__summary" data-ng-model="currentSecondReadingTitle">Summary</textarea>
+            <textarea name="" class="f__input rd__reading" data-ng-model="currentSecondReadingBody">The Reading</textarea>
         </div>
         <div class="reading">
             <h4 class="rd__label">Gospel</h4>
-            <input type="text" value="Verse" class="f__input rd__verse">
-            <textarea name="" class="f__input rd__summary">Summary</textarea>
-            <textarea name="" class="f__input rd__reading">The Gospel</textarea>
+            <input type="text" value="Verse" class="f__input rd__verse" data-ng-model="currentGospelBook">
+            <textarea name="" class="f__input rd__summary" data-ng-model="currentGospelTitle">Summary</textarea>
+            <textarea name="" class="f__input rd__reading" data-ng-model="currentGospelBody">The Gospel</textarea>
         </div>
     </div>
 </div>

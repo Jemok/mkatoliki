@@ -22,12 +22,13 @@ class Reading extends Model
 
         'second_reading_title',
         'second_reading_book',
-        'first_reading_body',
+        'second_reading_body',
 
         'responsorial_title',
         'responsorial_book',
         'responsorial_body_one',
         'responsorial_body_two',
+        'responsorial_body_one_verse',
 
         'gospel_title',
         'gospel_book',

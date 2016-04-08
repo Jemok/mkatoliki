@@ -51,6 +51,7 @@ class ReadingController extends Controller
         $reading->responsorial_book     = $request->get('responsorial_book');
         $reading->responsorial_body_one     = $request->get('responsorial_body_one');
         $reading->responsorial_body_two     = $request->get('responsorial_body_two');
+        $reading->responsorial_body_one_verse = $request->get('responsorial_body_one_verse');
 
         $reading->gospel_title           = $request->get('gospel_title');
         $reading->gospel_book           = $request->get('gospel_book');

@@ -700,7 +700,10 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
     $scope.create = function(){
 
+        alert('hi jemo');
+
         mainService.create({
+
 
             reading_date: $scope.currentReadingDate,
             reading_day: $scope.currentReadingDate,
@@ -718,6 +721,7 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
             responsorial_book: $scope.currentResponsorialBook,
             responsorial_body_one: $scope.currentResponsorialBodyOne,
             responsorial_body_two: $scope.currentResponsorialBodyTwo,
+            responsorial_body_one_verse: $scope.currentResponsorialPsalmVerse,
 
 
             gospel_title: $scope.currentGospelTitle,
@@ -771,6 +775,7 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
         $scope.currentResponsorialBook = "";
         $scope.currentResponsorialBodyOne = "";
         $scope.currentResponsorialBodyTwo = "";
+        $scope.currentResponsorialPsalmVerse = "";
 
 
 
