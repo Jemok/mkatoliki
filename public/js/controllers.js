@@ -812,7 +812,6 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
     $scope.create = function(){
 
-        alert('hi jemo');
 
         mainService.create({
 
