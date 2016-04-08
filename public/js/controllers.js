@@ -26,10 +26,11 @@ mkatolikiAppControllers.controller('LoginController', ['$scope', '$http', '$loca
     }
 }]);
 
-mkatolikiAppControllers.controller('mkatolikiController', ['$scope', function($scope){
+mkatolikiAppControllers.controller('mkatolikiController', ['$scope', '$location', function($scope, $location){
     $scope.$on('LOAD', function(){$scope.loading=true});
     $scope.$on('UNLOAD', function(){$scope.loading=false});
 
+    $scope.location = $location;
 }]);
 
 mkatolikiAppControllers.controller('SignupController', ['$scope', '$location' ,'$http', 'userService', function($scope, $location, $http, userService){

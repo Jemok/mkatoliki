@@ -9,7 +9,9 @@
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
         <link href="libs/css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/styles.css" rel="stylesheet">
+<!--        <link href="css/styles.css" rel="stylesheet">-->
+        <link href="css/style.css" rel="stylesheet">
+
 
 
         <script src="libs/js/angular.min.js"></script>
@@ -24,26 +26,24 @@
         <script src="js/services.js"></script>
         <script src="js/controllers.js"></script>
         <script src="js/filter.js"></script>
-
-        <style>
-
-            li {
-                padding-top: 8px;
-            }
-        </style>
-
+        <script src="js/directives.js"></script>
     </head>
 
-    <body>
-        <div class="container">
+    <body class="global__wrapper">
+            <div class="row global__navbar">
+                <div class="gn__logo">
+                    <div class="logo__name">Mkatoliki</div>
+                </div>
+                <div class="gn__nav">
+                    <ul class="nav">
+                        <li class="nav__item"><a data-ng-controller="MainController" href="" data-ng-click="logout()" class="nav__link">Logout</a></li>
+                    </ul>
 
-
-
-            <div ng-view data-ng-controller="mkatolikiController">
+                </div>
             </div>
-        </div>
 
-        <script src="libs/js/jquery.min.js"></script>
-        <script src="libs/js/bootstrap.min.js"></script>
+            <div ng-view data-ng-controller="mkatolikiController" class="row global__wrapper">
+
+        <script data-main="assets/js/main" src="assets/js/require.js"></script>
     </body>
 </html>

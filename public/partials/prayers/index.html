@@ -1,114 +1,157 @@
-<!-- Static navbar -->
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#/">Mkatoliki</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#/prayers">Prayers</a></li>
-                <li><a href="#/jumuiya">Jumuiya</a></li>
-                <li><a href="#/reflection">Reflection</a> </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a data-ng-click="logout()">Logout</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div><!--/.container-fluid -->
-</nav>
-
-<div class="row">
-    <div class="col-md-12">
-
-        <p>There are currently: <b>{{prayers.length}}</b> prayers in the database</p>
-
-
-    <div class="pull-left add-action">
-        <button class="btn btn-primary" data-toggle="modal" data-target="#addPrayerModal" >+Add Prayer</button>
+<div class="row global__toolbar">
+    <div class="gc__right">
+        <header class="row row__filter">
+            <form class="search">
+                <input type="text" value="Name ..." class="f__input">
+                <select class="f__input">
+                    <option selected="selected">Category</option>
+                    <option>The Holy Rosary</option>
+                </select>
+            </form>
+            <div class="create">
+                <button type="submit" class="cta">Search</button><a href="#" class="cta">Create New</a></div>
+        </header>
     </div>
-    </div>
-
-    <br>
-    <br>
-
-    <div id="fountainTextG" data-ng-show="loading"><div id="fountainTextG_1" class="fountainTextG">L</div><div id="fountainTextG_2" class="fountainTextG">o</div><div id="fountainTextG_3" class="fountainTextG">a</div><div id="fountainTextG_4" class="fountainTextG">d</div><div id="fountainTextG_5" class="fountainTextG">i</div><div id="fountainTextG_6" class="fountainTextG">n</div><div id="fountainTextG_7" class="fountainTextG">g</div></div>
-
-    <ul>
-        <li data-ng-repeat="prayer in prayers">
-
-            <div class="row">
-
-                <h4 class="text-center text-capitalize">{{prayer.title}}</h4>
-
-            <div class="alert alert-info col-md-8 col-md-offset-2">
-
-
-
-                <div class="col-md-offset-7">
-                    Created on: {{prayer.created_at}}
-
-                    <button data-ng-click="load(prayer.id)" class="btn btn-info btn-xs">Edit</button>
-                    <button class="btn btn-danger btn-xs" data-ng-click="remove(prayer.id)">Delete</button>
-                </div>
-
-                {{prayer.body}}
-            </div>
-            <br>
-
-            </div>
-
-        </li>
-    </ul>
 </div>
-
-<div class="modal fade" id="addPrayerModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add a Prayer</h4>
-            </div>
-
-            <div class="modal-body">
-                <p><textarea class="form-control" data-ng-model="currentTitle" placeholder="Prayer Title.."></textarea></p>
-                <p><textarea class="form-control" data-ng-model="currentBody" placeholder="Prayer Body.."></textarea></p>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-ng-click="create()">Save</button>
-            </div>
-
+<div class="row global__create">
+    <div class="row create__readings">
+        <div class="reading">
+            <h4 class="rd__label">1st Reading</h4>
+            <input type="text" value="Verse" class="f__input rd__verse">
+            <textarea name="" class="f__input rd__summary">Summary</textarea>
+            <textarea name="" class="f__input rd__reading">The Reading </textarea>
+        </div>
+        <div class="reading">
+            <h4 class="rd__label">Responsorial Psalm</h4>
+            <input type="text" value="Verse" class="f__input rd__verse">
+            <textarea name="" class="f__input rd__summary">The Responsorial Psalm</textarea>
+            <input type="text" value="Responsorial's Verse" class="f__input rd__verse">
+            <textarea name="" class="f__input rd__reading">The Reading</textarea>
+        </div>
+        <div class="reading">
+            <h4 class="rd__label">2nd Reading</h4>
+            <input type="text" value="Verse" class="f__input rd__verse">
+            <textarea name="" class="f__input rd__summary">Summary</textarea>
+            <textarea name="" class="f__input rd__reading">The Reading</textarea>
         </div>
     </div>
 </div>
-
-<div class="modal fade" id="updatePrayerModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Add a Prayer</h4>
-            </div>
-
-            <div class="modal-body">
-                <p><input type="hidden" data-ng-model="currentPrayerId"/></p>
-                <p><textarea class="form-control" data-ng-model="currentTitle" placeholder="Prayer Title.."></textarea></p>
-                <p><textarea class="form-control" data-ng-model="currentBody" placeholder="Prayer Body.."></textarea></p>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-ng-click="update()">Save</button>
-            </div>
-
-        </div>
+<div class="row global__content">
+    <div class="gc__sidebar">
+        <ul class="nav">
+            <li class="nav__header">Quick Links</li>
+            <li class="nav__item"><a href="#/reflections" class="nav__link">Reflections</a></li>
+            <li class="nav__item active"><a href="#/" class="nav__link">Readings</a></li>
+            <li class="nav__item"><a href="#/prayers" class="nav__link">Prayers</a></li>
+            <li class="nav__item"><a href="#/happenings" class="nav__link">Happening Today</a></li>
+            <li class="nav__item"><a href="#/jumuiya" class="nav__link">Jumuiya</a></li>
+        </ul>
+    </div>
+    <div class="gc__right">
+        <section class="row__table">
+            <table class="table">
+                <tr>
+                    <th>Prayer</th>
+                    <th>Clustured in</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td>Our Father</td>
+                    <td>Common Prayers, The Holy Rosary</td>
+                    <td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>
+                </tr>
+            </table>
+        </section>
     </div>
 </div>
+
+
+<!--<div class="row">-->
+    <!--<div class="col-md-12">-->
+
+        <!--<p>There are currently: <b>{{prayers.length}}</b> prayers in the database</p>-->
+
+
+    <!--<div class="pull-left add-action">-->
+        <!--<button class="btn btn-primary" data-toggle="modal" data-target="#addPrayerModal" >+Add Prayer</button>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<br>-->
+    <!--<br>-->
+
+    <!--<div id="fountainTextG" data-ng-show="loading"><div id="fountainTextG_1" class="fountainTextG">L</div><div id="fountainTextG_2" class="fountainTextG">o</div><div id="fountainTextG_3" class="fountainTextG">a</div><div id="fountainTextG_4" class="fountainTextG">d</div><div id="fountainTextG_5" class="fountainTextG">i</div><div id="fountainTextG_6" class="fountainTextG">n</div><div id="fountainTextG_7" class="fountainTextG">g</div></div>-->
+
+    <!--<ul>-->
+        <!--<li data-ng-repeat="prayer in prayers">-->
+
+            <!--<div class="row">-->
+
+                <!--<h4 class="text-center text-capitalize">{{prayer.title}}</h4>-->
+
+            <!--<div class="alert alert-info col-md-8 col-md-offset-2">-->
+
+
+
+                <!--<div class="col-md-offset-7">-->
+                    <!--Created on: {{prayer.created_at}}-->
+
+                    <!--<button data-ng-click="load(prayer.id)" class="btn btn-info btn-xs">Edit</button>-->
+                    <!--<button class="btn btn-danger btn-xs" data-ng-click="remove(prayer.id)">Delete</button>-->
+                <!--</div>-->
+
+                <!--{{prayer.body}}-->
+            <!--</div>-->
+            <!--<br>-->
+
+            <!--</div>-->
+
+        <!--</li>-->
+    <!--</ul>-->
+<!--</div>-->
+
+<!--<div class="modal fade" id="addPrayerModal">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                <!--<h4 class="modal-title">Add a Prayer</h4>-->
+            <!--</div>-->
+
+            <!--<div class="modal-body">-->
+                <!--<p><textarea class="form-control" data-ng-model="currentTitle" placeholder="Prayer Title.."></textarea></p>-->
+                <!--<p><textarea class="form-control" data-ng-model="currentBody" placeholder="Prayer Body.."></textarea></p>-->
+            <!--</div>-->
+
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                <!--<button type="button" class="btn btn-primary" data-ng-click="create()">Save</button>-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+<!--<div class="modal fade" id="updatePrayerModal">-->
+    <!--<div class="modal-dialog">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                <!--<h4 class="modal-title">Add a Prayer</h4>-->
+            <!--</div>-->
+
+            <!--<div class="modal-body">-->
+                <!--<p><input type="hidden" data-ng-model="currentPrayerId"/></p>-->
+                <!--<p><textarea class="form-control" data-ng-model="currentTitle" placeholder="Prayer Title.."></textarea></p>-->
+                <!--<p><textarea class="form-control" data-ng-model="currentBody" placeholder="Prayer Body.."></textarea></p>-->
+            <!--</div>-->
+
+            <!--<div class="modal-footer">-->
+                <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+                <!--<button type="button" class="btn btn-primary" data-ng-click="update()">Save</button>-->
+            <!--</div>-->
+
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
 

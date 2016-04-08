@@ -24,8 +24,8 @@ mkatolikiApp.config(['$routeProvider', function($routeProvider){
             templateUrl: 'partials/index.html',
             controller: 'MainController'
     }).
-    when('/readings', {
-         templateUrl: 'partials/readings/index.html',
+    when('/readings-create', {
+         templateUrl: 'partials/readings/create.html',
          controller: 'ReadingController'
     }).
     when('/prayers', {

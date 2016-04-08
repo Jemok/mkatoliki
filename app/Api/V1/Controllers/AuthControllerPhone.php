@@ -47,6 +47,12 @@ class AuthControllerPhone extends Controller
         if(isset($token)){
 
             $user = \Auth::user();
+            $parish_id = \Auth::user()->user_parishes()->first()->parish_id;
+            $station_id = \Auth::user()->user_stations()->first()->station_id;
+
+            $user->parish_id = $parish_id;
+            $user->station_id =$station_id;
+
         }
 
 
