@@ -52,7 +52,7 @@ class Reading extends Model
      */
     public function setReadingDayAttribute($date){
 
-        $this->attributes['reading_day'] = Carbon::parse($date)->addHours(3);
+        $this->attributes['reading_day'] = Carbon::parse($date);
 
     }
 

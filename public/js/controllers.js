@@ -299,7 +299,114 @@ mkatolikiAppControllers.controller('JumuiyaController', ['$scope', '$http', 'use
 
 }]);
 
-mkatolikiAppControllers.controller('ReflectionController', ['$scope', '$http', 'userService', 'reflectionService', function($scope, $http , userService, reflectionService){
+mkatolikiAppControllers.controller('ReflectionController', ['$scope', '$http', 'userService', 'reflectionService', 'mainService', function($scope, $http , userService, reflectionService, mainService){
+
+
+    var in10Days = new Date();
+    in10Days.setDate(in10Days.getDate() + 10);
+
+   // $scope.date1 = new Date('2016-03-29T21:00:00Z')
+
+    $scope.date1 = "";
+
+    $scope.dates = {
+        //date1: new Date('2016-03-28'),
+        date2: new Date('2015-03-01T12:30:00Z'),
+        date3: new Date(),
+        date4: new Date(),
+        date5: in10Days,
+        date6: new Date(),
+        date7: new Date(),
+        date8: new Date(),
+        date9: null,
+        date10: new Date('2015-03-01T09:00:00Z'),
+        date11: new Date('2015-03-01T10:00:00Z')
+    };
+
+    $scope.open = {
+        date1: false,
+        date2: false,
+        date3: false,
+        date4: false,
+        date5: false,
+        date6: false,
+        date7: false,
+        date8: false,
+        date9: false,
+        date10: false,
+        date11: false
+    };
+
+    $scope.getDate = function(){
+
+
+        if($scope.date1 === ""){
+
+            return "";
+        }
+
+        return $scope.date1.getTime();
+
+
+
+    }
+
+
+
+    // Disable today selection
+    this.disabled = function(date, mode) {
+        return (mode === 'day' && (new Date().toDateString() == date.toDateString()));
+    };
+
+    this.dateOptions = {
+        showWeeks: false,
+        startingDay: 1
+    };
+
+    this.timeOptions = {
+        readonlyInput: false,
+        showMeridian: false
+    };
+
+    this.dateModeOptions = {
+        minMode: 'year',
+        maxMode: 'year'
+    };
+
+    $scope.openCalendar = function(e, date) {
+        $scope.open[date] = true;
+
+    };
+
+    // watch date4 and date5 to calculate difference
+    var unwatch = $scope.$watch(function() {
+        return that.dates;
+    }, function() {
+        if (that.dates.date4 && that.dates.date5) {
+            var diff = that.dates.date4.getTime() - that.dates.date5.getTime();
+            that.dayRange = Math.round(Math.abs(diff/(1000*60*60*24)))
+        } else {
+            that.dayRange = 'n/a';
+        }
+    }, true);
+
+    $scope.refresh_readings = function(){
+
+        $scope.$emit('LOAD');
+
+        mainService.getAll(function(response){
+
+            $scope.readings = response;
+
+            $scope.$emit('UNLOAD');
+
+        }, function(){
+
+            alert('Some errors occurred while communicating with the service, Try again later!')
+
+        });
+    }
+
 
     $scope.refresh = function(){
 
@@ -412,6 +519,8 @@ mkatolikiAppControllers.controller('ReflectionController', ['$scope', '$http', '
     $scope.reflections = [];
 
     $scope.refresh();
+    $scope.refresh_readings();
+
     $scope.currentReflectionReset();
 
 }]);
@@ -544,9 +653,9 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
     var in10Days = new Date();
     in10Days.setDate(in10Days.getDate() + 10);
 
-  // $scope.date1 = new Date('2016-03-29T21:00:00Z')
+  $scope.date1 = new Date('2016-03-29T21:00:00Z')
 
-     $scope.date1 = "";
+     //$scope.date1 = "";
 
     $scope.dates = {
         //date1: new Date('2016-03-28'),
@@ -611,6 +720,9 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
     };
 
     $scope.openCalendar = function(e, date) {
+
+        alert('hi jemo mercy');
+
         $scope.open[date] = true;
 
     };

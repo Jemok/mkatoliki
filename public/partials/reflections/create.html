@@ -1,0 +1,52 @@
+<div class="row global__toolbar">
+    <div class="gc__right">
+        <header class="row row__filter">
+            <form class="search">
+                <!--<input type="text" value="Name ..." class="f__input">-->
+                <!--<input type="date" value="Date ..." class="f__input">-->
+                <input type="text" class="form-control" datetime-picker="mediumDate" ng-model="date1" is-open="open.date1" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-on-date-selection="true" datepicker-append-to-body="true" clear-text="Remove" />
+                <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'date1')"><i class="fa fa-calendar"></i></button>
+                </span>
+            </form>
+            <div class="create">
+                <button type="submit" class="cta">Save</button><a href="#" id="createNew" class="cta">Create New</a></div>
+        </header>
+    </div>
+</div>
+<div class="row">
+    <div class="row create__reflections">
+        <div class="reflection">
+            <h4 class="rd__label">Reflection of the day</h4>
+            <textarea name="" class="f__input rd__reading">The Reading</textarea>
+        </div>
+        <div class="reading">
+            <h4 class="rd__label">Readings of the day</h4>
+
+            <div class="f__input rd__reading" data-ng-repeat="reading in readings | filter : getDate()">
+                <p>{{reading.reading_date}}</p>
+                <p>{{reading.reading_day}}</p>
+
+                <p>{{reading.first_reading_title}}
+                    <!--<br> Lectionary: 264</p>-->
+                <p>{{reading.first_reading_book}}</p>
+                <p>
+                    {{reading.first_reading_body}}
+                </p>
+                <p>Responsorial Psalm
+                    <br>{{reading.responsorial_book}}</p>
+                <p>{{reading.responsorial_body_one}}</p>
+                <p>or:
+                    <br>{{reading.responsorial_body_one_verse}}</p>
+                <p>
+                    {{reading.responsorial_body_two}}
+                </p>
+                <p>Gospel {{reading.gospel_book}}</p>
+                <p>{{reading.gospel_book}}</p>
+                <p>
+                    {{reading.gospel_body}}
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
