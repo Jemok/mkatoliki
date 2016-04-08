@@ -427,9 +427,21 @@ mkatolikiAppControllers.controller('ReflectionController', ['$scope', '$http', '
 
     $scope.create = function(){
 
+        var item = document.getElementById('reading_id');
+
+       var reading_id =item.getAttribute('class');
+
+//        alert(reading_id);
+
+
+
+
         reflectionService.create({
 
-            body: $scope.currentBody
+            reflection_body: $scope.currentReflectionBody,
+            reading_id : reading_id,
+            reflection_date : $scope.date1
+
 
         }, function(){
 
