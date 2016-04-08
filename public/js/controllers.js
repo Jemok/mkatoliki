@@ -828,11 +828,11 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
             second_reading_body: $scope.currentSecondReadingBody,
 
 
-            responsorial_title: $scope.currentResponsorialTitle,
-            responsorial_book: $scope.currentResponsorialBook,
-            responsorial_body_one: $scope.currentResponsorialBodyOne,
-            responsorial_body_two: $scope.currentResponsorialBodyTwo,
-            responsorial_body_one_verse: $scope.currentResponsorialPsalmVerse,
+//            responsorial_title: $scope.currentResponsorialTitle,
+//            responsorial_book: $scope.currentResponsorialBook,
+//            responsorial_body_one: $scope.currentResponsorialBodyOne,
+//            responsorial_body_two: $scope.currentResponsorialBodyTwo,
+//            responsorial_body_one_verse: $scope.currentResponsorialPsalmVerse,
 
 
             gospel_title: $scope.currentGospelTitle,
