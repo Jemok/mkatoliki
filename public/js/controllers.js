@@ -818,26 +818,26 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
             reading_date: $scope.currentReadingDate,
             reading_day: $scope.currentReadingDate,
-//            first_reading_title: $scope.currentFirstReadingTitle,
-//            first_reading_book: $scope.currentFirstReadingBook,
-//            first_reading_body: $scope.currentFirstReadingBody,
-//
-//
-//            second_reading_title: $scope.currentSecondReadingTitle,
-//            second_reading_book: $scope.currentSecondReadingBook,
-//            second_reading_body: $scope.currentSecondReadingBody,
-//
-//
-//            responsorial_title: $scope.currentResponsorialTitle,
-//            responsorial_book: $scope.currentResponsorialBook,
-//            responsorial_body_one: $scope.currentResponsorialBodyOne,
-//            responsorial_body_two: $scope.currentResponsorialBodyTwo,
-//            responsorial_body_one_verse: $scope.currentResponsorialPsalmVerse,
-//
-//
-//            gospel_title: $scope.currentGospelTitle,
-//            gospel_book: $scope.currentGospelBook,
-//            gospel_body: $scope.currentGospelBody
+            first_reading_title: $scope.currentFirstReadingTitle,
+            first_reading_book: $scope.currentFirstReadingBook,
+            first_reading_body: $scope.currentFirstReadingBody,
+
+
+            second_reading_title: $scope.currentSecondReadingTitle,
+            second_reading_book: $scope.currentSecondReadingBook,
+            second_reading_body: $scope.currentSecondReadingBody,
+
+
+            responsorial_title: $scope.currentResponsorialTitle,
+            responsorial_book: $scope.currentResponsorialBook,
+            responsorial_body_one: $scope.currentResponsorialBodyOne,
+            responsorial_body_two: $scope.currentResponsorialBodyTwo,
+            responsorial_body_one_verse: $scope.currentResponsorialPsalmVerse,
+
+
+            gospel_title: $scope.currentGospelTitle,
+            gospel_book: $scope.currentGospelBook,
+            gospel_body: $scope.currentGospelBody
 
         }, function(){
 
