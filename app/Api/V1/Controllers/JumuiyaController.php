@@ -40,6 +40,8 @@ class JumuiyaController extends Controller
         $jumuiya->location = $request->get('location');
         $jumuiya->happening_on = $request->get('happening_on');
         $jumuiya->raw_jumuiya_id = $request->get('raw_jumuiya_id');
+        $jumuiya->more_details = $request->get('more_details');
+       // $jumuiya->mass  = $request->get('mass');
 
         if($this->currentUser()->jumuiyas()->save($jumuiya))
             return $this->response->created();

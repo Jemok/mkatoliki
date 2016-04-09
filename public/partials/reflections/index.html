@@ -2,11 +2,11 @@
 <div class="row global__toolbar">
     <div class="gc__right">
         <header class="row row__filter">
-            <form class="search">
-                <label class="f__label">Filter By:</label>
-                <input type="text" value="Name ..." class="f__input">
-                <input type="date" value="Date ..." class="f__input">
-            </form>
+            <!--<form class="search">-->
+                <!--<label class="f__label">Filter By:</label>-->
+                <!--&lt;!&ndash;<input type="text" value="Name ..." class="f__input">&ndash;&gt;-->
+                <!--<input type="date" value="Date ..." class="f__input">-->
+            <!--</form>-->
             <div class="create">
                 <a href="#/reflections-create" id="createNew" class="cta">Add New</a></div>
         </header>
@@ -144,9 +144,13 @@
             <li class="nav__header">Quick Links</li>
             <li class="nav__item"><a href="#/reflections" class="nav__link">Reflections</a></li>
             <li class="nav__item active"><a href="#/" class="nav__link">Readings</a></li>
+            <li class="nav__item"><a href="#/prayer-type-create" class="nav__link">Prayer Types</a></li>
             <li class="nav__item"><a href="#/prayers" class="nav__link">Prayers</a></li>
-            <li class="nav__item"><a href="#/happenings" class="nav__link">Happening Today</a></li>
-            <li class="nav__item"><a href="#/jumuiya" class="nav__link">Jumuiya</a></li>
+            <li class="nav__item"><a href="#/create-happenings" class="nav__link">Happening Today</a></li>
+            <li class="nav__item"><a href="#/create-raw-jumuiya" class="nav__link">Raw Jumuiya</a></li>
+            <li class="nav__item"><a href="#/create-jumuiya" class="nav__link">Jumuiya Event</a></li>
+            <li class="nav__item"><a href="#/create-parishes" class="nav__link">Parishes</a></li>
+            <li class="nav__item"><a href="#/create-stations" class="nav__link">Stations</a></li>
         </ul>
     </div>
     <div class="gc__right">
@@ -154,15 +158,14 @@
             <table class="table">
                 <tr>
                     <th>Church Calendar Date</th>
-                    <th>Readings</th>
-                    <th>Date</th>
-                    <th>Action</th>
+                    <th>Reflection</th>
+                    <!--<th>Action</th>-->
                 </tr>
-                <tr>
-                    <td>2nd Sunday in Ordinary time</td>
-                    <td>John 1:2-6, Galatians 5:5-9</td>
-                    <td>4-April-2014</td>
-                    <td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>
+                <tr data-ng-repeat="reflection in reflections" >
+                    <td>{{reflection.reflection_date}}</td>
+                    <td>{{reflection.reflection_body}}</td>
+                    <!--<td>4-April-2014</td>-->
+                    <!--<td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>-->
                 </tr>
             </table>
         </section>

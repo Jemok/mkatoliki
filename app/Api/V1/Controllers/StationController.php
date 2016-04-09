@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Dingo\Api\Routing\Helpers;
 use App\Station;
+use App\Parish;
 
 class StationController extends Controller
 {
@@ -108,5 +109,17 @@ class StationController extends Controller
     public function currentUser(){
 
         return JWTAuth::parseToken()->authenticate();
+    }
+
+    public function store_parish(Request $request)
+    {
+        $parish = new Parish;
+
+        $parish->parish_name = $request->get('parish_name');
+
+        if($this->currentUser()->parishes()->save($parish))
+            return $this->response->created();
+        else
+            return $this->response->error('could_not_create_parish', 500);
     }
 }

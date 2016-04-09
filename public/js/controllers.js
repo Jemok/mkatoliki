@@ -59,7 +59,7 @@ mkatolikiAppControllers.controller('SignupController', ['$scope', '$location' ,'
     }
 }]);
 
-mkatolikiAppControllers.controller('PrayerController', ['$scope', '$http', 'userService', 'prayerService', function($scope, $http , userService, prayerService){
+mkatolikiAppControllers.controller('PrayerController', ['$scope', '$http', 'userService', 'prayerService', 'prayerTypeService', function($scope, $http , userService, prayerService, prayerTypeService){
 
     $scope.refresh = function(){
 
@@ -80,23 +80,72 @@ mkatolikiAppControllers.controller('PrayerController', ['$scope', '$http', 'user
 
     $scope.create = function(){
 
+
+
+
         prayerService.create({
 
-            title: $scope.currentTitle,
-            body: $scope.currentBody
+            prayer_title: $scope.currentTitle,
+            prayer_body: $scope.currentBody,
+            prayer_type: $scope.currentType
 
         }, function(){
 
-            $('#addPrayerModal').modal('toggle');
+
+            alert('Created');
 
             $scope.currentPrayerReset();
-            $scope.refresh();
         }, function(response){
 
             alert('Some error occurred while creating the prayer');
 
         });
     }
+
+
+
+    $scope.refresh_prayer_types = function(){
+
+        $scope.$emit('LOAD');
+
+
+        prayerTypeService.getAll(function(response){
+
+            $scope.prayer_types = response;
+
+            $scope.$emit('UNLOAD');
+
+        }, function(){
+
+            alert('Some errors occurred while communicating with the service, Try Again Later');
+        });
+    }
+
+    $scope.create_type = function(){
+
+        prayerTypeService.create({
+
+            prayer_type_name: $scope.currentName,
+            prayer_type_description: $scope.currentDescription
+
+
+
+        }, function(){
+
+            $scope.successTextAlert = "Prayer type was successfully created";
+            $scope.showSuccessAlert = true;
+
+            $scope.switchBool = function(value) {
+                $scope[value] = !$scope[value];
+            };
+//            alert('Created');
+        }, function(response){
+
+            alert('Some error occurred while creating the prayer');
+
+        });
+    }
+
 
     $scope.remove = function(prayerId){
 
@@ -117,6 +166,7 @@ mkatolikiAppControllers.controller('PrayerController', ['$scope', '$http', 'user
 
         $scope.currentTitle = "";
         $scope.currentBody = "";
+        $scope.currentType = "";
 
     }
 
@@ -175,11 +225,13 @@ mkatolikiAppControllers.controller('PrayerController', ['$scope', '$http', 'user
     $scope.prayers = [];
 
     $scope.refresh();
+    $scope.refresh_prayer_types();
     $scope.currentPrayerReset();
 
 }]);
 
-mkatolikiAppControllers.controller('JumuiyaController', ['$scope', '$http', 'userService', 'jumuiyaService', function($scope, $http , userService, jumuiyaService){
+
+mkatolikiAppControllers.controller('JumuiyaController', ['$scope', '$http', 'userService', 'jumuiyaService', 'rawJumuiyaService', 'parishService', 'stationService', function($scope, $http , userService, jumuiyaService, rawJumuiyaService, parishService, stationService){
 
     $scope.refresh = function(){
 
@@ -189,6 +241,40 @@ mkatolikiAppControllers.controller('JumuiyaController', ['$scope', '$http', 'use
         jumuiyaService.getAll(function(response){
 
             $scope.jumuiyas = response;
+
+            $scope.$emit('UNLOAD');
+
+        }, function(){
+
+            alert('Some errors occurred while communicating with the service, Try Again Later');
+        });
+    }
+
+    $scope.refresh_raw_jumuiyas = function(){
+
+        $scope.$emit('LOAD');
+
+
+        rawJumuiyaService.getAll(function(response){
+
+            $scope.raw_jumuiyas = response;
+
+            $scope.$emit('UNLOAD');
+
+        }, function(){
+
+            alert('Some errors occurred while communicating with the service, Try Again Later');
+        });
+    }
+
+    $scope.refresh_parishes = function(){
+
+        $scope.$emit('LOAD');
+
+
+        parishService.getAll(function(response){
+
+            $scope.parishes = response;
 
             $scope.$emit('UNLOAD');
 
@@ -218,11 +304,13 @@ mkatolikiAppControllers.controller('JumuiyaController', ['$scope', '$http', 'use
         jumuiyaService.create({
 
             location: $scope.currentLocation,
-            happening_on: $scope.currentHappeningOn
+            happening_on: $scope.currentHappeningOn,
+            raw_jumuiya_id: $scope.currentRawJumuiyaId,
+            'more_details': $scope.currentDetails
+
 
         }, function(){
 
-            $('#addJumuiyaModal').modal('toggle');
 
             $scope.currentJumuiyaReset();
             $scope.refresh();
@@ -233,10 +321,64 @@ mkatolikiAppControllers.controller('JumuiyaController', ['$scope', '$http', 'use
         });
     }
 
+    $scope.create_parish = function(){
+
+        parishService.create({
+
+            parish_name: $scope.currentParishName
+
+        }, function(){
+
+
+            $scope.currentParishReset();
+            $scope.refresh();
+        }, function(response){
+
+            alert('Some error occurred while creating the jumuiya');
+
+        });
+    }
+
+    $scope.create_station = function(){
+
+        stationService.create({
+
+            station_name: $scope.currentStationName,
+            parish_id: $scope.currentParishId
+
+        }, function(){
+
+
+            $scope.currentStationReset();
+            $scope.refresh();
+        }, function(response){
+
+            alert('Some error occurred while creating the jumuiya');
+
+        });
+    }
+
+
+    $scope.currentParishReset = function(){
+
+        $scope.currentParishName = "";
+    }
+
+
+    $scope.currentStationReset = function(){
+
+        $scope.currentStationName = "";
+
+
+    }
+
+
     $scope.currentJumuiyaReset = function(){
 
         $scope.currentLocation = "";
         $scope.currentHappeningOn = "";
+        $scope.currentRawJumuiyaId = "";
+        $scope.currentDetails = "";
 
     }
 
@@ -295,6 +437,8 @@ mkatolikiAppControllers.controller('JumuiyaController', ['$scope', '$http', 'use
     $scope.jumuiyas = [];
 
     $scope.refresh();
+    $scope.refresh_raw_jumuiyas();
+    $scope.refresh_parishes();
     $scope.currentJumuiyaReset();
 
 }]);
@@ -445,7 +589,14 @@ mkatolikiAppControllers.controller('ReflectionController', ['$scope', '$http', '
 
         }, function(){
 
-            $('#addReflectionModal').modal('toggle');
+            $scope.successTextAlert = "Reflection was successfully created";
+            $scope.showSuccessAlert = true;
+
+            $scope.switchBool = function(value) {
+                $scope[value] = !$scope[value];
+            };
+            $scope.currentReadingReset();
+            $scope.refresh();
 
             $scope.currentReflectionReset();
             $scope.refresh();
@@ -537,7 +688,7 @@ mkatolikiAppControllers.controller('ReflectionController', ['$scope', '$http', '
 
 }]);
 
-mkatolikiAppControllers.controller('HappeningController', ['$scope', '$http', 'userService', 'happeningService', function($scope, $http , userService, happeningService){
+mkatolikiAppControllers.controller('HappeningController', ['$scope', '$http', 'userService', 'happeningService', 'rawJumuiyaService', function($scope, $http , userService, happeningService, rawJumuiyaService){
 
     $scope.refresh = function(){
 
@@ -568,13 +719,35 @@ mkatolikiAppControllers.controller('HappeningController', ['$scope', '$http', 'u
 
         }, function(){
 
-            $('#addHappeningModal').modal('toggle');
+
+            alert('Created');
 
             $scope.currentHappeningReset();
             $scope.refresh();
         }, function(response){
 
             alert('Some error occurred while creating the happening event');
+
+        });
+    }
+
+    $scope.create_raw = function(){
+
+
+        rawJumuiyaService.create({
+
+            jumuiya_name: $scope.currentName,
+            jumuiya_image_link: $scope.currentImageLink
+
+        }, function(){
+
+            alert('Created');
+
+            $scope.currentJumuiyaReset();
+            $scope.refresh();
+        }, function(response){
+
+            alert('Some error occurred while creating the jumuiya');
 
         });
     }
@@ -853,8 +1026,12 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
         }, function(){
 
-            $('#addReadingModal').modal('toggle');
+            $scope.successTextAlert = "Reading was successfully created";
+            $scope.showSuccessAlert = true;
 
+            $scope.switchBool = function(value) {
+                $scope[value] = !$scope[value];
+            };
             $scope.currentReadingReset();
             $scope.refresh();
 
@@ -910,6 +1087,20 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
     }
 
 
+    $scope.showAlert = function(id){
+
+
+        $scope.myvalue = id;
+
+        if($scope.myvalue === id){
+
+            $scope.myvalue = true;
+
+        }
+
+    };
+
+
     if(!userService.checkIfLoggedIn()){
 
         $location.path('/login');
@@ -922,3 +1113,16 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
     $scope.refresh();
 
 }]);
+
+mkatolikiAppControllers.controller('contentController', function($scope, $rootScope, $route) {
+
+    var paths = ['/login'];
+
+    $rootScope.$on('$locationChangeSuccess', function() {
+
+        var $$route = $route.current.$$route;
+        $scope.contentVisibility = $$route && paths.indexOf($$route.originalPath) < 0;
+
+    });
+
+});

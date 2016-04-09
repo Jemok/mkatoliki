@@ -7,62 +7,61 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use App\Raw_jumuiya;
 use Dingo\Api\Routing\Helpers;
+use App\Prayer_types;
 
-class RawJumuiyaController extends Controller
+class PrayerTypeController extends Controller
 {
     use Helpers;
-
     /**
-     * Display a listing of the raw-jumuiya resource.
+     * Display a listing of the prayer_type resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return Raw_jumuiya::all()
+        return Prayer_types::all()
             ->toArray();
     }
 
 
     /**
-     * Store a newly created raw-jumuiya resource in storage.
+     * Store a newly created prayer resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $raw_jumuiya = new Raw_jumuiya;
+        $prayer_type = new Prayer_types;
 
-        $raw_jumuiya->jumuiya_name = $request->get('jumuiya_name');
-        $raw_jumuiya->jumuiya_image_link = $request->get('jumuiya_image_link');
+        $prayer_type->prayer_type_name = $request->get('prayer_type_name');
+        $prayer_type->prayer_type_description = $request->get('prayer_type_description');
 
-        if($this->currentUser()->raw_jumuiya()->save($raw_jumuiya))
+        if($this->currentUser()->prayer_types()->save($prayer_type))
             return $this->response->created();
         else
-            return $this->response->error('could_not_create_raw_jumuiya', 500);
+            return $this->response->error('could_not_create_prayer_type', 500);
     }
 
     /**
-     * Display the specified raw-jumuiya resource.
+     * Display the specified prayer resource.
      * @param $id
      * @return mixed
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function show($id)
     {
-        $raw_jumuiya = $this->currentUser()->raw_jumuiya()->find($id);
+        $prayer = $this->currentUser()->prayers()->find($id);
 
-        if(!$raw_jumuiya)
+        if(!$prayer)
             throw new NotFoundHttpException;
-        return $raw_jumuiya;
+        return $prayer;
     }
 
 
     /**
-     * Update the specified raw-jumuiya resource in storage.
+     * Update the specified prayer resource in storage.
      * @param Request $request
      * @param $id
      * @return \Dingo\Api\Http\Response|void
@@ -70,36 +69,36 @@ class RawJumuiyaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $raw_jumuiya = $this->currentUser()->raw_jumuiya()->find($id);
+        $prayer = $this->currentUser()->prayers()->find($id);
 
-        if(!$raw_jumuiya)
+        if(!$prayer)
             throw new NotFoundHttpException;
 
-        $raw_jumuiya->fill($request->all());
+        $prayer->fill($request->all());
 
-        if($raw_jumuiya->save())
+        if($prayer->save())
             return $this->response->noContent();
         else
-            return $this->response->error('Could_not_update_raw_jumuiya', 500);
+            return $this->response->error('Could_not_update_prayer', 500);
     }
 
     /**
-     * Remove the specified raw-jumuiya resource from storage.
+     * Remove the specified prayer resource from storage.
      * @param $id
      * @return \Dingo\Api\Http\Response|void
      * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function destroy($id)
     {
-        $raw_jumuiya = $this->currentUser()->raw_jumuiya()->find($id);
+        $prayer = $this->currentUser()->prayers()->find($id);
 
-        if(!$raw_jumuiya)
+        if(!$prayer)
             throw new NotFoundHttpException;
 
-        if($raw_jumuiya->delete())
+        if($prayer->delete())
             return $this->response->noContent();
         else
-            return $this->response->error('Could_not_delete_raw_jumuiya', 500);
+            return $this->response->error('Could_not_delete_prayer', 500);
 
     }
 

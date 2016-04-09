@@ -416,5 +416,287 @@ mkatolikiAppServices.factory('happeningService', ['Restangular', 'userService', 
     }
 }]);
 
+mkatolikiAppServices.factory('prayerTypeService', ['Restangular', 'userService', function(Restangular, userService){
+
+    function getAll(onSuccess, onError){
+
+        Restangular.all('api/prayer-type').getList().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function getById(reflectionId, onSuccess, onError){
+
+        Restangular.one('api/reflections', reflectionId).get().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function create(data, onSuccess, onError){
+
+        Restangular.all('api/prayer-type').post(data).then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function update(reflectionsId, data, onSuccess, onError){
+
+        Restangular.one('api/reflections').customPUT(data, reflectionsId).then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function remove(reflectionId, onSuccess, onError){
+
+        Restangular.one('api/reflections', reflectionId).remove().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    Restangular.setDefaultHeaders({'Authorization' : 'Bearer' + userService.getCurrentToken()});
+
+    return {
+
+        getAll: getAll,
+        getById: getById,
+        create: create,
+        update: update,
+        remove: remove
+    }
+}]);
+
+
+mkatolikiAppServices.factory('rawJumuiyaService', ['Restangular', 'userService', function(Restangular, userService){
+
+    function getAll(onSuccess, onError){
+
+        Restangular.all('api/raw-jumuiyas').getList().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function getById(reflectionId, onSuccess, onError){
+
+        Restangular.one('api/reflections', reflectionId).get().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function create(data, onSuccess, onError){
+
+        Restangular.all('api/raw-jumuiyas').post(data).then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function update(reflectionsId, data, onSuccess, onError){
+
+        Restangular.one('api/reflections').customPUT(data, reflectionsId).then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function remove(reflectionId, onSuccess, onError){
+
+        Restangular.one('api/reflections', reflectionId).remove().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    Restangular.setDefaultHeaders({'Authorization' : 'Bearer' + userService.getCurrentToken()});
+
+    return {
+
+        getAll: getAll,
+        getById: getById,
+        create: create,
+        update: update,
+        remove: remove
+    }
+}]);
+
+mkatolikiAppServices.factory('parishService', ['Restangular', 'userService', function(Restangular, userService){
+
+    function getAll(onSuccess, onError){
+
+        Restangular.all('api/parishes').getList().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function getById(reflectionId, onSuccess, onError){
+
+        Restangular.one('api/reflections', reflectionId).get().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function create(data, onSuccess, onError){
+
+        Restangular.all('api/parishes').post(data).then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function update(reflectionsId, data, onSuccess, onError){
+
+        Restangular.one('api/reflections').customPUT(data, reflectionsId).then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function remove(reflectionId, onSuccess, onError){
+
+        Restangular.one('api/reflections', reflectionId).remove().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    Restangular.setDefaultHeaders({'Authorization' : 'Bearer' + userService.getCurrentToken()});
+
+    return {
+
+        getAll: getAll,
+        getById: getById,
+        create: create,
+        update: update,
+        remove: remove
+    }
+}]);
+
+mkatolikiAppServices.factory('stationService', ['Restangular', 'userService', function(Restangular, userService){
+
+    function getAll(onSuccess, onError){
+
+        Restangular.all('api/parishes').getList().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function getById(reflectionId, onSuccess, onError){
+
+        Restangular.one('api/reflections', reflectionId).get().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function create(data, onSuccess, onError){
+
+        Restangular.all('api/stations').post(data).then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function update(reflectionsId, data, onSuccess, onError){
+
+        Restangular.one('api/reflections').customPUT(data, reflectionsId).then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    function remove(reflectionId, onSuccess, onError){
+
+        Restangular.one('api/reflections', reflectionId).remove().then(function(response){
+
+            onSuccess(response);
+        }, function(response){
+
+            onError(response);
+        });
+    }
+
+    Restangular.setDefaultHeaders({'Authorization' : 'Bearer' + userService.getCurrentToken()});
+
+    return {
+
+        getAll: getAll,
+        getById: getById,
+        create: create,
+        update: update,
+        remove: remove
+    }
+}]);
+
+
+
+
+
+
 
 

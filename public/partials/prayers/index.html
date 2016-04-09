@@ -1,50 +1,31 @@
 <div class="row global__toolbar">
     <div class="gc__right">
         <header class="row row__filter">
-            <form class="search">
-                <input type="text" value="Name ..." class="f__input">
-                <select class="f__input">
-                    <option selected="selected">Category</option>
-                    <option>The Holy Rosary</option>
-                </select>
-            </form>
+            <!--<form class="search">-->
+                <!--<label class="f__label">Filter By:</label>-->
+                <!--<input type="text" value="Name ..." class="f__input">-->
+                <!--<textarea>The Prayer description</textarea>-->
+
+            <!--</form>-->
             <div class="create">
-                <button type="submit" class="cta">Search</button><a href="#" class="cta">Create New</a></div>
+                <!--<button type="submit" class="cta">Search</button>--><a href="#/prayers-create" class="cta">Create New</a></div>
         </header>
     </div>
 </div>
-<div class="row global__create">
-    <div class="row create__readings">
-        <div class="reading">
-            <h4 class="rd__label">1st Reading</h4>
-            <input type="text" value="Verse" class="f__input rd__verse">
-            <textarea name="" class="f__input rd__summary">Summary</textarea>
-            <textarea name="" class="f__input rd__reading">The Reading </textarea>
-        </div>
-        <div class="reading">
-            <h4 class="rd__label">Responsorial Psalm</h4>
-            <input type="text" value="Verse" class="f__input rd__verse">
-            <textarea name="" class="f__input rd__summary">The Responsorial Psalm</textarea>
-            <input type="text" value="Responsorial's Verse" class="f__input rd__verse">
-            <textarea name="" class="f__input rd__reading">The Reading</textarea>
-        </div>
-        <div class="reading">
-            <h4 class="rd__label">2nd Reading</h4>
-            <input type="text" value="Verse" class="f__input rd__verse">
-            <textarea name="" class="f__input rd__summary">Summary</textarea>
-            <textarea name="" class="f__input rd__reading">The Reading</textarea>
-        </div>
-    </div>
-</div>
+
 <div class="row global__content">
     <div class="gc__sidebar">
         <ul class="nav">
             <li class="nav__header">Quick Links</li>
             <li class="nav__item"><a href="#/reflections" class="nav__link">Reflections</a></li>
             <li class="nav__item active"><a href="#/" class="nav__link">Readings</a></li>
+            <li class="nav__item"><a href="#/prayer-type-create" class="nav__link">Prayer Types</a></li>
             <li class="nav__item"><a href="#/prayers" class="nav__link">Prayers</a></li>
-            <li class="nav__item"><a href="#/happenings" class="nav__link">Happening Today</a></li>
-            <li class="nav__item"><a href="#/jumuiya" class="nav__link">Jumuiya</a></li>
+            <li class="nav__item"><a href="#/create-happenings" class="nav__link">Happening Today</a></li>
+            <li class="nav__item"><a href="#/create-raw-jumuiya" class="nav__link">Raw Jumuiya</a></li>
+            <li class="nav__item"><a href="#/create-jumuiya" class="nav__link">Jumuiya Event</a></li>
+            <li class="nav__item"><a href="#/create-parishes" class="nav__link">Parishes</a></li>
+            <li class="nav__item"><a href="#/create-stations" class="nav__link">Stations</a></li>
         </ul>
     </div>
     <div class="gc__right">
@@ -52,13 +33,15 @@
             <table class="table">
                 <tr>
                     <th>Prayer</th>
+                    <th>Body</th>
                     <th>Clustured in</th>
-                    <th>Action</th>
+                    <!--<th>Action</th>-->
                 </tr>
-                <tr>
-                    <td>Our Father</td>
-                    <td>Common Prayers, The Holy Rosary</td>
-                    <td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>
+                <tr data-ng-repeat="prayer in prayers">
+                    <td>{{prayer.prayer_title}}</td>
+                    <td>{{prayer.prayer_body}}</td>
+                    <!--<td>Common Prayers, The Holy Rosary</td>-->
+                    <!--<td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>-->
                 </tr>
             </table>
         </section>

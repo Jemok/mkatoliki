@@ -30,17 +30,7 @@ class ParishController extends Controller
      * @return mixed
      */
 
-    public function store(Request $request)
-    {
-        $parish = new Parish;
 
-        $parish->parish_name = $request->get('parish_name');
-
-        if($this->currentUser()->parishes()->save($parish))
-            return $this->response->created();
-        else
-            return $this->response->error('could_not_create_parish', 500);
-    }
 
     /**
      * Display the specified parish resource.

@@ -39,7 +39,7 @@ class PrayerController extends Controller
 
         $prayer->prayer_title = $request->get('prayer_title');
         $prayer->prayer_body = $request->get('prayer_body');
-        $prayer->prayer_type = $request->get('prayer_type');
+        $prayer->prayer_type_id = $request->get('prayer_type');
 
         if($this->currentUser()->prayers()->save($prayer))
             return $this->response->created();

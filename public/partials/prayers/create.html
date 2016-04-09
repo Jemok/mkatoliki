@@ -1,0 +1,23 @@
+<div class="row global__toolbar">
+    <div class="gc__right">
+        <h3>Enter Prayers here</h3>
+
+        <header class="row row__filter">
+            <form class="search">
+                <input type="text" placeholder="Prayer name.." value="Name ..." class="f__input" data-ng-model="currentTitle">
+
+                <textarea placeholder="Prayer body..." data-ng-model="currentBody">The Prayer Type body </textarea>
+
+                <select class="f__input" data-ng-model="currentType">
+                    <option selected disabled>Select Prayer Category here</option>
+                    <option data-ng-repeat="ptype in prayer_types"  value="{{ptype.id}}">{{ptype.prayer_type_name}}</option>
+                </select>
+
+            </form>
+
+
+            <div class="create">
+                <button type="submit" class="cta" data-ng-click="create()">Save</button></div>
+        </header>
+    </div>
+</div>

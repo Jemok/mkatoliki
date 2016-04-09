@@ -1,12 +1,20 @@
+<div class="alert alert-success" ng-show="showSuccessAlert">
+    <button type="button" class="close" data-ng-click="switchBool('showSuccessAlert')" >×</button>
+    <strong>Done!</strong> {{successTextAlert}}
+</div>
+
+
 <div class="row global__toolbar">
+<form name="readingForm" data-ng-submit="create()">
     <div class="gc__right">
         <header class="row row__filter">
-            <form class="search">
-                <input type="text" value="Name ..." class="f__input">
-                <input type="date" value="Date ..." class="f__input" data-ng-model="currentReadingDate">
-            </form>
+
+                <!--<input type="text" value="Name ..." class="f__input">-->
+                <label class="f__label">Reading Date</label>
+                <input type="date" value="Date ..." class="f__input" data-ng-model="currentReadingDate" required>
+
             <div class="create">
-                <button  class="cta" data-ng-click="create()">Save</button><a href="#/readings-create" id="createNew" class="cta">Create New</a></div>
+                <button type="submit"  class="cta">Save</button></div>
         </header>
     </div>
 </div>
@@ -15,29 +23,30 @@
     <div class="row create__readings">
         <div class="reading">
             <h4 class="rd__label">1st Reading</h4>
-            <input type="text" value="Verse" class="f__input rd__verse" data-ng-model="currentFirstReadingBook">
-            <textarea  class="f__input rd__summary" data-ng-model="currentFirstReadingTitle">Summary</textarea>
-            <textarea  class="f__input rd__reading" data-ng-model="currentFirstReadingBody">The Reading </textarea>
+            <input type="text" placeholder="Verse" class="f__input rd__verse" data-ng-model="currentFirstReadingBook" required>
+            <textarea placeholder="Summary..."  class="f__input rd__summary" data-ng-model="currentFirstReadingTitle" required>Summary</textarea>
+            <textarea placeholder="Body..."  class="f__input rd__reading" data-ng-model="currentFirstReadingBody" required>The Reading </textarea>
         </div>
         <div class="reading">
             <h4 class="rd__label">Responsorial Psalm</h4>
-            <input type="text" value="Verse" class="f__input rd__verse" data-ng-model="currentResponsorialTitle">
-            <input type="text" value="Verse" class="f__input rd__verse" data-ng-model="currentResponsorialBook">
-            <textarea name="" class="f__input rd__summary" data-ng-model="currentResponsorialBodyOne">The Responsorial Psalm</textarea>
-            <input type="text" value="Responsorial's Verse" class="f__input rd__verse" data-ng-model="currentResponsorialPsalmVerse">
-            <textarea class="f__input rd__reading" data-ng-model="currentResponsorialBodyTwo">The Reading</textarea>
+            <input type="text" placeholder="Summary.."  class="f__input rd__verse" data-ng-model="currentResponsorialTitle" required>
+            <input type="text" placeholder="Verses.."  class="f__input rd__verse" data-ng-model="currentResponsorialBook" required>
+            <textarea placeholder="Response..." class="f__input rd__summary" data-ng-model="currentResponsorialBodyOne" required>The Responsorial Psalm</textarea>
+            <input type="text" placeholder="Psalm Verse..." class="f__input rd__verse" data-ng-model="currentResponsorialPsalmVerse" required>
+            <textarea placeholder="Body..." class="f__input rd__reading" data-ng-model="currentResponsorialBodyTwo" required>The Reading</textarea>
         </div>
         <div class="reading">
             <h4 class="rd__label">2nd Reading</h4>
-            <input type="text" value="Verse" class="f__input rd__verse" data-ng-model="currentSecondReadingBook">
-            <textarea  class="f__input rd__summary" data-ng-model="currentSecondReadingTitle">Summary</textarea>
-            <textarea class="f__input rd__reading" data-ng-model="currentSecondReadingBody">The Reading</textarea>
+            <input type="text" placeholder="Verse..." class="f__input rd__verse" data-ng-model="currentSecondReadingBook" required>
+            <textarea placeholder="Summary..." class="f__input rd__summary" data-ng-model="currentSecondReadingTitle" required>Summary</textarea>
+            <textarea placeholder="Body..." class="f__input rd__reading" data-ng-model="currentSecondReadingBody" required>The Reading</textarea>
         </div>
         <div class="reading">
             <h4 class="rd__label">Gospel</h4>
-            <input type="text" value="Verse" class="f__input rd__verse" data-ng-model="currentGospelBook">
-            <textarea  class="f__input rd__summary" data-ng-model="currentGospelTitle">Summary</textarea>
-            <textarea  class="f__input rd__reading" data-ng-model="currentGospelBody">The Gospel</textarea>
+            <input type="text" placeholder="Verse..." class="f__input rd__verse" data-ng-model="currentGospelBook" required>
+            <textarea placeholder="Summary..."  class="f__input rd__summary" data-ng-model="currentGospelTitle" required>Summary</textarea>
+            <textarea placeholder="Gospel..."  class="f__input rd__reading" data-ng-model="currentGospelBody" required>The Gospel</textarea>
         </div>
     </div>
 </div>
+</form>

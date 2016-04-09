@@ -1,44 +1,63 @@
 <div class="row global__toolbar">
     <div class="gc__right">
         <header class="row row__filter">
-            <form class="search">
-                <label class="f__label">Filter By:</label>
-                <input type="text" value="Name ..." class="f__input">
-                <input type="date" value="Date ..." class="f__input">
-            </form>
+            <!--<form class="search">-->
+                <!--<label class="f__label">Filter By:</label>-->
+                <!--<input type="date" value="Date ..." class="f__input">-->
+            <!--</form>-->
             <div class="create">
                <a href="#/readings-create" id="createNew" class="cta">Add New</a></div>
         </header>
     </div>
 
-<div class="row g</div>
-
-lobal__content">
+<div class="row global__content">
     <div class="gc__sidebar">
         <ul class="nav">
             <li class="nav__header">Quick Links</li>
             <li class="nav__item"><a href="#/reflections" class="nav__link">Reflections</a></li>
             <li class="nav__item active"><a href="#/" class="nav__link">Readings</a></li>
+            <li class="nav__item"><a href="#/prayer-type-create" class="nav__link">Prayer Types</a></li>
             <li class="nav__item"><a href="#/prayers" class="nav__link">Prayers</a></li>
-            <li class="nav__item"><a href="#/happenings" class="nav__link">Happening Today</a></li>
-            <li class="nav__item"><a href="#/jumuiya" class="nav__link">Jumuiya</a></li>
+            <li class="nav__item"><a href="#/create-happenings" class="nav__link">Happening Today</a></li>
+            <li class="nav__item"><a href="#/create-raw-jumuiya" class="nav__link">Raw Jumuiya</a></li>
+            <li class="nav__item"><a href="#/create-jumuiya" class="nav__link">Jumuiya Event</a></li>
+            <li class="nav__item"><a href="#/create-parishes" class="nav__link">Parishes</a></li>
+            <li class="nav__item"><a href="#/create-stations" class="nav__link">Stations</a></li>
         </ul>
     </div>
     <div class="gc__right">
         <section class="row__table">
             <table class="table">
                 <tr>
-                    <th>Church Calendar Date</th>
-                    <th>Readings</th>
-                    <th>Date</th>
-                    <th>Action</th>
+                    <th>First Reading</th>
+                    <th>Second Reading</th>
+                    <th>Responsorial</th>
+                    <th>Gospel</th>
                 </tr>
-                <tr>
-                    <td>2nd Sunday in Ordinary time</td>
-                    <td>John 1:2-6, Galatians 5:5-9</td>
-                    <td>4-April-2014</td>
-                    <td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>
+                <tr data-ng-repeat="reading in readings">
+                    <td>Date: {{reading.reading_date}}
+                        <p>Verse: {{reading.first_reading_book}}</p>
+                        <p>{{reading.first_reading_body}}</p>
+                    </td>
+                    <td>
+                        <p>Verse: {{reading.second_reading_book}}</p>
+                        <p>{{reading.second_reading_body}}</p>
+                    </td>
+                    <td>
+                        <p>Verse: {{reading.responsorial_book}}</p>
+                        <p>{{reading.responsorial_body_one}}</p>
+                        <p>{{reading.responsorial_body_two}}</p>
+
+                    </td>
+                    <td>
+                        <p>Verse: {{reading.gospel_book}}</p>
+                        <p>{{reading.gospel_body}}</p>
+
+                    </td>
+                    <!--<td>4-April-2014</td>-->
+                    <!--<td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>-->
                 </tr>
+
             </table>
         </section>
     </div>

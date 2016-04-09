@@ -15,6 +15,8 @@ class Jumuiya extends Model
         'location',
         'happening_on',
         'raw_jumuiya_id',
+        'mass',
+        'more_details',
         'user_id'
     ];
 

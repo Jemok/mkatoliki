@@ -22,6 +22,7 @@
         <script src="libs/js/ui-bootstrap-tpls.js"></script>
         <script src="libs/js/datetime-picker.min.js"></script>
         <script src="libs/js/restangular.min.js"></script>
+        <script src="libs/js/bootstrap.min.js"></script>
         <script src="js/app.js"></script>
         <script src="js/services.js"></script>
         <script src="js/controllers.js"></script>
@@ -30,7 +31,7 @@
     </head>
 
     <body class="global__wrapper">
-            <div class="row global__navbar">
+            <div class="row global__navbar" data-ng-controller="contentController" ng-show="contentVisibility">
                 <div class="gn__logo">
                     <div class="logo__name">Mkatoliki</div>
                 </div>
@@ -45,5 +46,6 @@
             <div ng-view data-ng-controller="mkatolikiController" class="row global__wrapper">
 
         <script data-main="assets/js/main" src="assets/js/require.js"></script>
+
     </body>
 </html>

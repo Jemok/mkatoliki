@@ -125,7 +125,7 @@ $api->version('v1', function ($api) {
      */
 
     $api->group(['middleware' => ['api.auth', 'cors']], function($api){
-        $api->post('parishes', 'App\Api\V1\Controllers\ParishController@store');
+        $api->post('parishes', 'App\Api\V1\Controllers\StationController@store_parish');
         $api->get('parishes', 'App\Api\V1\Controllers\ParishController@index');
         $api->get('parishes/{id}', 'App\Api\V1\Controllers\ParishController@show');
         $api->put('parishes/{id}', 'App\Api\V1\Controllers\ParishController@update');
@@ -134,7 +134,7 @@ $api->version('v1', function ($api) {
 
     /**------
      *
-     * Parish api routes
+     * Station api routes
      *
      *
      *
@@ -150,7 +150,7 @@ $api->version('v1', function ($api) {
 
     /**------
      *
-     * Parish api routes
+     * Raw Jumuiya api routes
      *
      *
      *
@@ -159,6 +159,22 @@ $api->version('v1', function ($api) {
     $api->group(['middleware' => ['api.auth', 'cors']], function($api){
         $api->post('raw-jumuiyas', 'App\Api\V1\Controllers\RawJumuiyaController@store');
         $api->get('raw-jumuiyas', 'App\Api\V1\Controllers\RawJumuiyaController@index');
+        $api->get('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@show');
+        $api->put('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@update');
+        $api->delete('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@destroy');
+    });
+
+    /**------
+     *
+     * Prayer Type api routes
+     *
+     *
+     *
+     */
+
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+        $api->post('prayer-type', 'App\Api\V1\Controllers\PrayerTypeController@store');
+        $api->get('prayer-type', 'App\Api\V1\Controllers\PrayerTypeController@index');
         $api->get('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@show');
         $api->put('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@update');
         $api->delete('raw-jumuiyas/{id}', 'App\Api\V1\Controllers\RawJumuiyaController@destroy');

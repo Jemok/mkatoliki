@@ -139,4 +139,9 @@ class User extends Model implements AuthenticatableContract,
 
         return $this->hasMany(User_stations::class);
     }
+
+    public function prayer_types(){
+
+        return $this->hasMany(Prayer_types::class);
+    }
 }
