@@ -1077,8 +1077,6 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
         $scope.currentResponsorialBodyTwo = "";
         $scope.currentResponsorialPsalmVerse = "";
 
-
-
         $scope.currentGospelTitle = "";
         $scope.currentGospelBook = "";
         $scope.currentGospelBody = "";
@@ -1086,19 +1084,10 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
     }
 
+    $scope.modal_show = function(){
 
-    $scope.showAlert = function(id){
-
-
-        $scope.myvalue = id;
-
-        if($scope.myvalue === id){
-
-            $scope.myvalue = true;
-
-        }
-
-    };
+        $('#m').modal('toggle');
+    }
 
 
     if(!userService.checkIfLoggedIn()){
