@@ -2,6 +2,16 @@
 <div class="row global__toolbar">
     <div class="gc__right">
         <header class="row row__filter">
+            <form class="search">
+                <!--<input type="text" value="Name ..." class="f__input">-->
+                <!--<input type="date" value="Date ..." class="f__input">-->
+                <label>Filter:</label>
+                <input type="text" class="form-control" datetime-picker="mediumDate" ng-model="date1" is-open="open.date1" enable-time="false" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"  close-on-date-selection="true" datepicker-append-to-body="true" clear-text="Remove" />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="openCalendar($event, 'date1')"><i class="fa fa-calendar"></i></button>
+                    </span>
+
+            </form>
             <!--<form class="search">-->
                 <!--<label class="f__label">Filter By:</label>-->
                 <!--&lt;!&ndash;<input type="text" value="Name ..." class="f__input">&ndash;&gt;-->
@@ -144,7 +154,7 @@
             <li class="nav__header">Quick Links</li>
             <li class="nav__item"><a href="#/reflections" class="nav__link">Reflections</a></li>
             <li class="nav__item active"><a href="#/" class="nav__link">Readings</a></li>
-            <li class="nav__item"><a href="#/prayer-type-create" class="nav__link">Prayer Types</a></li>
+            <!--<li class="nav__item"><a href="#/prayer-type-create" class="nav__link">Prayer Types</a></li>-->
             <li class="nav__item"><a href="#/prayers" class="nav__link">Prayers</a></li>
             <li class="nav__item"><a href="#/create-happenings" class="nav__link">Happening Today</a></li>
             <li class="nav__item"><a href="#/create-raw-jumuiya" class="nav__link">Raw Jumuiya</a></li>
@@ -159,6 +169,7 @@
                 <tr>
                     <th>Church Calendar Date</th>
                     <th>Reflection</th>
+                    <th>Readings</th>
                     <!--<th>Action</th>-->
                 </tr>
 
@@ -167,9 +178,11 @@
                     <img  class="" style="margin-left: 280px; margin-top: 100px;" width="200" height="200" src="../img/loading.gif" data-ng-show="loading">
 
                 </tr>
-                <tr data-ng-repeat="reflection in reflections" >
+                <tr data-ng-repeat="reflection in reflections | filter : getDate()">
+                    <td>{{reflection.reflection_date}}</td>
                     <td>{{reflection.reflection_date}}</td>
                     <td>{{reflection.reflection_body}}</td>
+                    <td><a href="#/reflections-reading/{{reflection.reading_id}}"> View Reading</a></td>
                     <!--<td>4-April-2014</td>-->
                     <!--<td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>-->
                 </tr>
@@ -178,6 +191,22 @@
     </div>
 </div>
 
+<div class="modal fade" id="m">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Update a Book</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-ng-click="update()">SaveChanges</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--<div class="row">-->
     <!--<div class="col-md-12">-->

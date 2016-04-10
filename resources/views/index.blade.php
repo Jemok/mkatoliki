@@ -9,8 +9,9 @@
 
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" />
         <link href="libs/css/bootstrap.min.css" rel="stylesheet">
-<!--        <link href="css/styles.css" rel="stylesheet">-->
+        <link href="css/styles.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.js" rel="stylesheet">
 
 
 
@@ -19,6 +20,7 @@
         <script src="libs/js/angular-route.min.js"></script>
         <script src="libs/js/angular-animate.min.js"></script>
         <script src="libs/js/angular-local-storage.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.css"></script>
         <script src="libs/js/ui-bootstrap-tpls.js"></script>
         <script src="libs/js/datetime-picker.min.js"></script>
         <script src="libs/js/restangular.min.js"></script>

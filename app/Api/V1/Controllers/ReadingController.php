@@ -72,7 +72,7 @@ class ReadingController extends Controller
 
     public function show($id)
     {
-        $reading = $this->currentUser()->readings()->find($id);
+        $reading = Reading::find($id);
 
         if(!$reading)
             throw new NotFoundHttpException;

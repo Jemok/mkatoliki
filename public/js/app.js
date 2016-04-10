@@ -60,6 +60,10 @@ mkatolikiApp.config(['$routeProvider', function($routeProvider){
             templateUrl: 'partials/reflections/create.html',
             controller: 'ReflectionController'
     }).
+    when('/reflections-reading/:reading_id', {
+            templateUrl: 'partials/readings/show.html',
+            controller: 'ReadingController'
+    }).
     when('/happenings', {
             templateUrl: 'partials/happenings/index.html',
             controller: 'HappeningController'

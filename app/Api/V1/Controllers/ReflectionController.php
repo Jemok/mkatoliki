@@ -39,6 +39,7 @@ class ReflectionController extends Controller
 
         $reflection->reflection_body = $request->get('reflection_body');
         $reflection->reflection_date = $request->get('reflection_date');
+        $reflection->reflection_day = $request->get('reflection_date');
         $reflection->reading_id = $request->get('reading_id');
 
         if($this->currentUser()->reflections()->save($reflection))

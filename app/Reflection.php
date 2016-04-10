@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Reflection extends Model
 {
@@ -14,6 +15,7 @@ class Reflection extends Model
 
         'reflection_body',
         'reflection_date',
+        'reflection_day',
         'reading_id',
         'user_id'
     ];
@@ -34,5 +36,36 @@ class Reflection extends Model
     public function reading(){
 
         return $this->belongsTo(Reading::class);
+    }
+
+    /**
+     * Format the reflection time day before it is persisted
+     * @param $date
+     */
+    public function setReflectionDayAttribute($date){
+
+        $this->attributes['reflection_day'] = Carbon::parse($date);
+
+    }
+
+    /**
+     * Format the reflection day after it is persisted
+     * @param $date
+     * @return string
+     */
+    public function getReflectionDayAttribute($date){
+
+        $dt = Carbon::parse($date);
+
+        return $dt->timestamp.'000';
+    }
+
+    /**
+     * A reading has a single reflection
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function reflection(){
+
+        return $this->hasOne(Reflection::class);
     }
 }

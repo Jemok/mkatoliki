@@ -31,6 +31,9 @@
 
             <div class="f__input rd__reading" data-ng-repeat="reading in readings | filter : getDate()">
 
+                <img  class="" style="" width="200" height="200" src="../img/loading.gif" data-ng-show="loading">
+
+
                 <input type="hidden" class="{{reading.id}}" id="reading_id">
 
                 <p>{{reading.reading_date}}</p>

@@ -443,7 +443,9 @@ mkatolikiAppControllers.controller('JumuiyaController', ['$scope', '$http', 'use
 
 }]);
 
-mkatolikiAppControllers.controller('ReflectionController', ['$scope', '$http', 'userService', 'reflectionService', 'mainService', function($scope, $http , userService, reflectionService, mainService){
+mkatolikiAppControllers.controller('ReflectionController', ['$scope', '$http', '$location', 'userService', 'reflectionService', 'mainService', function($scope, $http, $location, userService, reflectionService, mainService){
+
+
 
 
     var in10Days = new Date();
@@ -840,7 +842,7 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
   $scope.date1 = new Date('2016-03-29T21:00:00Z')
 
-     //$scope.date1 = "";
+     $scope.date1 = "";
 
     $scope.dates = {
         //date1: new Date('2016-03-28'),
@@ -934,6 +936,12 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
     }
 
+
+
+
+
+
+
     $scope.load =function(readingId){
 
         mainService.getById(readingId, function(response){
@@ -943,6 +951,7 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
             $scope.currentSecondReading = response.reading.second_reading;
             $scope.currentResponsorial = response.reading.responsorial;
             $scope.currentGospel = response.reading.gospel;
+
 
 
             $('#updateReadingModal').modal('toggle');
@@ -996,9 +1005,7 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
     $scope.create = function(){
 
-
         mainService.create({
-
 
             reading_date: $scope.currentReadingDate,
             reading_day: $scope.currentReadingDate,
@@ -1006,18 +1013,15 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
             first_reading_book: $scope.currentFirstReadingBook,
             first_reading_body: $scope.currentFirstReadingBody,
 
-
             second_reading_title: $scope.currentSecondReadingTitle,
             second_reading_book: $scope.currentSecondReadingBook,
             second_reading_body: $scope.currentSecondReadingBody,
-
 
             responsorial_title: $scope.currentResponsorialTitle,
             responsorial_book: $scope.currentResponsorialBook,
             responsorial_body_one: $scope.currentResponsorialBodyOne,
             responsorial_body_two: $scope.currentResponsorialBodyTwo,
             responsorial_body_one_verse: $scope.currentResponsorialPsalmVerse,
-
 
             gospel_title: $scope.currentGospelTitle,
             gospel_book: $scope.currentGospelBook,
@@ -1083,11 +1087,6 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
     }
 
-    $scope.modal_show = function(){
-
-        $('#m').modal('toggle');
-    }
-
 
     if(!userService.checkIfLoggedIn()){
 
@@ -1112,5 +1111,29 @@ mkatolikiAppControllers.controller('contentController', function($scope, $rootSc
         $scope.contentVisibility = $$route && paths.indexOf($$route.originalPath) < 0;
 
     });
+
+});
+
+
+mkatolikiAppControllers.controller('ReadingController', function($scope, $rootScope, $routeParams, mainService) {
+
+        mainService.getById($routeParams.reading_id, function(response){
+
+            $scope.currentFirstReadingBook = response.reading.first_reading_book;
+            $scope.currentFirstReadingBody = response.reading.first_reading_body;
+            $scope.currentSecondReadingBook = response.reading.second_reading_book;
+            $scope.currentSecondReadingBody = response.reading.second_reading_body;
+            $scope.currentResponsorialBook = response.reading.responsorial_book;
+            $scope.currentResponsorialBodyOne = response.reading.responsorial_body_one;
+            $scope.currentResponsorialBodyTwo = response.reading.responsorial_body_two;
+            $scope.currentGospelBook = response.reading.gospel_book;
+            $scope.currentGospelBody = response.reading.gospel_body;
+
+
+        }, function(){
+
+            alert('Some errors occurred, try again later');
+        });
+
 
 });
