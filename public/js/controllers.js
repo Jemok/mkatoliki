@@ -906,7 +906,6 @@ mkatolikiAppControllers.controller('MainController', ['$scope', '$http', '$locat
 
     $scope.openCalendar = function(e, date) {
 
-        alert('hi jemo mercy');
 
         $scope.open[date] = true;
 
