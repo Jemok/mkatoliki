@@ -75,6 +75,5 @@ class Reflection extends Model
         parent::boot();
 
         User::observe(new GlobalObserver());
-
     }
 }
