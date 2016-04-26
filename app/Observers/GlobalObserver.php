@@ -17,16 +17,19 @@ class GlobalObserver {
 
         $client = new Client();
 
+
         $client->post('https://gcm-http.googleapis.com/gcm/send',
         [
            "headers" => [
                "Authorization" => "key=AIzaSyCAGRXrBB__ZhlQIV0thCY7zM2AziWbIcY",
                "Content-Type"     => "application/json"
            ],
-          "to"   => "/topics/global",
-          "data" => [
+            [
+                "to"   => "/topics/global",
+                "data" => [
                     "message" => "update"
-           ]
+             ]
+        ]
         ]);
     }
 
