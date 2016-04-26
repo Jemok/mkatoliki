@@ -1,18 +1,27 @@
 <?php
-
+/**
+ * The authentication controller that handles
+ * the login. registration and logout logic
+ */
 namespace App\Api\V1\Controllers;
 
+use App\Api\V1\Traits\Login;
+use App\Api\V1\Validators\ValidateLogin;
+use App\Api\V1\Validators\ValidateSignup;
 use JWTAuth;
 use Validator;
 use Config;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
 use Dingo\Api\Routing\Helpers;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Dingo\Api\Exception\ValidationHttpException;
+use App\Api\V1\Repositories\UserRepository;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use App\User;
 
 class AuthController extends Controller
 {
@@ -22,83 +31,112 @@ class AuthController extends Controller
     use Helpers;
 
     /**
-     * Handles Login in a user into the API
+     * Login Trait
+     */
+    use Login;
+
+    /**
+     * Validate Login Trait
+     */
+    use ValidateLogin;
+
+    /**
+     * Validate SignUp Trait
+     */
+    use ValidateSignup;
+
+    /**
+     * Holds the login mode
+     * @var
+     */
+    protected $login_type;
+
+    /**
+     * Handles Login in a user into the app from the web
      * @param Request $request
      * @return \Illuminate\Http\JsonResponse|void
      * @throws \Dingo\Api\Exception\ValidationHttpException
      */
 
-    public function login(Request $request)
+    public function loginDefault(Request $request)
     {
-        //Only Email and Password are required for login
+        //Only Email and Password are required for login(for web app)
         $credentials = $request->only(['email', 'password']);
 
-        //Validate the input incoming into the API from a client
-        $validator = Validator::make($credentials, [
-            'email' => 'required',
-            'password' => 'required',
-        ]);
+        $this->login_type = 'web';
 
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
+        //Validate Incoming input from request
+        $this->validateLogin($credentials, $this->login_type);
 
-        try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return $this->response->errorUnauthorized();
-            }
-        } catch (JWTException $e) {
-            return $this->response->error('could_not_create_token', 500);
-        }
-
-        //If API successfully authenticated the user, get the authenticated user
-        if(isset($token)){
-
-            $user = \Auth::user();
-        }
-
-        //Return the jwt token and the authenticated user details
-        return response()->json(compact('token', 'user'));
+        //Login the user
+        return $this->login($credentials, $this->login_type);
     }
+
+
 
     /**
      * Handles registration of a new user into the API
      * @param Request $request
+     * @param UserRepository $userRepository
      * @return \Dingo\Api\Http\Response|\Illuminate\Http\JsonResponse|void
-     * @throws \Dingo\Api\Exception\ValidationHttpException
      */
-    public function signup(Request $request)
+
+    public function signup(Request $request, UserRepository $userRepository)
     {
-        // Get the sign up fields from the Sign up fields boilerplate
+        // Get the sign up fields from the Sign up fields boilerplate in
+        // app/config/boilerplate.php
         $signupFields = Config::get('boilerplate.signup_fields');
         $hasToReleaseToken = Config::get('boilerplate.signup_token_release');
 
         //Set the fields to be used for registration
         $userData = $request->only($signupFields);
 
-        //Start the validation process
-        $validator = Validator::make($userData, Config::get('boilerplate.signup_fields_rules'));
+        $this->validateSignup($userData, Config::get('boilerplate.signup_fields_rules'));
 
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
-
-        //Persist the new user into the database users table
-        User::unguard();
-        $user = User::create($userData);
-        User::reguard();
-
+        $user = $userRepository->store($userData);
         //If there was an error, return response error message
         if(!$user->id) {
             return $this->response->error('could_not_create_user', 500);
         }
 
         if($hasToReleaseToken) {
-            return $this->login($request);
+
+            return $this->loginDefault($request);
         }
 
-        //If successfully created the usee, return response success
+
+
+        //If successfully created the user, return response success
         return $this->response->created();
+    }
+
+    /**
+     * Retrieves the authenticated user
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getAuthenticatedUser()
+    {
+        try {
+
+            if (! $user = JWTAuth::parseToken()->authenticate()) {
+                return response()->json(['user_not_found'], 404);
+            }
+
+        } catch (TokenExpiredException $e) {
+
+            return response()->json(['token_expired'], $e->getStatusCode());
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+        }
+
+        // the token is valid and we have found the user via the sub claim
+        return response()->json(compact('user'));
     }
 
     /**
@@ -164,7 +202,7 @@ class AuthController extends Controller
         switch ($response) {
             case Password::PASSWORD_RESET:
                 if(Config::get('boilerplate.reset_token_release')) {
-                    return $this->login($request);
+                    return $this->loginDefault($request);
                 }
                 return $this->response->noContent();
 

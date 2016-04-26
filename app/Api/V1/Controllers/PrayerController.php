@@ -104,13 +104,4 @@ class PrayerController extends Controller
             return $this->response->error('Could_not_delete_prayer', 500);
 
     }
-
-    /**
-     * Returns the currently logged in user
-     * @return mixed
-     */
-    public function currentUser(){
-
-        return JWTAuth::parseToken()->authenticate();
-    }
 }

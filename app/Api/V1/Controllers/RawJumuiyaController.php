@@ -103,12 +103,4 @@ class RawJumuiyaController extends Controller
 
     }
 
-    /**
-     * Returns the currently logged in user
-     * @return mixed
-     */
-    public function currentUser(){
-
-        return JWTAuth::parseToken()->authenticate();
-    }
 }

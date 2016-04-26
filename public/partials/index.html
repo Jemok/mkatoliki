@@ -54,7 +54,7 @@
 
                 </tr>
 
-                <tr data-ng-repeat="reading in readings | filter : getDate()">
+                <tr data-ng-repeat="reading in readings | filter : getDate() | orderBy:'-id'">
 
 
                     <td>Date: {{reading.reading_date}}

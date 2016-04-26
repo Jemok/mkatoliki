@@ -13,8 +13,6 @@
         <link href="css/style.css" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.16.1/select.min.js" rel="stylesheet">
 
-
-
         <script src="libs/js/angular.min.js"></script>
         <script src="libs/js/lodash.min.js"></script>
         <script src="libs/js/angular-route.min.js"></script>
@@ -26,8 +24,31 @@
         <script src="libs/js/restangular.min.js"></script>
         <script src="libs/js/bootstrap.min.js"></script>
         <script src="js/app.js"></script>
-        <script src="js/services.js"></script>
-        <script src="js/controllers.js"></script>
+        <script src="js/services/baseService.js"></script>
+        <script src="js/services/userService.js"></script>
+        <script src="js/services/mainService.js"></script>
+        <script src="js/services/prayerService.js"></script>
+        <script src="js/services/jumuiyaService.js"></script>
+        <script src="js/services/reflectionService.js"></script>
+        <script src="js/services/happeningService.js"></script>
+        <script src="js/services/prayerTypeService.js"></script>
+        <script src="js/services/rawJumuiyaService.js"></script>
+        <script src="js/services/parishService.js"></script>
+        <script src="js/services/stationService.js"></script>
+
+
+
+        <script src="js/controllers/baseController.js"></script>
+        <script src="js/controllers/mainController.js"></script>
+        <script src="js/controllers/loginController.js"></script>
+        <script src="js/controllers/signupController.js"></script>
+        <script src="js/controllers/prayerController.js"></script>
+        <script src="js/controllers/jumuiyaController.js"></script>
+        <script src="js/controllers/reflectionController.js"></script>
+        <script src="js/controllers/happeningController.js"></script>
+        <script src="js/controllers/readingController.js"></script>
+
+
         <script src="js/filter.js"></script>
         <script src="js/directives.js"></script>
     </head>

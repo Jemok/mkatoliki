@@ -23,5 +23,4 @@ class User_parishes extends Model
 
     ];
 
-
 }

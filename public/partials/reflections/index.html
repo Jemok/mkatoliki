@@ -178,7 +178,7 @@
                     <img  class="" style="margin-left: 280px; margin-top: 100px;" width="200" height="200" src="../img/loading.gif" data-ng-show="loading">
 
                 </tr>
-                <tr data-ng-repeat="reflection in reflections | filter : getDate()">
+                <tr data-ng-repeat="reflection in reflections | filter : getDate() | orderBy:'-id'">
                     <td>{{reflection.reflection_date}}</td>
                     <td>{{reflection.reflection_date}}</td>
                     <td>{{reflection.reflection_body}}</td>

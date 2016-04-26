@@ -37,6 +37,7 @@ class Reading extends Model
 
     ];
 
+
     /**
      * Reading User One to many relationship
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

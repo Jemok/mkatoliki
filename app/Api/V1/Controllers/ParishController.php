@@ -23,7 +23,6 @@ class ParishController extends Controller
             ->toArray();
     }
 
-
     /**
      * Store a newly created parish resource in storage.
      * @param Request $request
@@ -46,7 +45,6 @@ class ParishController extends Controller
             throw new NotFoundHttpException;
         return $parish;
     }
-
 
     /**
      * Update the specified parish resource in storage.
@@ -87,14 +85,5 @@ class ParishController extends Controller
             return $this->response->noContent();
         else
             return $this->response->error('Could_not_delete_parish', 500);
-    }
-
-    /**
-     * Returns the currently logged in user
-     * @return mixed
-     */
-    public function currentUser(){
-
-        return JWTAuth::parseToken()->authenticate();
     }
 }

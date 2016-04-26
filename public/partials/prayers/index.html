@@ -39,7 +39,7 @@
                     <th>Clustured in</th>
                     <!--<th>Action</th>-->
                 </tr>
-                <tr data-ng-repeat="prayer in prayers">
+                <tr data-ng-repeat="prayer in prayers | orderBy:'-id'">
                     <td>{{prayer.prayer_title}}</td>
                     <td>{{prayer.prayer_body}}</td>
                     <!--<td>Common Prayers, The Holy Rosary</td>-->

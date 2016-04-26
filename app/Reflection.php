@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use App\Observers\GlobalObserver;
 
 class Reflection extends Model
 {
@@ -67,5 +68,13 @@ class Reflection extends Model
     public function reflection(){
 
         return $this->hasOne(Reflection::class);
+    }
+
+    public static function boot(){
+
+        parent::boot();
+
+        User::observe(new GlobalObserver());
+
     }
 }

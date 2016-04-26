@@ -125,12 +125,4 @@ class ReadingController extends Controller
         else
             return $this->response->error('could_not_delete_reading', 500);
     }
-
-    /**
-     * Grab the authenticated from the JWT token
-     * @return mixed
-     */
-    public function currentUser(){
-        return JWTAuth::parseToken()->authenticate();
-    }
 }

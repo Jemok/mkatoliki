@@ -1,90 +1,49 @@
 <?php
 
+// This is repeated code,, move it away from here completely
+
 namespace App\Api\V1\Controllers;
 
-use App\Reflection;
 use App\User_parishes;
 use App\User_stations;
 use JWTAuth;
-use Validator;
 use Config;
-use App\User;
 use Illuminate\Http\Request;
-use Illuminate\Mail\Message;
 use Dingo\Api\Routing\Helpers;
+use App\Api\V1\Traits\Login;
+use App\Api\V1\Validators\ValidateLogin;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Password;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use Dingo\Api\Exception\ValidationHttpException;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class AuthControllerPhone extends Controller
 {
     use Helpers;
+    use Login;
+    use ValidateLogin;
 
-    public function login(Request $request)
+    /**
+     * Holds the login mode
+     * @var
+     */
+    protected $login_type;
+
+    /**
+     * Handles login a user using the phone model
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function loginPhone(Request $request)
     {
+        $this->login_type = 'phone';
+
+        //Only phone_number and password are required for login(for mobile app)
         $credentials = $request->only(['phone_number', 'password']);
 
-        $validator = Validator::make($credentials, [
-            'phone_number' => 'required',
-            'password' => 'required',
-        ]);
+        //Validate Incoming input from request
+        $this->validateLogin($credentials, $this->login_type);
 
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
-
-        try {
-            if (! $token = JWTAuth::attempt($credentials)) {
-                return $this->response->errorUnauthorized();
-            }
-        } catch (JWTException $e) {
-            return $this->response->error('could_not_create_token', 500);
-        }
-
-        if(isset($token)){
-
-            $user = \Auth::user();
-
-            $parish_id = \Auth::user()->user_parishes()->first()->parish_id;
-
-            $station_id = \Auth::user()->user_stations()->first()->station_id;
-
-            $user->parish_id = $parish_id;
-            $user->station_id =$station_id;
-
-        }
-
-
-        return response()->json(compact('token', 'user'));
-    }
-
-    public function getAuthenticatedUser()
-    {
-        try {
-
-            if (! $user = JWTAuth::parseToken()->authenticate()) {
-                return response()->json(['user_not_found'], 404);
-            }
-
-        } catch (TokenExpiredException $e) {
-
-            return response()->json(['token_expired'], $e->getStatusCode());
-
-        } catch (TokenInvalidException $e) {
-
-            return response()->json(['token_invalid'], $e->getStatusCode());
-
-        } catch (JWTException $e) {
-
-            return response()->json(['token_absent'], $e->getStatusCode());
-
-        }
-
-        // the token is valid and we have found the user via the sub claim
-        return response()->json(compact('user'));
+        //Login the user
+        return $this->login($credentials, $this->login_type);
     }
 
     /**

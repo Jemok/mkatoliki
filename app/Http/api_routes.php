@@ -6,41 +6,48 @@ $api->version('v1', function ($api) {
 
     /**------
      *
-     * Authentication api routes
+     * Authentication, user, logout, recovery api routes
      *
      *
      *
      */
 
     $api->group(['middleware' => 'cors'], function ($api) {
-        $api->post('auth/login', 'App\Api\V1\Controllers\AuthController@login');
-        $api->get('auth/user', 'App\Api\V1\Controllers\AuthControllerPhone@getAuthenticatedUser');
-        $api->post('auth/user/parish-station', 'App\Api\V1\Controllers\AuthControllerPhone@setParishAndStation');
-        $api->post('auth/login-phone/', 'App\Api\V1\Controllers\AuthControllerPhone@login');
+
+        /**
+         * Login routes
+         */
+        $api->post('auth/login', 'App\Api\V1\Controllers\AuthController@loginDefault');
+        $api->post('auth/login-phone/', 'App\Api\V1\Controllers\AuthControllerPhone@loginPhone');
+
+        /**
+         * Signup route
+         */
+
         $api->post('auth/signup', 'App\Api\V1\Controllers\AuthController@signup');
+
+        /**
+         * Account recovery routes
+         */
         $api->post('auth/recovery', 'App\Api\V1\Controllers\AuthController@recovery');
         $api->post('auth/reset', 'App\Api\V1\Controllers\AuthController@reset');
+
+        /**
+         * Logut route
+         */
         $api->get('auth/logout', 'App\Api\V1\Controllers\AuthControllerPhone@logout');
 
+        /**
+         * User routes
+         */
+        $api->get('auth/user', 'App\Api\V1\Controllers\AuthController@getAuthenticatedUser');
+        $api->post('auth/user/parish-station', 'App\Api\V1\Controllers\AuthControllerPhone@setParishAndStation');
+
     });
-
-
-
-	// example of protected route
-	$api->get('protected', ['middleware' => ['api.auth'], function () {		
-		return \App\User::all();
-    }]);
-
-	// example of free route
-	$api->get('free', function() {
-		return \App\User::all();
-
-	});
 
     /**------
      *
      * Readings api routes
-     *
      *
      *
      */

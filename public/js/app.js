@@ -1,6 +1,3 @@
-
-
-
 var mkatolikiApp = angular.module('mkatolikiApp', [
 
     'ngRoute',
@@ -109,5 +106,4 @@ mkatolikiApp.config(['$routeProvider', function($routeProvider){
     otherwise({
             redirectTo: '/'
     });
-
 }]);
