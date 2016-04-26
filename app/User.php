@@ -42,15 +42,6 @@ class User extends Model implements AuthenticatableContract,
     ];
 
 
-    public static function boot(){
-
-        parent::boot();
-
-        User::observe(new GlobalObserver());
-
-    }
-
-
 
     /**
      * The attributes excluded from the model's JSON form.
