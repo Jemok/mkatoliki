@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'CraetePrayerTypesTableMigration' => $baseDir . '/database/migrations/2016_04_07_062319_craete_prayer_types_table_migration.php',
     'CreatRawJumuiyasMigrationTable' => $baseDir . '/database/migrations/2016_04_06_134705_creat_raw_jumuiyas_migration_table.php',
+    'CreateGcmPushesMigrationTable' => $baseDir . '/database/migrations/2016_04_27_104129_create_gcm_pushes_migration_table.php',
     'CreateHappeningEventsTableMigration' => $baseDir . '/database/migrations/2016_04_06_131254_create_happening_events_table_migration.php',
     'CreateJumuiyasTableMigration' => $baseDir . '/database/migrations/2016_04_06_131906_create_jumuiyas_table_migration.php',
     'CreateParishesMigrationTable' => $baseDir . '/database/migrations/2016_04_06_132050_create_parishes_migration_table.php',

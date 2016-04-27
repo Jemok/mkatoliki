@@ -11,7 +11,6 @@ $api->version('v1', function ($api) {
      *
      *
      */
-
     $api->group(['middleware' => 'cors'], function ($api) {
 
         /**
@@ -19,6 +18,8 @@ $api->version('v1', function ($api) {
          */
         $api->post('auth/login', 'App\Api\V1\Controllers\AuthController@loginDefault');
         $api->post('auth/login-phone/', 'App\Api\V1\Controllers\AuthControllerPhone@loginPhone');
+
+
 
         /**
          * Signup route
@@ -200,9 +201,6 @@ $api->version('v1', function ($api) {
         $api->get('parishes-outstations', 'App\Api\V1\Controllers\ParishOutStationController@index');
 
     });
-
-
-
 
     /**------
      *

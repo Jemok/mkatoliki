@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\GlobalObserver;
+
 
 class Raw_jumuiya extends Model
 {
@@ -41,6 +43,13 @@ class Raw_jumuiya extends Model
     public function user(){
 
         return $this->belongsTo(User::class);
+    }
+
+    public static function boot(){
+
+        parent::boot();
+
+        Raw_jumuiya::observe(new GlobalObserver());
     }
 
 }

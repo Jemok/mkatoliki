@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\GlobalObserver;
+
 
 class Jumuiya extends Model
 {
@@ -37,5 +39,12 @@ class Jumuiya extends Model
 
        return $this->belongsTo(Raw_jumuiya::class);
    }
+
+   public static function boot(){
+
+        parent::boot();
+
+        Jumuiya::observe(new GlobalObserver());
+    }
 
 }

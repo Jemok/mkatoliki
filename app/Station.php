@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\GlobalObserver;
+
 
 class Station extends Model
 {
@@ -24,4 +26,11 @@ class Station extends Model
         'user_id'
 
     ];
+
+    public static function boot(){
+
+        parent::boot();
+
+        Station::observe(new GlobalObserver());
+    }
 }

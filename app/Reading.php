@@ -84,7 +84,7 @@ class Reading extends Model
 
         parent::boot();
 
-        User::observe(new GlobalObserver());
+        Reading::observe(new GlobalObserver());
     }
 
 }

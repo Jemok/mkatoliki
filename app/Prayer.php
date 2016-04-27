@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\GlobalObserver;
+
 
 class Prayer extends Model
 {
@@ -25,5 +27,12 @@ class Prayer extends Model
     public function user(){
 
         return $this->belongsTo(User::class);
+    }
+
+    public static function boot(){
+
+        parent::boot();
+
+        Prayer::observe(new GlobalObserver());
     }
 }

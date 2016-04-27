@@ -26,7 +26,6 @@ class ReflectionController extends Controller
             ->toArray();
     }
 
-
     /**
      * Store a newly created reflection resource in storage.
      *

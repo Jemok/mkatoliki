@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\GlobalObserver;
+
 
 class Parish extends Model
 {
@@ -29,5 +31,12 @@ class Parish extends Model
      */
     public function stations(){
         return $this->hasMany(Station::class);
+    }
+
+    public static function boot(){
+
+        parent::boot();
+
+        Parish::observe(new GlobalObserver());
     }
 }

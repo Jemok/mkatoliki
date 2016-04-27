@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\GlobalObserver;
+
 
 class Prayer_types extends Model
 {
@@ -23,5 +25,12 @@ class Prayer_types extends Model
         'user_id'
 
     ];
+
+    public static function boot(){
+
+        parent::boot();
+
+        Prayer_types::observe(new GlobalObserver());
+    }
 
 }

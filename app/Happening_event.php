@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\GlobalObserver;
 
 class Happening_event extends Model
 {
@@ -35,5 +36,12 @@ class Happening_event extends Model
     public function user(){
 
         return $this->belongsTo(User::class);
+    }
+
+    public static function boot(){
+
+        parent::boot();
+
+        Happening_event::observe(new GlobalObserver());
     }
 }
