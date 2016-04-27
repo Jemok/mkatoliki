@@ -55,8 +55,6 @@ class GlobalObserver {
 
             $gcm_repository->store($message->message_id);
 
-            dd('200');
-
         }catch (RequestException $e){
             dd($e->getRequest());
         }
