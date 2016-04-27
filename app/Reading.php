@@ -52,9 +52,19 @@ class Reading extends Model
      * Format the reading time day before it is persisted
      * @param $date
      */
+    public function setReadingDateAttribute($date){
+
+        $this->attributes['reading_date'] = Carbon::parse($date)->addHours(3);
+
+    }
+
+    /**
+     * Format the reading time day before it is persisted
+     * @param $date
+     */
     public function setReadingDayAttribute($date){
 
-        $this->attributes['reading_day'] = Carbon::parse($date);
+        $this->attributes['reading_day'] = Carbon::parse($date)->addHours(3);
 
     }
 

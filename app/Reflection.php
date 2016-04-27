@@ -40,12 +40,22 @@ class Reflection extends Model
     }
 
     /**
+     * Format the reflection time date before it is persisted
+     * @param $date
+     */
+    public function setReflectionDateAttribute($date){
+
+        $this->attributes['reflection_date'] = Carbon::parse($date)->addHours(3);
+
+    }
+
+    /**
      * Format the reflection time day before it is persisted
      * @param $date
      */
     public function setReflectionDayAttribute($date){
 
-        $this->attributes['reflection_day'] = Carbon::parse($date);
+        $this->attributes['reflection_day'] = Carbon::parse($date)->addHours(3);
 
     }
 
