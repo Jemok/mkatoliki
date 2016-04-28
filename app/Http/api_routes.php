@@ -48,6 +48,19 @@ $api->version('v1', function ($api) {
 
     /**------
      *
+     * GCM phone token routes
+     *
+     *
+     *
+     */
+    $api->group(['middleware' => ['api.auth', 'cors']], function ($api) {
+
+        $api->post('gcm/tokens', 'App\Api\V1\Controllers\PhoneTokenController@store');
+
+    });
+
+    /**------
+     *
      * Readings api routes
      *
      *

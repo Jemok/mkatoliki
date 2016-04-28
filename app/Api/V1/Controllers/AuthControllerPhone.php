@@ -78,7 +78,6 @@ class AuthControllerPhone extends Controller
             return $this->response->created();
         else
             return $this->response->error('could_not_create_user_parish_station', 500);
-
     }
 
     /**

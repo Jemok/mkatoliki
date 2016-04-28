@@ -149,6 +149,15 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasMany(Prayer_types::class);
     }
 
+    /**
+     * Phone_token User relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function phone_token(){
+
+        return $this->hasOne(Phone_token::class);
+    }
+
 
 
 }

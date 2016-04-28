@@ -13,6 +13,7 @@ return array(
     'CreateJumuiyasTableMigration' => $baseDir . '/database/migrations/2016_04_06_131906_create_jumuiyas_table_migration.php',
     'CreateParishesMigrationTable' => $baseDir . '/database/migrations/2016_04_06_132050_create_parishes_migration_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreatePhoneTokensMigrationTable' => $baseDir . '/database/migrations/2016_04_28_104809_create_phone_tokens_migration_table.php',
     'CreatePrayersTableMigration' => $baseDir . '/database/migrations/2016_04_06_130545_create_prayers_table_migration.php',
     'CreateReadingsMigrationTable' => $baseDir . '/database/migrations/2016_04_06_130356_create_readings_migration_table.php',
     'CreateReflectionsTableMigration' => $baseDir . '/database/migrations/2016_04_06_130735_create_reflections_table_migration.php',
