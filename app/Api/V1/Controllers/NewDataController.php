@@ -86,8 +86,8 @@ class NewDataController extends Controller
                    'raw_jumuiyas'  => $this->rawJumuiyaTransformer->transformCollection($this->getAllRawJumuiyas()),
                    'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getAllJumuiya()),
                    'parishes'       =>  $this->parishesTransformer->transformCollection($this->getAllParishes()),
-//                   'out-stations'       =>  $this->stationTransformer->transformCollection($this->getAllStations()),
-//                   'prayer_types'     => $this->prayerTypeTransformer->transformCollection($this->getAllPrayerTypes())
+                   'out-stations'       =>  $this->stationTransformer->transformCollection($this->getAllStations()),
+                   'prayer_types'     => $this->prayerTypeTransformer->transformCollection($this->getAllPrayerTypes())
                ]
            ]);
 
@@ -106,8 +106,8 @@ class NewDataController extends Controller
             'raw_jumuiyas'  => $this->rawJumuiyaTransformer->transformCollection($this->getNewRawJumuiyas($client_date)),
             'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getNewJumuiya($client_date)),
             'parishes'       =>  $this->parishesTransformer->transformCollection($this->getNewParishes($client_date)),
-//            'out-stations'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
-//            'prayer_types'    =>   $this->prayerTypeTransformer->transformCollection($this->getNewPrayerTypes($client_date))
+            'out-stations'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
+            'prayer_types'    =>   $this->prayerTypeTransformer->transformCollection($this->getNewPrayerTypes($client_date))
 
             ]
         ]);
