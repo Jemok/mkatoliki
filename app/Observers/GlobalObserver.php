@@ -9,12 +9,9 @@
 namespace App\Observers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use App\Api\V1\Repositories\GcmPushRepository;
-
-
+use App\Api\V1\GCM\Repositories\GcmPushRepository;
 
 class GlobalObserver {
-
     /**
      *
      * @param $model
@@ -58,6 +55,5 @@ class GlobalObserver {
         }catch (RequestException $e){
             dd($e->getRequest());
         }
-
     }
 } 

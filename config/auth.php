@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => App\User::class,
+    'model' => \App\Api\V1\Account\Models\User::class,
 
     /*
     |--------------------------------------------------------------------------
