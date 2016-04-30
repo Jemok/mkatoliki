@@ -2,8 +2,11 @@
 
 namespace App\Api\V1\Happening\Models;
 
+use App\Api\V1\Account\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\GlobalObserver;
+use Carbon\Carbon;
+
 
 class Happening_event extends Model
 {
@@ -43,5 +46,15 @@ class Happening_event extends Model
         parent::boot();
 
         Happening_event::observe(new GlobalObserver());
+    }
+
+    /**
+     * Format the event date before it is persisted
+     * @param $date
+     */
+    public function setEventDateAttribute($date){
+
+        $this->attributes['event_date'] = Carbon::parse($date)->addHours(3);
+
     }
 }

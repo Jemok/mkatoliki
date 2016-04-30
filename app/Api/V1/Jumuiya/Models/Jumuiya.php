@@ -5,6 +5,7 @@ namespace App\Api\V1\Jumuiya\Models;
 use App\Api\V1\Raw_Jumuiya\Models\Raw_jumuiya;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\GlobalObserver;
+use Carbon\Carbon;
 
 
 class Jumuiya extends Model
@@ -40,6 +41,16 @@ class Jumuiya extends Model
 
        return $this->belongsTo(Raw_jumuiya::class);
    }
+
+    /**
+     * Format the happening on date before it is persisted
+     * @param $date
+     */
+    public function setHappeningOnAttribute($date){
+
+        $this->attributes['happening_on'] = Carbon::parse($date)->addHours(3);
+
+    }
 
    public static function boot(){
 
