@@ -18,6 +18,20 @@ class GcmPush extends Model
      * @var array
      */
     protected $fillable = [
-        'message_id'
+        'message_id',
+        'multicast_id',
+        'success',
+        'failure',
+        'conical_ids',
+        'gcm_push_type_id'
     ];
+
+    /**
+     * GcmPush -- GcmPushType Relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function gcm_push_type(){
+
+        return $this->belongsTo(GcmPushType::class);
+    }
 }

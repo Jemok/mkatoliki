@@ -2,6 +2,9 @@
     border: 0;
 }
 
+input.ng-invalid.ng-dirty{border: 1px solid red;}
+
+
 .navbar{
 
     margin-top: 25px;

@@ -1,9 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Reading;
+use App\Api\V1\Reading\Models\Reading;
 use Faker\Factory as Faker;
-use App\User;
 
 class ReadingsTableSeeder extends Seeder
 {
@@ -22,8 +21,8 @@ class ReadingsTableSeeder extends Seeder
         {
             Reading::create([
 
-                'reading_date' => $faker->dateTime,
-                'reading_day'  => '2016-04-22 21:00:00',
+                'reading_date' => \Carbon\Carbon::now(),
+                'reading_day'  => \Carbon\Carbon::now(),
 
                 'first_reading_title'  => $faker->sentence(1),
                 'first_reading_book' => $faker->word,

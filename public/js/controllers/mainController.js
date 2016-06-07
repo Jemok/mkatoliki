@@ -4,7 +4,7 @@
 
     angular
         .module('mkatolikiApp')
-        .controller('MainController', ['$scope', '$http', '$location', 'userService', 'mainService', function($scope, $http, $location, userService, mainService){
+        .controller('MainController', ['$scope', '$http', '$location', 'userService', 'mainService', 'localStorageService', function($scope, $http, $location, userService, mainService, localStorageService){
 
             var in10Days = new Date();
             in10Days.setDate(in10Days.getDate() + 10);
@@ -95,9 +95,17 @@
             });
             $scope.logout = function(){
 
-                userService.logout();
+                userService.logout(function(response){
 
-                $location.path('/login');
+                    localStorageService.remove('token')
+
+                    $location.path('/login');
+
+                }, function(){
+
+                    alert('Some errors occurred, try again later');
+                });
+
 
             }
 
@@ -208,18 +216,42 @@
 
                 $scope.$emit('LOAD');
 
-                mainService.getAll(function(response){
+                $scope.lastpage=1;
 
-                    $scope.readings = response;
+                mainService.getAll($scope.lastpage, function(response){
+
+                    $scope.readings = response.data.data;
+
+                    //console.log(response.data);
+
+                    $scope.currentpage = response.data.current_page;
 
                     $scope.$emit('UNLOAD');
 
-                }, function(){
-
-                    alert('Some errors occurred while communicating with the service, Try again later!')
+                }, function(response){
 
                 });
-            }
+            };
+
+
+            $scope.loadMore = function() {
+
+                $scope.lastpage +=1;
+                $scope.$emit('LOAD');
+
+                $http({
+                    url: 'api/readings',
+                    method: "GET",
+                    params: {page:  $scope.lastpage, token: userService.getCurrentToken()}
+                }).success(function (response, status, headers, config) {
+
+                    $scope.$emit('UNLOAD');
+
+                    console.log(response.data);
+                    $scope.readings = $scope.readings.concat(response.data);
+
+                });
+            };
 
             $scope.currentReadingReset = function(){
                 $scope.currentReadingDate = "";

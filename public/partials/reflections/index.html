@@ -170,7 +170,6 @@
                     <th>Church Calendar Date</th>
                     <th>Reflection</th>
                     <th>Readings</th>
-                    <!--<th>Action</th>-->
                 </tr>
 
                 <tr>
@@ -180,9 +179,8 @@
                 </tr>
                 <tr data-ng-repeat="reflection in reflections | filter : getDate() | orderBy:'-id'">
                     <td>{{reflection.reflection_date}}</td>
-                    <td>{{reflection.reflection_date}}</td>
                     <td>{{reflection.reflection_body}}</td>
-                    <td><a href="#/reflections-reading/{{reflection.reading_id}}"> View Reading</a></td>
+                    <td><a href="#/reflections-reading/{{reflection.reading_id}}">Associated Reading</a></td>
                     <!--<td>4-April-2014</td>-->
                     <!--<td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>-->
                 </tr>

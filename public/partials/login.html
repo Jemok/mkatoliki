@@ -1,6 +1,14 @@
 
     <div class="gc__center">
-        <form class="form__auth">
+        <div class="alert alert-info" data-ng-show="loading"><i>Login you in, please wait</i></div>
+
+        <div class="alert alert-danger" data-ng-if="loginError == 401">
+            Invalid Email or Password, Please Try Again
+        </div>
+        <div class="alert alert-danger" data-ng-if="loginError == 500">
+            Ooops, Mkatoliki Encountered an Error while processing your request, try again later!
+        </div>
+        <form class="form__auth" name="frm">
             <div class="f__section left">
                 <div class="f__field">Logo</div>
             </div>
@@ -8,12 +16,16 @@
                 <div class="f__field">
                     <h4 class="f__label">User Login</h4>
                 </div>
-                    <input type="text" placeholder="Email Address..." data-ng-model="email" required >
+                    <input type="email" name="email" placeholder="Email Address..." data-ng-model="email" required>
                 <div class="f__field">
+                    <span data-ng-show="frm.email.$dirty && frm.email.$error.required"><i>Email is required</i></span>
+                    <span data-ng-show="frm.email.$dirty && frm.email.$error.email"><i>Email is invalid</i></span>
 
             </div>
                 <div class="f__field">
-                    <input type="password" placeholder="Password..." data-ng-model="password" required >
+                    <input type="password" name="password" placeholder="Password..." data-ng-model="password" required>
+                    <span data-ng-show="frm.password.$dirty && frm.password.$error.required"><i>Password is required</i></span>
+
                 </div>
                 <div class="f__field">
                     <button class="cta" data-ng-click="login()">Login</button>

@@ -674,6 +674,7 @@ Describes how to subscribe to a particular subscription package using mpesa
             Connection: close
 
            {
+
              "message": "Failed",
              "reason": "Insufficient Funds"
            }

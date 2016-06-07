@@ -14,7 +14,15 @@ class CreateGcmPushesMigrationTable extends Migration
     {
         Schema::create('gcm_pushes', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('message_id')->unsigned();
+            $table->string('message_id');
+            $table->integer('gcm_push_type_id')->unsigned()->index();
+            $table->string('multicast_id')->nullable();
+            $table->integer('success')->nullable();
+            $table->integer('failure')->nullable();
+            $table->string('conical_ids')->nullable();
+            $table->foreign('gcm_push_type_id')
+                  ->references('id')
+                  ->on('gcm_push_types');
             $table->timestamps();
         });
     }

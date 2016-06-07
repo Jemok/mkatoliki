@@ -56,7 +56,7 @@
     <body class="global__wrapper">
             <div class="row global__navbar" data-ng-controller="contentController" ng-show="contentVisibility">
                 <div class="gn__logo">
-                    <div class="logo__name">Mkatoliki</div>
+                    <div class="logo__name"><a href="#/">Mkatoliki</a></div>
                 </div>
                 <div class="gn__nav">
                     <ul class="nav">
@@ -66,9 +66,6 @@
                 </div>
             </div>
 
-            <div ng-view data-ng-controller="mkatolikiController" class="row global__wrapper">
-
-        <script data-main="assets/js/main" src="assets/js/require.js"></script>
-
+            <div ng-view data-ng-controller="mkatolikiController" class="row global__wrapper"> </div>
     </body>
 </html>

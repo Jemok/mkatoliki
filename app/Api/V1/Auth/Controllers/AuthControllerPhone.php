@@ -57,7 +57,7 @@ class AuthControllerPhone extends Controller
 
         JWTAuth::invalidate($token);
 
-        return response()->json(compact('token'));
+        return $this->response->noContent();
 
     }
 

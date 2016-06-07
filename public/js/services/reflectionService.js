@@ -4,17 +4,25 @@
 
     angular
         .module('mkatolikiApp')
-        .factory('reflectionService', ['Restangular', 'userService', function(Restangular, userService){
+        .factory('reflectionService', ['Restangular', 'userService', 'localStorageService', '$http', function(Restangular, userService, localStorageService, $http){
 
             function getAll(onSuccess, onError){
 
-                Restangular.all('api/reflections').getList().then(function(response){
+                $http.get('api/reflections?token='+localStorageService.get('token'), {
+                    })
+                    .then(function(response){
+                        onSuccess(response);
+                    }, function(response){
+                        onError(response);
+                    });
 
-                    onSuccess(response);
-                }, function(response){
-
-                    onError(response);
-                });
+                // Restangular.all('api/reflections').getList().then(function(response){
+                //
+                //     onSuccess(response);
+                // }, function(response){
+                //
+                //     onError(response);
+                // });
             }
 
             function getById(reflectionId, onSuccess, onError){

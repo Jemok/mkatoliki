@@ -1,7 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\User_parishes;
+use App\Api\V1\Account\Models\User_parishes;
+use App\Api\V1\Account\Models\User;
+use App\Api\V1\Parish\Models\Parish;
 use Faker\Factory as Faker;
 
 
@@ -16,9 +18,9 @@ class UserParishesTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        $parishIds     = \App\Parish::lists('id')->toArray();
+        $parishIds     = Parish::lists('id')->toArray();
 
-        $userIds      = \App\User::lists('id')->toArray();
+        $userIds      = User::lists('id')->toArray();
 
 
         foreach(range(1, 30) as $index)

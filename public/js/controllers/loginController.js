@@ -4,27 +4,41 @@
 
     angular
         .module('mkatolikiApp')
-        .controller('LoginController', ['$scope', '$http', '$location', 'userService', 'mainService', function($scope, $http, $location, userService, mainService){
+        .controller('LoginController', ['$scope', '$http', '$location', 'userService', 'localStorageService', 'mainService', function($scope, $http, $location, userService, localStorageService, mainService){
             //Initiate the login in process
+
+
             $scope.login = function(){
+                $scope.$emit('LOAD');
+
                 userService.login(
                     $scope.email,
                     $scope.password,
 
                     function(response){
 
+                        localStorageService.set('token', response.data.token);
+
+
+                        $location.path('/');
                     },
                     function(response){
+
+                        $scope.$emit('UNLOAD');
 
                         //Invalid credentials
                         if(response.data.error.status_code === 401){
 
-                            alert("Invalid email or password, try again!");
+                            //alert("Invalid email or password, try again!");
+
+                            $scope.loginError = response.data.error.status_code;
+
                         }
                         //Internal server error
                         if(response.data.error.status_code === 500){
 
-                            alert("Ooops, something went wrong!! Our bad!");
+                            $scope.loginError = response.data.error.status_code;
+
                         }
                     }
                 );

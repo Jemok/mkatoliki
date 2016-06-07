@@ -6,26 +6,25 @@
 
 
 
-
             var in10Days = new Date();
             in10Days.setDate(in10Days.getDate() + 10);
 
-            // $scope.date1 = new Date('2016-03-29T21:00:00Z')
+            $scope.date1 = new Date('2016-05-06T00:00:00Z')
 
             $scope.date1 = "";
 
             $scope.dates = {
                 //date1: new Date('2016-03-28'),
-                date2: new Date('2015-03-01T12:30:00Z'),
-                date3: new Date(),
-                date4: new Date(),
-                date5: in10Days,
-                date6: new Date(),
-                date7: new Date(),
-                date8: new Date(),
-                date9: null,
-                date10: new Date('2015-03-01T09:00:00Z'),
-                date11: new Date('2015-03-01T10:00:00Z')
+//                date2: new Date('2015-03-01T12:30:00Z'),
+//                date3: new Date(),
+//                date4: new Date(),
+//                date5: in10Days,
+//                date6: new Date(),
+//                date7: new Date(),
+//                date8: new Date(),
+//                date9: null,
+//                date10: new Date('2015-03-01T09:00:00Z'),
+//                date11: new Date('2015-03-01T10:00:00Z')
             };
 
             $scope.open = {
@@ -51,8 +50,6 @@
                 }
 
                 return $scope.date1.getTime();
-
-
 
             }
 
@@ -99,15 +96,14 @@
 
                 $scope.$emit('LOAD');
 
-                mainService.getAll(function(response){
+                mainService.getAllForReflections(function(response){
 
-                    $scope.readings = response;
-
+                    $scope.readings = response.data;
+                    
                     $scope.$emit('UNLOAD');
 
                 }, function(){
 
-                    alert('Some errors occurred while communicating with the service, Try again later!')
 
                 });
             }
@@ -117,31 +113,30 @@
 
                 $scope.$emit('LOAD');
 
-
                 reflectionService.getAll(function(response){
 
-                    $scope.reflections = response;
+                    $scope.reflections = response.data;
 
                     $scope.$emit('UNLOAD');
 
                 }, function(){
 
-                    alert('Some errors occurred while communicating with the service, Try Again Later');
                 });
             }
 
             $scope.create = function(){
 
+                $scope.reflectionErrorCode = "";
+
+
                 var item = document.getElementById('reading_id');
 
                 var reading_id =item.getAttribute('class');
 
-//        alert(reading_id);
-
-
-
-
+                $scope.$emit('LOAD');
+                
                 reflectionService.create({
+
 
                     reflection_body: $scope.currentReflectionBody,
                     reading_id : reading_id,
@@ -149,6 +144,8 @@
 
 
                 }, function(){
+
+                    $scope.$emit('UNLOAD');
 
                     $scope.successTextAlert = "Reflection was successfully created";
                     $scope.showSuccessAlert = true;
@@ -161,10 +158,17 @@
 
                     $scope.currentReflectionReset();
                     $scope.refresh();
+
                 }, function(response){
 
-                    alert('Some error occurred while creating the reflection');
+                    $scope.$emit('UNLOAD');
 
+                    if(response.status == 500){
+                        
+                        $scope.reflectionErrorCode = 500;
+                        
+                    }
+                    
                 });
             }
 
@@ -231,9 +235,6 @@
 
                 );
             }
-
-
-
 
             if(!userService.checkIfLoggedIn()){
 

@@ -49,6 +49,8 @@ $api->version('v1', function ($api) {
     $api->group(['middleware' => ['api.auth', 'cors']], function ($api) {
 
         $api->post('gcm/tokens', 'App\Api\V1\GCM\Controllers\PhoneTokenController@store');
+        $api->post('gcm/push-types', 'App\Api\V1\GCM\Controllers\GcmPushTypeController@store');
+
 
     });
 
@@ -58,8 +60,9 @@ $api->version('v1', function ($api) {
      *
      */
     $api->group(['middleware' => ['api.auth', 'cors']], function ($api) {
-        $api->post('readings', 'App\Api\V1\Reading\Controllers\ReadingController@store');
         $api->get('readings', 'App\Api\V1\Reading\Controllers\ReadingController@index');
+        $api->get('readings/all', 'App\Api\V1\Reading\Controllers\ReadingController@indexForReflections');
+        $api->post('readings', 'App\Api\V1\Reading\Controllers\ReadingController@store');
         $api->get('readings/{id}', 'App\Api\V1\Reading\Controllers\ReadingController@show');
         $api->put('readings/{id}', 'App\Api\V1\Reading\Controllers\ReadingController@update');
         $api->delete('readings/{id}', 'App\Api\V1\Reading\Controllers\ReadingController@destroy');
@@ -102,8 +105,8 @@ $api->version('v1', function ($api) {
      */
 
     $api->group(['middleware' => ['api.auth', 'cors']], function($api){
-        $api->post('reflections', 'App\Api\V1\Reflection\Controllers\ReflectionController@store');
         $api->get('reflections', 'App\Api\V1\Reflection\Controllers\ReflectionController@index');
+        $api->post('reflections', 'App\Api\V1\Reflection\Controllers\ReflectionController@store');
         $api->get('reflections/{id}', 'App\Api\V1\Reflection\Controllers\ReflectionController@show');
         $api->put('reflections/{id}', 'App\Api\V1\Reflection\Controllers\ReflectionController@update');
         $api->delete('reflections/{id}', 'App\Api\V1\Reflection\Controllers\ReflectionController@destroy');
@@ -151,7 +154,7 @@ $api->version('v1', function ($api) {
         $api->delete('stations/{id}', 'App\Api\V1\Station\Controllers\StationController@destroy');
     });
 
-    /**------
+    /**--------------------------------------------------------------------------------------------------------
      *
      * Raw Jumuiya api routes
      *
@@ -202,6 +205,45 @@ $api->version('v1', function ($api) {
         $api->get('new-data/{client_date}', 'App\Api\V1\Data\Controllers\NewDataController@index');
 
     });
+
+    /**-------------------------------------------------------------------------------------------------------
+     *
+     * Subscription api routes
+     *
+     */
+
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+
+        /**----------------------------------------------------------------------------------------------------
+         * Subscription Categories
+         */
+
+        $api->post('subscriptions/categories', 'App\Api\V1\Subscription\Controllers\SubscriptionCategoryController@store');
+
+        /**----------------------------------------------------------------------------------------------------
+         * Subscription Status
+         */
+
+        $api->post('subscriptions/status', 'App\Api\V1\Subscription\Controllers\SubscriptionStatusController@store');
+
+        /**----------------------------------------------------------------------------------------------------
+         * Subscription
+         */
+
+        $api->post('subscriptions', 'App\Api\V1\Subscription\Controllers\SubscriptionController@store');
+
+        $api->post('subscriptions/mpesa/query', 'App\Api\V1\Subscription\Controllers\SubscriptionController@queryMpesa');
+
+        $api->post('subscriptions/mpesa/confirm', 'App\Api\V1\Subscription\Controllers\SubscriptionController@confirmTransaction');
+
+        $api->post('subscriptions/mpesa/check', 'App\Api\V1\Subscription\Controllers\SubscriptionController@finishTransaction');
+
+        $api->post('subscriptions/mpesa/cancel', 'App\Api\V1\Subscription\Controllers\SubscriptionController@cancelSubscription');
+
+    });
+
+    $api->post('subscriptions/mpesa/callback', 'App\Api\V1\Subscription\Controllers\SubscriptionController@saveMpesaResults');
+
 
 
 });

@@ -70,9 +70,7 @@ class AuthController extends Controller
         //Login the user
         return $this->login($credentials, $this->login_type);
     }
-
-
-
+    
     /**
      * Handles registration of a new user into the API
      * @param Request $request

@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Parish\Models;
 
+use App\Api\V1\Station\Models\Station;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\GlobalObserver;
 

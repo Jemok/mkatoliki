@@ -5,6 +5,11 @@
 
 <div class="row global__toolbar">
     <div class="gc__right">
+        <div class="alert alert-info" data-ng-show="loading"><i>Saving, please wait</i></div>
+        <div class="alert alert-danger" data-ng-if="reflectionErrorCode == 500">
+            Ooops, Mkatoliki Encountered an Error while processing your request, try again later!
+        </div>
+
         <header class="row row__filter">
             <form class="search">
                 <!--<input type="text" value="Name ..." class="f__input">-->
@@ -29,7 +34,7 @@
         <div class="reading">
             <h4 class="rd__label">Readings of the day</h4>
 
-            <div class="f__input rd__reading" data-ng-repeat="reading in readings | filter : getDate()">
+            <div class="f__input rd__reading" data-ng-repeat="reading in readings | filter : getDate() | orderBy:'-id'">
 
                 <img  class="" style="" width="200" height="200" src="../img/loading.gif" data-ng-show="loading">
 

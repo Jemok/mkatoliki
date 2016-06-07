@@ -21,8 +21,12 @@ class ReadingController extends Controller
      */
     public function index()
     {
-        return Reading::all()
-                       ->toArray();
+        return Reading::latest()->paginate(2);
+    }
+
+    public function indexForReflections()
+    {
+        return Reading::all()->toArray();
     }
 
     /**

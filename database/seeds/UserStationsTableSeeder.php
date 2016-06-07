@@ -2,7 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use App\User_stations;
+use App\Api\V1\Account\Models\User_stations;
+use App\Api\V1\Parish\Models\Parish;
+use App\Api\V1\Account\Models\User;
 
 
 
@@ -17,9 +19,9 @@ class UserStationsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        $stationIds     = \App\Parish::lists('id')->toArray();
+        $stationIds     = Parish::lists('id')->toArray();
 
-        $userIds      = \App\User::lists('id')->toArray();
+        $userIds      = User::lists('id')->toArray();
 
 
         foreach(range(1, 30) as $index)

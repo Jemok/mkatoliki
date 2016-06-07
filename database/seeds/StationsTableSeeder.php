@@ -2,7 +2,8 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use App\Station;
+use App\Api\V1\Station\Models\Station;
+use App\Api\V1\Parish\Models\Parish;
 
 class StationsTableSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class StationsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        $parishIds     = \App\Parish::lists('id')->toArray();
+        $parishIds     = Parish::lists('id')->toArray();
 
         foreach(range(1, 30) as $index)
         {

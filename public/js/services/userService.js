@@ -34,20 +34,26 @@
                 })
                  .then(function(response){
 
-
-                        localStorageService.set('token', response.data.token);
+                     //localStorageService.set('token', response.data.token);
                         onSuccess(response);
 
-                       return $location.path('/');
+                       //return $location.path('/');
 
                     }, function(response){
-                        onError(response);
+                         onError(response);
                     });
             }
 
             //Logout a user out of the application
-            function logout(){
-                localStorageService.remove('token');
+            function logout(onSuccess, onError){
+
+                $http.get('/api/auth/logout?token='+localStorageService.get('token'), {
+                    })
+                    .then(function(response){
+                       onSuccess(response);
+                    }, function(response){
+                        onError(response);
+                    });
             }
 
             //Get the token that is currently set on local storage

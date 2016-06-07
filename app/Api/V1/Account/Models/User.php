@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Account\Models;
 
+use App\Api\V1\GCM\Models\GcmPushType;
 use App\Api\V1\GCM\Models\Phone_token;
 use App\Api\V1\Happening\Models\Happening_event;
 use App\Api\V1\Jumuiya\Models\Jumuiya;
@@ -11,6 +12,11 @@ use App\Api\V1\Prayer_Type\Models\Prayer_types;
 use App\Api\V1\Raw_Jumuiya\Models\Raw_jumuiya;
 use App\Api\V1\Reflection\Models\Reflection;
 use App\Api\V1\Station\Models\Station;
+use App\Api\V1\Subscription\Models\Subscription;
+use App\Api\V1\Subscription\Models\SubscriptionCategory;
+use App\Api\V1\Subscription\Models\SubscriptionStatus;
+use App\Api\V1\Subscription\Models\SubscriptionStatusType;
+use App\Api\V1\Subscription\Models\UserSubscription;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -152,6 +158,31 @@ class User extends Model implements AuthenticatableContract,
     public function prayer_types(){
 
         return $this->hasMany(Prayer_types::class);
+    }
+
+    public function subscriptions(){
+
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function subscription_categories(){
+
+        return $this->hasMany(SubscriptionCategory::class);
+    }
+
+
+    public function subscription_status(){
+
+        return $this->hasMany(SubscriptionStatus::class);
+    }
+
+    /**
+     * User -- GcmPushType Relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function gcm_push_types(){
+
+        return $this->hasMany(GcmPushType::class);
     }
 
     /**

@@ -16,17 +16,16 @@ class CreateJumuiyasTableMigration extends Migration
             $table->increments('id');
             $table->string('location');
             $table->timestamp('happening_on');
-            $table->integer('user_id')->unsigned();
-            $table->integer('raw_jumuiya_id')->unsigned();
+            $table->integer('user_id')->unsigned()->index();
+            $table->integer('raw_jumuiya_id')->unsigned()->index();
             $table->text('more_details');
+            $table->boolean('mass');
             $table->string('day_event_name');
             $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
-
-
         });
     }
 

@@ -4,18 +4,48 @@
 
     angular
         .module('mkatolikiApp')
-        .factory('mainService', ['Restangular', 'userService', function(Restangular, userService){
+        .factory('mainService', ['Restangular', 'userService', '$http', 'localStorageService', function(Restangular, userService, $http, localStorageService){
 
-            function getAll(onSuccess, onError){
+            function getAll(last_page ,onSuccess, onError){
 
-                Restangular.all('api/readings').getList().then(function(response){
+                $http.get('api/readings/?last_page='+last_page+'&token='+localStorageService.get('token'), {
+                    })
+                    .then(function(response){
+                        onSuccess(response);
+                    }, function(response){
+                        onError(response);
+                    });
 
-                    onSuccess(response);
-                }, function(){
+                // Restangular.all('api/readings').getList().then(function(response){
+                //
+                //     onSuccess(response);
+                //
+                // }, function(response){
+                //
+                //     onError(response);
+                //
+                // });
+            }
 
-                    onError(response);
-                });
+            function getAllForReflections(onSuccess, onError){
 
+                $http.get('api/readings/all/?token='+localStorageService.get('token'), {
+                    })
+                    .then(function(response){
+                        onSuccess(response);
+                    }, function(response){
+                        onError(response);
+                    });
+
+                // Restangular.all('api/readings').getList().then(function(response){
+                //
+                //     onSuccess(response);
+                //
+                // }, function(response){
+                //
+                //     onError(response);
+                //
+                // });
             }
 
             function getById(readingId, onSuccess, onError){
@@ -29,11 +59,11 @@
                 });
             }
 
-            function create(data, onSucess, onError){
+            function create(data, onSuccess, onError){
 
                 Restangular.all('api/readings').post(data).then(function(response){
 
-                    onSucess(response);
+                    onSuccess(response);
                 }, function(response){
 
                     onError(response);
@@ -65,6 +95,7 @@
             return{
 
                 getAll: getAll,
+                getAllForReflections: getAllForReflections,
                 getById: getById,
                 create: create,
                 update: update,

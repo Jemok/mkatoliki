@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use App\Raw_jumuiya;
+use App\Api\V1\Raw_Jumuiya\Models\Raw_jumuiya;
 
 class RawJumuiyasTableSeeder extends Seeder
 {

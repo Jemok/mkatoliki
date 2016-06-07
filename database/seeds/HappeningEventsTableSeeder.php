@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
-use App\Happening_event;
+use App\Api\V1\Happening\Models\Happening_event;
 
 class HappeningEventsTableSeeder extends Seeder
 {
@@ -24,7 +24,7 @@ class HappeningEventsTableSeeder extends Seeder
                 'event_title' => $faker->sentence(1),
                 'event_body'    => $faker->paragraph(5),
                 'event_excerpt'    => $faker->paragraph(3),
-                'event_date'        => $faker->dateTime,
+                'event_date'        => \Carbon\Carbon::now(),
                 'user_id'        => 1
 
             ]);

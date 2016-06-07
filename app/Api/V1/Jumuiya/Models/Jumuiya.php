@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Jumuiya\Models;
 
+use App\Api\V1\Account\Models\User;
 use App\Api\V1\Raw_Jumuiya\Models\Raw_jumuiya;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\GlobalObserver;
@@ -21,11 +22,12 @@ class Jumuiya extends Model
         'raw_jumuiya_id',
         'mass',
         'more_details',
-        'user_id'
+        'user_id',
+        'day_event_name'
     ];
 
     /**
-     * Jumuiya User One to many relationship
+     * Jumuiya -- User One to many Relationship
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(){
@@ -34,7 +36,7 @@ class Jumuiya extends Model
     }
 
     /**
-     * Jumuiya Jumuiya Event relationship
+     * Jumuiya -- JumuiyaEvent Relationship
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function jumuiya(){
@@ -49,10 +51,13 @@ class Jumuiya extends Model
     public function setHappeningOnAttribute($date){
 
         $this->attributes['happening_on'] = Carbon::parse($date)->addHours(3);
-
     }
 
-   public static function boot(){
+    /**
+     * The boot methods
+     */
+
+    public static function boot(){
 
         parent::boot();
 

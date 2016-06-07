@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Parish;
+use App\Api\V1\Parish\Models\Parish;
 use Faker\Factory as Faker;
 
 

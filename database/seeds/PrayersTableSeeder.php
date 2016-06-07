@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Prayer;
+use App\Api\V1\Prayer\Models\Prayer;
+use App\Api\V1\Prayer_Type\Models\Prayer_types;
 use Faker\Factory as Faker;
 
 
@@ -17,7 +18,7 @@ class PrayersTableSeeder extends Seeder
         $faker = Faker::create();
 
 
-        $prayerTypeIds = \App\Prayer_types::lists('id')->toArray();
+        $prayerTypeIds = Prayer_types::lists('id')->toArray();
 
         foreach(range(1, 30) as $index)
         {

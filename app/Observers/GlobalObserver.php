@@ -50,10 +50,9 @@ class GlobalObserver {
 
             $gcm_repository = new GcmPushRepository();
 
-            $gcm_repository->store($message->message_id);
+            $gcm_repository->store($message->message_id, "", "", "", "", "");
 
         }catch (RequestException $e){
-            dd($e->getRequest());
         }
     }
 } 

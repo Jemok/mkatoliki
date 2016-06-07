@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Prayer_types;
+use App\Api\V1\Prayer_Type\Models\Prayer_types;
 use Faker\Factory as Faker;
 
 
