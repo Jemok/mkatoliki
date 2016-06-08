@@ -24,7 +24,7 @@ class GlobalObserver {
      * Push a global message to all phones using GCM
      */
     public function push(){
-        $client = new Client(['timeout'  => 60.0]);
+        $client = new Client(['timeout'  => 300.0]);
 
         try{
             $response = $client->post('https://gcm-http.googleapis.com/gcm/send',

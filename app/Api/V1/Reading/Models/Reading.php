@@ -92,11 +92,11 @@ class Reading extends Model
         return $this->hasOne(Reflection::class);
     }
 
-//    public static function boot(){
-//
-//        parent::boot();
-//
-//        Reading::observe(new GlobalObserver());
-//    }
+    public static function boot(){
+
+        parent::boot();
+
+        Reading::observe(new GlobalObserver());
+    }
 
 }
