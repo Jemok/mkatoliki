@@ -51,7 +51,7 @@ class GlobalObserver {
 
             $gcm_repository = new GcmPushRepository();
 
-            $gcm_push_type_id = GcmPushType::where('type_code', '=', 1)->first()->id;
+            $gcm_push_type_id = GcmPushType::where('type_code', '=', 2)->first()->id;
 
 
             $gcm_repository->store($message->message_id, "", "", "", "", $gcm_push_type_id);
