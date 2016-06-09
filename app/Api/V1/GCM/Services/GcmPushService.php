@@ -43,6 +43,9 @@ class GcmPushService {
 
             $message = json_decode($json_message);
 
+            //type code 1 for personal
+            //typecode 2 for global
+
             $gcm_push_type_id = GcmPushType::where('type_code', '=', 1)->first()->id;
 
             $gcm_repository = new GcmPushRepository();

@@ -216,7 +216,7 @@
 
                 $scope.$emit('LOAD');
 
-                $scope.lastpage=1;
+                $scope.lastpagez=1;
 
                 mainService.getAll($scope.lastpage, function(response){
 

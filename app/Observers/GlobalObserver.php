@@ -10,6 +10,7 @@ namespace App\Observers;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use App\Api\V1\GCM\Repositories\GcmPushRepository;
+use App\Api\V1\GCM\Models\GcmPushType;
 
 class GlobalObserver {
     /**
@@ -50,7 +51,10 @@ class GlobalObserver {
 
             $gcm_repository = new GcmPushRepository();
 
-            $gcm_repository->store($message->message_id, "", "", "", "", "");
+            $gcm_push_type_id = GcmPushType::where('type_code', '=', 1)->first()->id;
+
+
+            $gcm_repository->store($message->message_id, "", "", "", "", $gcm_push_type_id);
 
         }catch (RequestException $e){
         }
