@@ -216,6 +216,10 @@ $api->version('v1', function ($api) {
 
         $api->get('subscriptions', 'App\Api\V1\Subscription\Controllers\SubscriptionCategoryController@getSubscriptions');
 
+        $api->post('subscribe', 'App\Api\V1\Subscription\Controllers\SubscriptionCategoryController@subscribe');
+
+        $api->post('unsubscribe', 'App\Api\V1\Subscription\Controllers\SubscriptionCategoryController@unSubscribe');
+
         /**----------------------------------------------------------------------------------------------------
          * Subscription Categories
          */

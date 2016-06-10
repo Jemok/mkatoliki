@@ -10,6 +10,8 @@ namespace App\Api\V1\Subscription\Controllers;
 
 
 use App\Api\V1\Account\Models\User;
+use App\Api\V1\Subscription\Models\Subscription;
+use App\Api\V1\Subscription\Models\SubscriptionStatus;
 use App\Api\V1\Subscription\Transformers\SubscriptionTransformer;
 use App\Http\Controllers\Controller;
 use App\Api\V1\Subscription\Models\SubscriptionCategory;
@@ -47,9 +49,49 @@ class SubscriptionCategoryController extends Controller {
 
     public function getSubscriptions(SubscriptionTransformer $subscriptionTransformer){
 
-        $users =  User::where('id', '>', 20)->get()->toArray();
+        $users =  User::where('id', '>', 0)->get()->toArray();
 
         return $this->respond($subscriptionTransformer->transformCollection($users));
+    }
+
+    public function subscribe(Request $request){
+
+        $user_id = $request->get('user_id');
+
+        $subscription_id = $request->get('subscription_id');
+
+        $subscription = Subscription::where('user_id', $user_id)->where('id', $subscription_id)->first();
+
+        $subscription_status = SubscriptionStatus::where('status_code', 0)->first();
+
+
+
+        $subscription->update([
+
+            'subscription_status_id' => $subscription_status->id
+
+        ]);
+
+    }
+
+    public function unSubscribe(Request $request){
+
+        $user_id = $request->get('user_id');
+
+        $subscription_id = $request->get('subscription_id');
+
+        $subscription = Subscription::where('user_id', $user_id)->where('id', $subscription_id)->first();
+
+        $subscription_status = SubscriptionStatus::where('status_code', 1)->first();
+
+
+
+        $subscription->update([
+
+            'subscription_status_id' => $subscription_status->id
+
+        ]);
+
     }
 
     public function respond($data, $headers = [])
