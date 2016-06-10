@@ -103,6 +103,10 @@ mkatolikiApp.config(['$routeProvider', function($routeProvider){
             templateUrl: 'partials/raw-jumuiya/create.html',
             controller: 'HappeningController'
         }).
+        when('/subscriptions', {
+            templateUrl: 'partials/subscriptions/subscribe.html',
+            controller: 'SubscriptionController'
+        }).
     otherwise({
             redirectTo: '/'
     });

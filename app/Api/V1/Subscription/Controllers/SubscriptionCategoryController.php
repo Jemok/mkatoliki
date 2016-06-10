@@ -9,6 +9,7 @@
 namespace App\Api\V1\Subscription\Controllers;
 
 
+use App\Api\V1\Account\Models\User;
 use App\Http\Controllers\Controller;
 use App\Api\V1\Subscription\Models\SubscriptionCategory;
 use Dingo\Api\Routing\Helpers;
@@ -39,5 +40,10 @@ class SubscriptionCategoryController extends Controller {
             return $this->response->created();
         else
             return $this->response->error('could_not_create_subscription_category', 500);
+    }
+
+    public function getSubscriptions(){
+
+        return User::all();
     }
 } 

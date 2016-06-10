@@ -1,0 +1,65 @@
+<div class="row global__toolbar">
+
+    <div class="row global__content">
+        <div class="gc__sidebar">
+            <ul class="nav">
+                <li class="nav__header">Quick Links</li>
+                <li class="nav__item"><a href="#/reflections" class="nav__link">Reflections</a></li>
+                <li class="nav__item active"><a href="#/" class="nav__link">Readings</a></li>
+                <!--<li class="nav__item"><a href="#/prayer-type-create" class="nav__link">Prayer Types</a></li>-->
+                <li class="nav__item"><a href="#/prayers" class="nav__link">Prayers</a></li>
+                <li class="nav__item"><a href="#/create-happenings" class="nav__link">Happening Today</a></li>
+                <li class="nav__item"><a href="#/create-raw-jumuiya" class="nav__link">Raw Jumuiya</a></li>
+                <li class="nav__item"><a href="#/create-jumuiya" class="nav__link">Jumuiya Event</a></li>
+                <li class="nav__item"><a href="#/create-parishes" class="nav__link">Parishes</a></li>
+                <li class="nav__item"><a href="#/create-stations" class="nav__link">Stations</a></li>
+                <li class="nav__item"><a href="#/subscriptions" class="nav__link">Subscriptions</a></li>
+
+            </ul>
+        </div>
+        <div class="gc__right">
+            <section class="row__table">
+                <table class="table">
+
+
+                    <tr>
+                        <th>User Name</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Subscription</th>
+                    </tr>
+
+
+                    <tr>
+                        <!--<div id="fountainTextG" data-ng-show="loading"><div id="fountainTextG_1" class="fountainTextG">L</div><div id="fountainTextG_2" class="fountainTextG">o</div><div id="fountainTextG_3" class="fountainTextG">a</div><div id="fountainTextG_4" class="fountainTextG">d</div><div id="fountainTextG_5" class="fountainTextG">i</div><div id="fountainTextG_6" class="fountainTextG">n</div><div id="fountainTextG_7" class="fountainTextG">g</div></div>-->
+                        <img  class="" style="margin-left: 280px; margin-top: 100px;" width="200" height="200" src="../img/loading.gif" data-ng-show="loading">
+
+                    </tr>
+
+                    <tr data-ng-repeat="user in users | orderBy:'-id'">
+
+
+                        <td>
+                            {{user.name}}
+                        </td>
+                        <td>
+                            <p>{{user.email}}</p>
+                        </td>
+
+                        <td>
+                            <p>{{user.phone_number}}</p>
+
+                        </td>
+                        <td>
+                            <p>{{reading.gospel_book}}</p>
+
+                        </td>
+
+                        <!--<td>4-April-2014</td>-->
+                        <!--<td> <a href="#" class="cta__link">Edit</a><a href="#" class="cta__link">Delete</a></td>-->
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </div>
+</div>

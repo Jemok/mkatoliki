@@ -35,6 +35,8 @@
         <script src="js/services/rawJumuiyaService.js"></script>
         <script src="js/services/parishService.js"></script>
         <script src="js/services/stationService.js"></script>
+        <script src="js/services/subscriptionService.js"></script>
+
 
 
 
@@ -47,6 +49,8 @@
         <script src="js/controllers/reflectionController.js"></script>
         <script src="js/controllers/happeningController.js"></script>
         <script src="js/controllers/readingController.js"></script>
+        <script src="js/controllers/subscriptionController.js"></script>
+
 
 
         <script src="js/filter.js"></script>

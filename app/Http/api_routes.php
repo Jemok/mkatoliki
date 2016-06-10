@@ -214,6 +214,8 @@ $api->version('v1', function ($api) {
 
     $api->group(['middleware' => ['api.auth', 'cors']], function($api){
 
+        $api->get('subscriptions', 'App\Api\V1\Subscription\Controllers\SubscriptionCategoryController@getSubscriptions');
+
         /**----------------------------------------------------------------------------------------------------
          * Subscription Categories
          */
