@@ -51,12 +51,12 @@
 
                         </td>
                         <td>
-
-
                             <button data-ng-show="{{user.subscription_status == 0}}" class="btn btn-sm btn-primary" data-ng-click="unsubscribe(user.user_id, user.subscription_id)">Subscribed</button>
                             <button data-ng-show="{{user.subscription_status == 1}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
-
-
+                            <button data-ng-show="{{user.subscription_status == 2}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
+                            <button data-ng-show="{{user.subscription_status == 3}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
+                            <button data-ng-show="{{user.subscription_status == 4}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
+                            <button data-ng-show="{{user.subscription_status == 5}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
                         </td>
 
                         <!--<td>4-April-2014</td>-->
