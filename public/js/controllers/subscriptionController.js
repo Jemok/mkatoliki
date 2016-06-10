@@ -38,7 +38,7 @@
 
             $scope.unsubscribe = function(user_id, subscription_id){
 
-
+                $scope.$emit('LOAD');
 
                 $http({
                     url: 'api/unsubscribe',
@@ -46,7 +46,7 @@
                     params: {user_id:  user_id, subscription_id: subscription_id, token: userService.getCurrentToken()}
                 }).success(function (response, status, headers, config) {
 
-
+                    $scope.$emit('UNLOAD');
                     $scope.refresh();
                 });
             }

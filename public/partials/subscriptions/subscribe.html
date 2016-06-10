@@ -32,7 +32,6 @@
 
                     <tr>
                         <!--<div id="fountainTextG" data-ng-show="loading"><div id="fountainTextG_1" class="fountainTextG">L</div><div id="fountainTextG_2" class="fountainTextG">o</div><div id="fountainTextG_3" class="fountainTextG">a</div><div id="fountainTextG_4" class="fountainTextG">d</div><div id="fountainTextG_5" class="fountainTextG">i</div><div id="fountainTextG_6" class="fountainTextG">n</div><div id="fountainTextG_7" class="fountainTextG">g</div></div>-->
-                        <img  class="" style="margin-left: 280px; margin-top: 100px;" width="200" height="200" src="../img/loading.gif" data-ng-show="loading">
 
                     </tr>
 
@@ -51,7 +50,7 @@
 
                         </td>
                         <td>
-                            <button data-ng-show="{{user.subscription_status == 0}}" class="btn btn-sm btn-primary" data-ng-click="unsubscribe(user.user_id, user.subscription_id)">Subscribed</button>
+                            <button data-ng-show="{{user.subscription_status == 0}}" class="btn btn-sm btn-primary" data-ng-click="unsubscribe(user.user_id, user.subscription_id)">Subscribed  <img  class="" style="margin-left: 5px; margin-top: 0px;" width="10" height="10" src="../img/loading.gif" data-ng-show="loading"></button>
                             <button data-ng-show="{{user.subscription_status == 1}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
                             <button data-ng-show="{{user.subscription_status == 2}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
                             <button data-ng-show="{{user.subscription_status == 3}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
