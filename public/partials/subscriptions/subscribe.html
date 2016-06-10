@@ -36,7 +36,7 @@
 
                     </tr>
 
-                    <tr data-ng-repeat="user in users | orderBy:'-id'">
+                    <tr data-ng-repeat="user in users | orderBy:'-user_id'">
 
 
                         <td>
@@ -51,7 +51,8 @@
 
                         </td>
                         <td>
-                            <p>{{reading.gospel_book}}</p>
+
+                            <input type="checkbox" data-ng-checked="{{user.subscription_status == 0}}">
 
                         </td>
 

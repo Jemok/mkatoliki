@@ -11,7 +11,7 @@
 
                 subscriptionService.getAll(function(response){
 
-                    $scope.users = response.data.users;
+                    $scope.users = response.data;
 
                     console.log($scope.users);
 

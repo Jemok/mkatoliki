@@ -10,10 +10,13 @@ namespace App\Api\V1\Subscription\Controllers;
 
 
 use App\Api\V1\Account\Models\User;
+use App\Api\V1\Subscription\Transformers\SubscriptionTransformer;
 use App\Http\Controllers\Controller;
 use App\Api\V1\Subscription\Models\SubscriptionCategory;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+
 
 class SubscriptionCategoryController extends Controller {
 
@@ -42,8 +45,15 @@ class SubscriptionCategoryController extends Controller {
             return $this->response->error('could_not_create_subscription_category', 500);
     }
 
-    public function getSubscriptions(){
+    public function getSubscriptions(SubscriptionTransformer $subscriptionTransformer){
 
-        return User::all();
+        $users =  User::where('id', '>', 20)->get()->toArray();
+
+        return $this->respond($subscriptionTransformer->transformCollection($users));
+    }
+
+    public function respond($data, $headers = [])
+    {
+        return Response::json($data, '200', $headers);
     }
 } 

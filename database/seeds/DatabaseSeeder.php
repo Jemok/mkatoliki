@@ -10,14 +10,16 @@ class DatabaseSeeder extends Seeder
 {
     protected $tables = [
 
-        'readings',
-        'prayers',
-        'raw_jumuiyas',
-        'jumuiyas',
-        'reflections',
-        'happening_events',
-        'parishes',
-        'stations'
+//        'readings',
+//        'prayers',
+//        'raw_jumuiyas',
+//        'jumuiyas',
+//        'reflections',
+//        'happening_events',
+//        'parishes',
+//        'stations',
+        'subscription_categories',
+        'subscription_status'
 
 
 
@@ -31,18 +33,21 @@ class DatabaseSeeder extends Seeder
     {
         $this->cleanDatabase();
 
-        $this->call(UserTableSeeder::class);
-        $this->call(ReadingsTableSeeder::class);
-        $this->call(PrayerTypesTableSeeder::class);
-        $this->call(PrayersTableSeeder::class);
-        $this->call(HappeningEventsTableSeeder::class);
-        $this->call(RawJumuiyasTableSeeder::class);
-        $this->call(ReflectionsTableSeeder::class);
-        $this->call(JumuiyasTableSeeder::class);
-        $this->call(ParishesTableSeeder::class);
-        $this->call(StationsTableSeeder::class);
-        $this->call(UserParishesTableSeeder::class);
-        $this->call(UserStationsTableSeeder::class);
+//        $this->call(UserTableSeeder::class);
+//        $this->call(ReadingsTableSeeder::class);
+//        $this->call(PrayerTypesTableSeeder::class);
+//        $this->call(PrayersTableSeeder::class);
+//        $this->call(HappeningEventsTableSeeder::class);
+//        $this->call(RawJumuiyasTableSeeder::class);
+//        $this->call(ReflectionsTableSeeder::class);
+//        $this->call(JumuiyasTableSeeder::class);
+//        $this->call(ParishesTableSeeder::class);
+//        $this->call(StationsTableSeeder::class);
+//        $this->call(UserParishesTableSeeder::class);
+//        $this->call(UserStationsTableSeeder::class);
+        $this->call(SubscriptionCategoryTableSeeder::class);
+        $this->call(SubscriptionStatusTableSeeder::class);
+
 
 
 

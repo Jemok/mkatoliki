@@ -8,6 +8,9 @@ namespace App\Api\V1\Auth\Controllers;
 use App\Api\V1\Auth\Traits\Login;
 use App\Api\V1\Auth\Validators\ValidateLogin;
 use App\Api\V1\Auth\Validators\ValidateSignup;
+use App\Api\V1\Subscription\Models\SubscriptionCategory;
+use App\Api\V1\Subscription\Models\SubscriptionStatus;
+use Carbon\Carbon;
 use JWTAuth;
 use Validator;
 use Config;
@@ -88,9 +91,26 @@ class AuthController extends Controller
         //Set the fields to be used for registration
         $userData = $request->only($signupFields);
 
+
+
         $this->validateSignup($userData, Config::get('boilerplate.signup_fields_rules'));
 
         $user = $userRepository->store($userData);
+
+        $subscription = $user->subscriptions()->create([
+
+            'subscription_category_id' => SubscriptionCategory::where('subscription_category', 1)->first()->id,
+            'subscription_status_id' => SubscriptionStatus::where('status_code', 4)->first()->id
+
+        ]);
+
+        $subscription->subscription_details()->create([
+
+            'start_date' => Carbon::now(),
+            'end_date'   => Carbon::now()->addHours(SubscriptionCategory::where('subscription_category', 1)->first()->days)
+
+
+        ]);
         //If there was an error, return response error message
         if(!$user->id) {
             return $this->response->error('could_not_create_user', 500);
