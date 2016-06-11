@@ -6,7 +6,7 @@
                     <option selected="selected" data-ng-repeat="raw_jumuiya in raw_jumuiyas" value="{{raw_jumuiya.id}}">{{raw_jumuiya.jumuiya_name}}</option>
                 </select>
 
-                <input type="date" value="Date" class="f__input" data-ng-model="currentHappeningOn">
+                <input type="datetime-local" value="Date" class="f__input" data-ng-model="currentHappeningOn">
                 <input type="text" placeholder="Jumuiya Location" class="f__input" data-ng-model="currentLocation">
                 <input type="text" placeholder="More Details" class="f__input" data-ng-model="currentDetails">
                 <select class="f__input">
