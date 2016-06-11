@@ -4,6 +4,7 @@ namespace App\Api\V1\Subscription\Models;
 
 use App\Api\V1\Account\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\GlobalObserver;
 
 class Subscription extends Model
 {
@@ -72,5 +73,12 @@ class Subscription extends Model
     public function subscription_mpesa_confirmation(){
 
         return $this->hasOne(SubscriptionMpesaConfirmations::class);
+    }
+
+    public static function boot(){
+
+        parent::boot();
+
+        Subscription::observe(new GlobalObserver());
     }
 }
