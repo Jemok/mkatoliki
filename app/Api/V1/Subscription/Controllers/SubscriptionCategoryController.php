@@ -64,14 +64,9 @@ class SubscriptionCategoryController extends Controller {
 
         $subscription_status = SubscriptionStatus::where('status_code', 0)->first();
 
-
-
         $subscription->update([
-
             'subscription_status_id' => $subscription_status->id
-
         ]);
-
     }
 
     public function unSubscribe(Request $request){
@@ -84,14 +79,9 @@ class SubscriptionCategoryController extends Controller {
 
         $subscription_status = SubscriptionStatus::where('status_code', 1)->first();
 
-
-
         $subscription->update([
-
             'subscription_status_id' => $subscription_status->id
-
         ]);
-
     }
 
     public function respond($data, $headers = [])

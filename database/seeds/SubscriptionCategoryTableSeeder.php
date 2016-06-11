@@ -16,10 +16,10 @@ class SubscriptionCategoryTableSeeder extends Seeder
         Model::unguard();
 
         SubscriptionCategory::create([
-            'name' => 'annually',
-            'days' => 365,
-            'price' => 2000 ,
-            'subscription_category' => 3,
+            'name' => 'weekly',
+            'days' => 7,
+            'price' => 50,
+            'subscription_category' => 1,
             'user_id' => 1
         ]);
 
@@ -32,10 +32,18 @@ class SubscriptionCategoryTableSeeder extends Seeder
         ]);
 
         SubscriptionCategory::create([
-            'name' => 'weekly',
-            'days' => 7,
-            'price' => 50,
-            'subscription_category' => 1,
+            'name' => 'three_months',
+            'days' => 90,
+            'price' => 500,
+            'subscription_category' => 3,
+            'user_id' => 1
+        ]);
+
+        SubscriptionCategory::create([
+            'name' => 'annually',
+            'days' => 365,
+            'price' => 2000 ,
+            'subscription_category' => 4,
             'user_id' => 1
         ]);
 

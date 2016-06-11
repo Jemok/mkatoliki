@@ -11,8 +11,10 @@ use App\Api\V1\Raw_Jumuiya\Transformers\RawJumuiyaTransformer;
 use App\Api\V1\Reflection\Transformers\ReflectionTransformer;
 use App\Api\V1\Station\Transformers\StationTransformer;
 use App\Api\V1\Reading\Transformers\ReadingTransformer;
+use App\Api\V1\Subscription\Transformers\SubscriptionTransformer;
 use App\Api\V1\Happening\Models\Happening_event;
 use App\Api\V1\Jumuiya\Models\Jumuiya;
+use App\Api\V1\Account\Models\User;
 use App\Api\V1\Parish\Models\Parish;
 use App\Api\V1\Prayer\Models\Prayer;
 use App\Api\V1\Raw_Jumuiya\Models\Raw_jumuiya;
@@ -42,6 +44,7 @@ class NewDataController extends Controller
     protected $prayerTypeTransformer;
     protected $userParishesTransformer;
     protected $userOutstationsTransformer;
+    protected $subscriptionTransformer;
 
    public function __construct(ReadingTransformer $readingTransformer,
                                PrayerTransformer $prayerTransformer,
@@ -51,7 +54,8 @@ class NewDataController extends Controller
                                RawJumuiyaTransformer $rawJumuiyaTransformer,
                                ParishTransformer $parishTransformer,
                                StationTransformer $stationTransformer,
-                               PrayerTypeTransformer $prayerTypeTransformer
+                               PrayerTypeTransformer $prayerTypeTransformer,
+                               SubscriptionTransformer $subscriptionTransformer
 
 
     ){
@@ -65,6 +69,7 @@ class NewDataController extends Controller
        $this->parishesTransformer = $parishTransformer;
        $this->stationTransformer = $stationTransformer;
        $this->prayerTypeTransformer = $prayerTypeTransformer;
+       $this->subscriptionTransformer = $subscriptionTransformer;
    }
 
    public function index($client_date){
@@ -84,7 +89,8 @@ class NewDataController extends Controller
                    'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getAllJumuiya()),
                    'parishes'       =>  $this->parishesTransformer->transformCollection($this->getAllParishes()),
                    'out-stations'       =>  $this->stationTransformer->transformCollection($this->getAllStations()),
-                   'prayer_types'     => $this->prayerTypeTransformer->transformCollection($this->getAllPrayerTypes())
+                   'prayer_types'     => $this->prayerTypeTransformer->transformCollection($this->getAllPrayerTypes()),
+                   'subscriptions'    => $this->subscriptionTransformer->transformCollection($this->getAllSubscriptions())
                ],
                'meta' => [
                     'to_server_last_date'  => new \DateTime()
@@ -104,7 +110,8 @@ class NewDataController extends Controller
             'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getNewJumuiya($client_date)),
             'parishes'       =>  $this->parishesTransformer->transformCollection($this->getNewParishes($client_date)),
             'out-stations'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
-            'prayer_types'    =>   $this->prayerTypeTransformer->transformCollection($this->getNewPrayerTypes($client_date))
+            'prayer_types'    =>   $this->prayerTypeTransformer->transformCollection($this->getNewPrayerTypes($client_date)),
+            'subscriptions'   => $this->subscriptionTransformer->transformCollection($this->getNewSubscriptions($client_date))
 
             ],
             'meta' => [
@@ -170,6 +177,12 @@ class NewDataController extends Controller
 
     }
 
+    public function getNewSubscriptions($date){
+
+        return  User::where('updated_at', '>', $date)->get()->toArray();
+
+    }
+
     public function respond($data, $headers = [])
     {
         return Response::json($data, '200', $headers);
@@ -229,5 +242,10 @@ class NewDataController extends Controller
 
         return Station::all()->toArray();
 
+    }
+
+    public function getAllSubscriptions(){
+
+        return  $users =  User::where('id', '>', 0)->get()->toArray();
     }
 }

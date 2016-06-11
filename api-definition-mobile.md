@@ -399,7 +399,42 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
                 "prayer_type_name": "Ducimus.",
                 "prayer_type_description": "Ut quidem ratione ratione eum tenetur vel qui reiciendis. Tenetur delectus maiores nesciunt mollitia. Mollitia magnam unde harum cumque eaque sunt. Est sunt velit quia voluptates corrupti. Exercitationem dolores quidem necessitatibus quibusdam. Saepe saepe hic temporibus exercitationem vitae hic saepe. Quia porro qui vitae cumque at voluptas. Sunt explicabo rerum modi laborum qui ad asperiores. Eum recusandae et veniam. Dolorum quia laborum in esse vel et. Dolorum aspernatur praesentium cumque vero praesentium laborum tempora."
               },...
-        ]
+        ],
+         "subscriptions": [
+              {
+                "name": "user",
+                "email": "user2@mkatoliki.com",
+                "phone_number": "0712775371",
+                "subscription_id": 2,           // The id of the subscription instance
+                "user_id": 5,                   // The id of the subscribed user
+                "subscription_status": 0,       // The status of the subscription i.e
+                                                //  0 for active
+                                                //  1 for closed
+                                                //  2 for initiated
+                                                //  3 for confirmed
+                                                //  4 for canceled
+                "subscription_category_name": "weekly", // The subscription category type
+                "subscription_category_code": 1,        // The code of the category
+                                                        //  1 for weekly
+                                                        //  2 for monthly
+                                                        //  3 for three_months
+                                                        //  4 for annually
+
+                "start_date": "2016-06-10 22:32:13",
+                "end_date": "2016-06-11 05:32:13",
+                "created_at": {
+                  "date": "2016-06-10 22:32:13",
+                  "timezone_type": 3,
+                  "timezone": "Africa/Khartoum"
+                },
+                "updated_at": {
+                  "date": "2016-06-11 04:53:40",
+                  "timezone_type": 3,
+                  "timezone": "Africa/Khartoum"
+                }
+              },
+              .....
+         ]
       }
     }
 
@@ -635,7 +670,6 @@ Describes how to subscribe to a particular subscription package using mpesa
 
             HOST:  api.mkatoliki.com
             POST: /api/subscriptions/mpesa/check HTTP/1.1
-
             {
                 "transaction_id":"cce3d32e0159c1e62a9ec45b67676200",
                 "subscription_id" : 78
