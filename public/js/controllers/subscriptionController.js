@@ -9,12 +9,13 @@
 
             $scope.refresh = function(){
 
+                $scope.$emit('LOAD');
 
                 subscriptionService.getAll(function(response){
 
-                    $scope.users = response.data;
+                    $scope.$emit('UNLOAD');
 
-                    console.log($scope.users);
+                    $scope.users = response.data;
 
                 }, function(response){
 
