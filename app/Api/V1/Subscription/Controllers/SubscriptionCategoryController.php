@@ -15,6 +15,7 @@ use App\Api\V1\Subscription\Models\SubscriptionStatus;
 use App\Api\V1\Subscription\Transformers\SubscriptionTransformer;
 use App\Http\Controllers\Controller;
 use App\Api\V1\Subscription\Models\SubscriptionCategory;
+use Carbon\Carbon;
 use Dingo\Api\Routing\Helpers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -58,15 +59,31 @@ class SubscriptionCategoryController extends Controller {
 
         $user_id = $request->get('user_id');
 
-        $subscription_id = $request->get('subscription_id');
-
-        $subscription = Subscription::where('user_id', $user_id)->where('id', $subscription_id)->first();
-
+        $subscription_category = SubscriptionCategory::where('subscription_category', 2)->first();
         $subscription_status = SubscriptionStatus::where('status_code', 0)->first();
 
-        $subscription->update([
-            'subscription_status_id' => $subscription_status->id
+        $subscription = Subscription::create([
+            'user_id' => $user_id,
+            'subscription_category_id' => $subscription_category->id,
+            'subscription_status_id'   => $subscription_status->id,
         ]);
+
+        $subscription->subscription_details()->create([
+
+            'start_date'    => Carbon::now(),
+            'end_date'      => Carbon::now()->addDays($subscription_category->days)
+
+        ]);
+
+//        $subscription_id = $request->get('subscription_id');
+//
+//        $subscription = Subscription::where('user_id', $user_id)->where('id', $subscription_id)->first();
+//
+//        $subscription_status = SubscriptionStatus::where('status_code', 0)->first();
+//
+//        $subscription->update([
+//            'subscription_status_id' => $subscription_status->id
+//        ]);
     }
 
     public function unSubscribe(Request $request){

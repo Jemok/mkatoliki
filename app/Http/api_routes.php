@@ -214,9 +214,11 @@ $api->version('v1', function ($api) {
 
     $api->group(['middleware' => ['api.auth', 'cors']], function($api){
 
+        $api->post('subscribe', 'App\Api\V1\Subscription\Controllers\SubscriptionCategoryController@subscribe');
+
+
         $api->get('subscriptions', 'App\Api\V1\Subscription\Controllers\SubscriptionCategoryController@getSubscriptions');
 
-        $api->post('subscribe', 'App\Api\V1\Subscription\Controllers\SubscriptionCategoryController@subscribe');
 
         $api->post('unsubscribe', 'App\Api\V1\Subscription\Controllers\SubscriptionCategoryController@unSubscribe');
 

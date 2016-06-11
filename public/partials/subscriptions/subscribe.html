@@ -27,6 +27,9 @@
                         <th>Email</th>
                         <th>Phone Number</th>
                         <th>Subscription</th>
+                        <th>Category</th>
+                        <th>From</th>
+                        <th>To</th>
                     </tr>
 
 
@@ -36,10 +39,8 @@
                     </tr>
 
                     <tr data-ng-repeat="user in users | orderBy:'-user_id'">
-
-
                         <td>
-                            {{user.name}}
+                            <a href="">{{user.name}}</a>
                         </td>
                         <td>
                             <p>{{user.email}}</p>
@@ -47,7 +48,6 @@
 
                         <td>
                             <p>{{user.phone_number}}</p>
-
                         </td>
                         <img  class="" style="margin-left: 750px; margin-top: 0px;" width="10" height="10" src="../img/loading.gif" data-ng-show="loading">
                         <td>
@@ -57,6 +57,18 @@
                             <button data-ng-show="{{user.subscription_status == 3}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
                             <button data-ng-show="{{user.subscription_status == 4}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
                             <button data-ng-show="{{user.subscription_status == 5}}" class="btn btn-sm btn-warning" data-ng-click="subscribe(user.user_id, user.subscription_id)">Unsubscribed</button>
+                        </td>
+                        <td>
+                            <span data-ng-show="{{user.subscription_category_code == 1}}">Weekly</span>
+                            <span data-ng-show="{{user.subscription_category_code == 2}}">Monthly</span>
+                            <span data-ng-show="{{user.subscription_category_code == 3}}">3 Months</span>
+                            <span data-ng-show="{{user.subscription_category_code == 4}}">Annual</span>
+                        </td>
+                        <td>
+                           {{user.start_date | date : format : timezone}}
+                        </td>
+                        <td>
+                            {{user.end_date | date : format : timezone}}
                         </td>
 
                         <!--<td>4-April-2014</td>-->

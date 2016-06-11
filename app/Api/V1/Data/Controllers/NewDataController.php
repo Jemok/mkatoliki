@@ -246,6 +246,6 @@ class NewDataController extends Controller
 
     public function getAllSubscriptions(){
 
-        return  $users =  User::where('id', '>', 0)->get()->toArray();
+        return  $users =  User::where('id', '>', 20)->get()->toArray();
     }
 }
