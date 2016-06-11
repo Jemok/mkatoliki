@@ -62,7 +62,7 @@ class SubscriptionCategoryController extends Controller {
 
         $subscription = Subscription::where('user_id', $user_id)->where('id', $subscription_id)->first();
 
-        $subscription_status = SubscriptionStatus::where('status_code', 20)->first();
+        $subscription_status = SubscriptionStatus::where('status_code', 2)->first();
 
 
 

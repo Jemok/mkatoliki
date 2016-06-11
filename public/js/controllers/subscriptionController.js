@@ -24,10 +24,7 @@
 
             $scope.subscribe = function(user_id, subscription_id){
 
-                $scope.location = $location;
-
                 $scope.$emit('LOAD');
-
 
                 $http({
                     url: 'api/subscribe',
