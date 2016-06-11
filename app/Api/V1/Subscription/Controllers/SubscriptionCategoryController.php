@@ -49,7 +49,7 @@ class SubscriptionCategoryController extends Controller {
 
     public function getSubscriptions(SubscriptionTransformer $subscriptionTransformer){
 
-        $users =  User::where('id', '>', 20)->get()->toArray();
+        $users =  User::where('id', '>', 0)->get()->toArray();
 
         return $this->respond($subscriptionTransformer->transformCollection($users));
     }
@@ -62,7 +62,7 @@ class SubscriptionCategoryController extends Controller {
 
         $subscription = Subscription::where('user_id', $user_id)->where('id', $subscription_id)->first();
 
-        $subscription_status = SubscriptionStatus::where('status_code', 0)->first();
+        $subscription_status = SubscriptionStatus::where('status_code', 20)->first();
 
 
 

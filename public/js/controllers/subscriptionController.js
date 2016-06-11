@@ -4,7 +4,8 @@
 
     angular
         .module('mkatolikiApp')
-        .controller('SubscriptionController', ['subscriptionService', '$scope', '$http', 'userService', function(subscriptionService, $scope, $http, userService){
+        .controller('SubscriptionController', ['subscriptionService', '$scope', '$http', 'userService', '$location', function(subscriptionService, $scope, $http, userService, $location){
+
 
             $scope.refresh = function(){
 
@@ -23,6 +24,9 @@
 
             $scope.subscribe = function(user_id, subscription_id){
 
+                $scope.location = $location;
+
+                $scope.$emit('LOAD');
 
 
                 $http({
@@ -31,6 +35,7 @@
                     params: {user_id:  user_id, subscription_id: subscription_id, token: userService.getCurrentToken()}
                 }).success(function (response, status, headers, config) {
 
+                    $scope.$emit('UNLOAD');
 
                     $scope.refresh();
                 });
