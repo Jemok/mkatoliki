@@ -50,7 +50,9 @@ class SubscriptionCategoryController extends Controller {
 
     public function getSubscriptions(SubscriptionTransformer $subscriptionTransformer){
 
-        $users =  User::where('id', '>', 20)->get()->toArray();
+
+
+        $users =  User::where('id', '=', \Auth::user()->id)->get()->toArray();
 
         return $this->respond($subscriptionTransformer->transformCollection($users));
     }
