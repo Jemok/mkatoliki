@@ -58,6 +58,15 @@ class SubscriptionCategoryController extends Controller {
     public function subscribe(Request $request){
 
         $user_id = $request->get('user_id');
+        $subscription_id = $request->get('subscription_id');
+
+        $oldSubscription = Subscription::where('id', $subscription_id)->first();
+
+        $oldSubscriptionStatus = SubscriptionStatus::where('status_code', 1)->first();
+
+        $oldSubscription->update([
+            'subscription_status_id' => $oldSubscriptionStatus->id
+        ]);
 
         $subscription_category = SubscriptionCategory::where('subscription_category', 2)->first();
         $subscription_status = SubscriptionStatus::where('status_code', 0)->first();
