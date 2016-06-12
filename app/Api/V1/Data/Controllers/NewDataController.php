@@ -181,7 +181,7 @@ class NewDataController extends Controller
 
        // return  User::where('id', \Auth::user()->id)->where('updated_at', '>', $date)->where('id', '>', 20)->get()->toArray();
 
-        return  User::where('id', \Auth::user()->id)->where('updated_at', '>', $date)->get()->toArray();
+        return  User::where('id', \Auth::user()->id)->get()->toArray();
 
 
     }
