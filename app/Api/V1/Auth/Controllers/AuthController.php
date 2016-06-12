@@ -99,8 +99,8 @@ class AuthController extends Controller
 
         $subscription = $user->subscriptions()->create([
 
-            'subscription_category_id' => SubscriptionCategory::where('subscription_category', 1)->first()->id,
-            'subscription_status_id' => SubscriptionStatus::where('status_code', 4)->first()->id
+            'subscription_category_id' => SubscriptionCategory::where('subscription_category', 2)->first()->id,
+            'subscription_status_id' => SubscriptionStatus::where('status_code', 1)->first()->id
 
         ]);
 

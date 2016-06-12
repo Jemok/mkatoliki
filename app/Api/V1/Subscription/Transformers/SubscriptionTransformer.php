@@ -10,6 +10,7 @@ namespace App\Api\V1\Subscription\Transformers;
 
 
 use App\Api\V1\Account\Models\User;
+use App\Api\V1\Subscription\Models\SubscriptionStatus;
 use App\Api\V1\Transformers\Transformer;
 
 class SubscriptionTransformer extends Transformer {
@@ -22,12 +23,16 @@ class SubscriptionTransformer extends Transformer {
 
         $subscription_status_id = $user->subscriptions->last()->subscription_status_id;
 
+        $old_subscription_status_id = SubscriptionStatus::where('status_code', 1)->first();
+
+        $oldSubscriptions = $user->subscriptions()->where('subscription_status_id', $old_subscription_status_id)->get();
+
+        $oldSubscription = $oldSubscriptions->last();
+
 
         if($user->subscriptions()->where('subscription_status_id', $subscription_status_id)->exists()){
 
             $subscription = $user->subscriptions()->where('subscription_status_id', $subscription_status_id)->first();
-
-
 
             return [
                 'name'   => $user->name,
@@ -42,6 +47,7 @@ class SubscriptionTransformer extends Transformer {
                 'end_date' => $subscription->subscription_details->end_date,
                 'created_at' => $subscription->created_at,
                 'updated_at' => $subscription->updated_at,
+                'closed_subscription_id' => $oldSubscription->id
             ];
         }
 
