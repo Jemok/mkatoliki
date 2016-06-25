@@ -75,10 +75,10 @@ class Subscription extends Model
         return $this->hasOne(SubscriptionMpesaConfirmations::class);
     }
 
-    public static function boot(){
-
-        parent::boot();
-
-        Subscription::observe(new GlobalObserver());
-    }
+//    public static function boot(){
+//
+//        parent::boot();
+//
+//        Subscription::observe(new GlobalObserver());
+//    }
 }

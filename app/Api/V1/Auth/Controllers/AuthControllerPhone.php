@@ -6,6 +6,7 @@ namespace App\Api\V1\Auth\Controllers;
 
 use App\Api\V1\Account\Models\User_parishes;
 use App\Api\V1\Account\Models\User_stations;
+use App\Api\V1\Auth\Transformers\UserTransformer;
 use JWTAuth;
 use Config;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class AuthControllerPhone extends Controller
         $this->validateLogin($credentials, $this->login_type);
 
         //Login the user
-        return $this->login($credentials, $this->login_type);
+        return $this->login($credentials, $this->login_type, new UserTransformer());
     }
 
     /**
@@ -57,8 +58,7 @@ class AuthControllerPhone extends Controller
 
         JWTAuth::invalidate($token);
 
-        return $this->response->noContent();
-
+        return response()->json(['logged out successfully'], 200);
     }
 
     /**

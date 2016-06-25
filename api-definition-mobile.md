@@ -401,40 +401,53 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
               },...
         ],
          "subscriptions": [
-              {
-                "name": "user",
-                "email": "user2@mkatoliki.com",
-                "phone_number": "0712775371",
-                "subscription_id": 2,           // The id of the subscription instance
-                "user_id": 5,                   // The id of the subscribed user
-                "subscription_status": 0,       // The status of the subscription i.e
-                                                //  0 for active
-                                                //  1 for closed
-                                                //  2 for initiated
-                                                //  3 for confirmed
-                                                //  4 for canceled
-                "subscription_category_name": "weekly", // The subscription category type
-                "subscription_category_code": 1,        // The code of the category
-                                                        //  1 for weekly
-                                                        //  2 for monthly
-                                                        //  3 for three_months
-                                                        //  4 for annually
-
-                "start_date": "2016-06-10 22:32:13",
-                "end_date": "2016-06-11 05:32:13",
-                "created_at": {
-                  "date": "2016-06-10 22:32:13",
-                  "timezone_type": 3,
-                  "timezone": "Africa/Khartoum"
-                },
-                "updated_at": {
-                  "date": "2016-06-11 04:53:40",
-                  "timezone_type": 3,
-                  "timezone": "Africa/Khartoum"
-                }
-              },
-              .....
-         ]
+               {
+                 "active": {
+                   "name": "user",
+                   "email": "user1@mkatoliki.com",
+                   "phone_number": "0712675072",
+                   "subscription_id": 7,
+                   "user_id": 2,
+                   "subscription_status": 0,
+                   "subscription_category_name": "monthly",
+                   "subscription_category_code": 2,
+                   "start_date": "2016-06-13 11:13:33",
+                   "end_date": "2016-07-13 11:13:33",
+                   "created_at": {
+                     "date": "2016-06-13 11:13:33",
+                     "timezone_type": 3,
+                     "timezone": "Africa/Khartoum"
+                   },
+                   "updated_at": {
+                     "date": "2016-06-13 11:13:33",
+                     "timezone_type": 3,
+                     "timezone": "Africa/Khartoum"
+                   }
+                 },
+                 "closed": {
+                   "name": "user",
+                   "email": "user1@mkatoliki.com",
+                   "phone_number": "0712675072",
+                   "subscription_id": 6,
+                   "user_id": 2,
+                   "subscription_status": 1,
+                   "subscription_category_name": "monthly",
+                   "subscription_category_code": 2,
+                   "start_date": "2016-06-13 11:12:04",
+                   "end_date": "2016-07-13 11:12:04",
+                   "created_at": {
+                     "date": "2016-06-13 11:12:03",
+                     "timezone_type": 3,
+                     "timezone": "Africa/Khartoum"
+                   },
+                   "updated_at": {
+                     "date": "2016-06-13 11:13:33",
+                     "timezone_type": 3,
+                     "timezone": "Africa/Khartoum"
+                   }
+                 }
+               }
+             ]
       }
     }
 

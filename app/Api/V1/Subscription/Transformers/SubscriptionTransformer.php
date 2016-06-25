@@ -21,13 +21,26 @@ class SubscriptionTransformer extends Transformer {
         $user = User::where('id', $user['id'])->with('subscriptions')->first();
 
 
-        $subscription_status_id = $user->subscriptions->last()->subscription_status_id;
+        //$subscription_status_id = $user->subscriptions->last()->subscription_status_id;
 
-        if($user->subscriptions()->where('subscription_status_id', $subscription_status_id)->exists()){
+        $closed_status_id = SubscriptionStatus::where('status_code', 1)->first()->id;
 
-            $subscription = $user->subscriptions()->where('subscription_status_id', $subscription_status_id)->first();
+        $closed_subscriptions = $user->subscriptions->where('subscription_status_id', $closed_status_id);
+
+        $closed_subscription = $closed_subscriptions->last();
+
+        //$user->subscriptions()->where('subscription_status_id', $subscription_status_id)->exists()
+
+        if($subscription_status_id = $user->subscriptions->last()){
+
+            //$subscription = $user->subscriptions()->where('subscription_status_id', $subscription_status_id)->first();
+
+            //dd($subscription);
+
+            $subscription =   $subscription_status_id = $user->subscriptions->last();
 
             return [
+
                 'name'   => $user->name,
                 'email'  => $user->email,
                 'phone_number' => $user->phone_number,
@@ -40,6 +53,11 @@ class SubscriptionTransformer extends Transformer {
                 'end_date' => $subscription->subscription_details->end_date,
                 'created_at' => $subscription->created_at,
                 'updated_at' => $subscription->updated_at,
+                'closed_subscription_id' => $closed_subscription->id,
+                'closed_subscription_status' =>  $closed_subscription->subscription_status->status_code,
+                'closed_subscription_category_code' => $closed_subscription->subscription_category->subscription_category,
+                'closed_subscription_created_at' => $closed_subscription->created_at,
+                'closed_subscription_updated_at' => $closed_subscription->updated_at
             ];
         }
 

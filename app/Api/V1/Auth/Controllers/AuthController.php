@@ -6,6 +6,7 @@
 namespace App\Api\V1\Auth\Controllers;
 
 use App\Api\V1\Auth\Traits\Login;
+use App\Api\V1\Auth\Transformers\UserTransformer;
 use App\Api\V1\Auth\Validators\ValidateLogin;
 use App\Api\V1\Auth\Validators\ValidateSignup;
 use App\Api\V1\Subscription\Models\SubscriptionCategory;
@@ -71,7 +72,7 @@ class AuthController extends Controller
         $this->validateLogin($credentials, $this->login_type);
 
         //Login the user
-        return $this->login($credentials, $this->login_type);
+        return $this->login($credentials, $this->login_type, new UserTransformer());
     }
     
     /**
@@ -91,37 +92,29 @@ class AuthController extends Controller
         //Set the fields to be used for registration
         $userData = $request->only($signupFields);
 
-
-
         $this->validateSignup($userData, Config::get('boilerplate.signup_fields_rules'));
 
         $user = $userRepository->store($userData);
 
         $subscription = $user->subscriptions()->create([
-
             'subscription_category_id' => SubscriptionCategory::where('subscription_category', 2)->first()->id,
             'subscription_status_id' => SubscriptionStatus::where('status_code', 1)->first()->id
-
         ]);
 
         $subscription->subscription_details()->create([
-
             'start_date' => Carbon::now(),
             'end_date'   => Carbon::now()->addHours(SubscriptionCategory::where('subscription_category', 1)->first()->days)
-
-
         ]);
         //If there was an error, return response error message
         if(!$user->id) {
             return $this->response->error('could_not_create_user', 500);
         }
 
+        //Login the user
         if($hasToReleaseToken) {
 
             return $this->loginDefault($request);
         }
-
-
 
         //If successfully created the user, return response success
         return $this->response->created();
@@ -131,7 +124,7 @@ class AuthController extends Controller
      * Retrieves the authenticated user
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getAuthenticatedUser()
+    public function getAuthenticatedUser(UserTransformer $userTransformer)
     {
         try {
 
@@ -151,9 +144,9 @@ class AuthController extends Controller
 
             return response()->json(['token_absent'], $e->getStatusCode());
         }
-
         // the token is valid and we have found the user via the sub claim
-        return response()->json(compact('user'));
+        // return response()->json(compact('user'));
+        return $userTransformer->transform($user);
     }
 
     /**

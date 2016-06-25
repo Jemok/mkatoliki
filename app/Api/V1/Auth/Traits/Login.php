@@ -14,20 +14,18 @@ use Config;
 use Illuminate\Http\Request;
 use Dingo\Api\Routing\Helpers;
 use Tymon\JWTAuth\Exceptions\JWTException;
-
+use App\Api\V1\Auth\Transformers\UserTransformer;
 
 trait Login {
 
     /**
-     * Login in users to the application
      * @param $credentials
      * @param $login_type
-     * @return \Illuminate\Http\JsonResponse
+     * @param UserTransformer $userTransformer
+     * @return array
      */
-
-    public function login($credentials, $login_type)
+    public function login($credentials, $login_type, UserTransformer $userTransformer)
     {
-
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return $this->response->errorUnauthorized();
@@ -37,24 +35,47 @@ trait Login {
         }
 
         //If API successfully authenticated the user, get the authenticated user
-        if(isset($token)){
-
-            $user = \Auth::user();
+        if(isset($token) && !empty($token)){
 
             if($login_type == 'phone'){
 
-                $parish_id = \Auth::user()->user_parishes()->first()->parish_id;
+               $user = $this->getUserDetails($token, 'phone');
 
-                $station_id = \Auth::user()->user_stations()->first()->station_id;
-
-                $user->parish_id = $parish_id;
-                $user->station_id =$station_id;
+               return $userTransformer->transform($user);
             }
 
+            $user = $this->getUserDetails($token, 'web');
+
+            return $userTransformer->transform($user);
         }
 
-        //Return the jwt token and the authenticated user details
-        return response()->json(compact('token', 'user'));
+        return $this->response->errorUnauthorized();
     }
 
+    /**
+     * Get the details of the user currently logged in
+     * @param $token
+     * @param $login_type
+     * @return mixed
+     */
+    private function getUserDetails($token, $login_type){
+
+        $user = \Auth::user();
+
+        if($login_type == 'phone'){
+
+            $parish_id = \Auth::user()->user_parishes()->first()->parish_id;
+
+            $station_id = \Auth::user()->user_stations()->first()->station_id;
+
+            $user->parish_id = $parish_id;
+            $user->station_id =$station_id;
+
+            return $user;
+        }
+
+        $user->token = $token;
+
+        return $user;
+    }
 } 

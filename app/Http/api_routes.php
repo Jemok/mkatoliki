@@ -1,3 +1,4 @@
+
 <?php
 	
 $api = app('Dingo\Api\Routing\Router');
@@ -9,18 +10,23 @@ $api->version('v1', function ($api) {
      *
      */
 
+    //NB:: Use the cors middleware to allow for cross-origin resource sharing when hitting these routes
+    // These routes do not require an authentication
     $api->group(['middleware' => 'cors'], function ($api) {
 
         /**----------------------------------------------------------------------------------------------
          * Account Login routes
          */
+        // Login in a user from the web using an email field
         $api->post('auth/login',       'App\Api\V1\Auth\Controllers\AuthController@loginDefault');
+        //Start Login in a user from a mobile phone using a phone_number field
         $api->post('auth/login-phone', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@loginPhone');
 
 
         /**----------------------------------------------------------------------------------------------
          * Signup route
          */
+        // registering a user from either a mobile app client or the web client
         $api->post('auth/signup',     'App\Api\V1\Auth\Controllers\AuthController@signup');
 
         /**----------------------------------------------------------------------------------------------
@@ -28,16 +34,35 @@ $api->version('v1', function ($api) {
          */
         $api->post('auth/recovery',  'App\Api\V1\Auth\Controllers\AuthController@recovery');
         $api->post('auth/reset',     'App\Api\V1\Auth\Controllers\AuthController@reset');
+//
+//        /**----------------------------------------------------------------------------------------------
+//         * Logout route
+//         */
+//        $api->get('auth/logout', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@logout');
+//
+//        /**----------------------------------------------------------------------------------------------
+//         * User routes
+//         */
+//        //
+//        $api->get('auth/user', 'App\Api\V1\Auth\Controllers\AuthController@getAuthenticatedUser');
+//        $api->post('auth/user/parish-station', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@setParishAndStation');
+    });
 
+    // These routes handle user activities that require an authenticationtoken
+    $api->group(['middleware' => ['api.auth', 'cors']], function ($api) {
         /**----------------------------------------------------------------------------------------------
-         * Logut route
+         * Start login out a user, must provide an access token
+         * Logout route
          */
-        $api->get('auth/logout', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@logout');
+        $api->t('auth/logout', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@logout');
 
         /**----------------------------------------------------------------------------------------------
          * User routes
          */
-        $api->get('auth/user',                 'App\Api\V1\Auth\Controllers\AuthController@getAuthenticatedUser');
+        // Start getting the details of the authenticated user
+        $api->get('auth/user', 'App\Api\V1\Auth\Controllers\AuthController@getAuthenticatedUser');
+
+        // Start process of setting the parish and outstation of a user
         $api->post('auth/user/parish-station', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@setParishAndStation');
     });
 
