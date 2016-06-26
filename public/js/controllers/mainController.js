@@ -99,6 +99,8 @@
 
                     localStorageService.remove('token')
 
+                    console.log(response);
+
                     $location.path('/login');
 
                 }, function(){

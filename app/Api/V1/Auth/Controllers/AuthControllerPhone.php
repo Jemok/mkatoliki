@@ -6,6 +6,7 @@ namespace App\Api\V1\Auth\Controllers;
 
 use App\Api\V1\Account\Models\User_parishes;
 use App\Api\V1\Account\Models\User_stations;
+use App\Api\V1\Auth\Transformers\LogoutTransformer;
 use App\Api\V1\Auth\Transformers\UserTransformer;
 use JWTAuth;
 use Config;
@@ -48,17 +49,36 @@ class AuthControllerPhone extends Controller
     }
 
     /**
-     * The logout method
+     * Logout users out of the application
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param LogoutTransformer $logoutTransformer
+     * @return array|\Illuminate\Http\JsonResponse
      */
-    public function logout(Request $request){
+    public function logout(Request $request, LogoutTransformer $logoutTransformer){
 
         $token = $request->input('token');
 
-        JWTAuth::invalidate($token);
+        try {
 
-        return response()->json(['logged out successfully'], 200);
+            if(JWTAuth::invalidate($token))
+            {
+                return $logoutTransformer->transform($token);
+            }
+
+            return response()->json(['logout_failed', 500]);
+
+        } catch (TokenExpiredException $e) {
+
+            return response()->json(['token_expired'], $e->getStatusCode());
+
+        } catch (TokenInvalidException $e) {
+
+            return response()->json(['token_invalid'], $e->getStatusCode());
+
+        } catch (JWTException $e) {
+
+            return response()->json(['token_absent'], $e->getStatusCode());
+        }
     }
 
     /**

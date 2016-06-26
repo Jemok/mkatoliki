@@ -47,7 +47,7 @@
             //Logout a user out of the application
             function logout(onSuccess, onError){
 
-                $http.get('/api/auth/logout?token='+localStorageService.get('token'), {
+                $http.post('/api/auth/logout?token='+localStorageService.get('token'), {
                     })
                     .then(function(response){
                        onSuccess(response);

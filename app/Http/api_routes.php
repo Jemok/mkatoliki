@@ -54,7 +54,10 @@ $api->version('v1', function ($api) {
          * Start login out a user, must provide an access token
          * Logout route
          */
-        $api->t('auth/logout', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@logout');
+        // Start the logout process
+        // Requires authentication
+        // Requires a token to be invalidated
+        $api->post('auth/logout', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@logout');
 
         /**----------------------------------------------------------------------------------------------
          * User routes

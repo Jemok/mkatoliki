@@ -480,8 +480,32 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
     Connection: close
 
 		{
-			“token”, “expired_jwt token”
-		}
+          "message": "logged out successfully",
+          "status_code": 200
+        }
+
+    others
+
+    RESPONSE 401
+
+    {
+      "error": {
+        "message": "The token has been blacklisted",
+        "status_code": 401
+      }
+    }
+
+    RESPONSE 401
+
+    {
+      "error": {
+        "message": "Token has expired",
+        "status_code": 401
+      }
+    }
+
+
+
 
 ### SUBSCRIPTION DESCRIPTION
 
