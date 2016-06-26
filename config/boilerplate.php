@@ -13,7 +13,7 @@ return [
     |
     */
     'signup_fields' => [
-        'name', 'email', 'password', 'phone_number', 'parish_id', 'station_id'
+        'name', 'email', 'password', 'phone_number'
     ],
 
     /*
@@ -26,14 +26,11 @@ return [
     |
     */
 
-
-
     'signup_fields_rules' => [
-    	'name' => 'required',
+    	'name' => 'required|max:50|min:3',
     	'email' => 'required|email|unique:users',
     	'password' => 'required|min:6',
-        'phone_number' => 'max:15|unique:users',
-
+        'phone_number' => 'max:10|min:10|unique:users',
     ],
 
     /*
@@ -46,7 +43,7 @@ return [
     | success message.
     |
     */
-    'signup_token_release' => env('API_SIGNUP_TOKEN_RELEASE', true),
+    'signup_token_release' => env('API_SIGNUP_TOKEN_RELEASE', false),
 
     /*
     |--------------------------------------------------------------------------

@@ -82,7 +82,9 @@ class AuthControllerPhone extends Controller
     }
 
     /**
+     * Set parish and outstation for the authenticated user
      * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|void
      */
     public function setParishAndStation(Request $request){
 
@@ -93,20 +95,9 @@ class AuthControllerPhone extends Controller
 
         $user_station->station_id = $request->get('station_id');
 
-
-        if($this->currentUser()->user_parishes()->save($user_parish) && $this->currentUser()->user_stations()->save($user_station))
-            return $this->response->created();
+        if(\Auth::user()->user_parishes()->save($user_parish) && $this->currentUser()->user_stations()->save($user_station))
+            return response()->json(['parish and outstation set successfully'], 201);
         else
-            return $this->response->error('could_not_create_user_parish_station', 500);
+            return $this->response->error('could not create user parish station', 500);
     }
-
-    /**
-     * Returns the currently logged in user
-     * @return mixed
-     */
-    public function currentUser(){
-
-        return JWTAuth::parseToken()->authenticate();
-    }
-
 }

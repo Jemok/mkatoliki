@@ -231,6 +231,10 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
 
     RESPONSE OK 201 Created
 
+    [
+      "parish ans outstation set successfully"
+    ]
+
     RESPONSE 401 Unauthorized
 
         {
@@ -240,7 +244,7 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
 			}
 		}
 
-        RESPONSE 500 Internal Server Error
+     RESPONSE 500 Internal Server Error
 
         {
 		 “error” :{

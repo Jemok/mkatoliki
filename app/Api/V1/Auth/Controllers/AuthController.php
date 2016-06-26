@@ -87,15 +87,20 @@ class AuthController extends Controller
         // Get the sign up fields from the Sign up fields boilerplate in
         // app/config/boilerplate.php
         $signupFields = Config::get('boilerplate.signup_fields');
+
+        //A token is released by the api depending on either the value is true or false
         $hasToReleaseToken = Config::get('boilerplate.signup_token_release');
 
         //Set the fields to be used for registration
         $userData = $request->only($signupFields);
 
+        //Validate request user data against the signup validation rules
         $this->validateSignup($userData, Config::get('boilerplate.signup_fields_rules'));
 
+        //Save the user to the database
         $user = $userRepository->store($userData);
 
+        // Set a default subscription for the user
         $subscription = $user->subscriptions()->create([
             'subscription_category_id' => SubscriptionCategory::where('subscription_category', 2)->first()->id,
             'subscription_status_id' => SubscriptionStatus::where('status_code', 1)->first()->id
@@ -109,16 +114,15 @@ class AuthController extends Controller
         if(!$user->id) {
             return $this->response->error('could_not_create_user', 500);
         }
-
         //Login the user
         if($hasToReleaseToken) {
 
             return $this->loginDefault($request);
         }
-
         //If successfully created the user, return response success
         return $this->response->created();
-    }
+
+        }
 
     /**
      * Retrieves the authenticated user

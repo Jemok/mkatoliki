@@ -1,5 +1,7 @@
 
 <?php
+
+//All the api endpoints are defined here
 	
 $api = app('Dingo\Api\Routing\Router');
 
@@ -19,14 +21,13 @@ $api->version('v1', function ($api) {
          */
         // Login in a user from the web using an email field
         $api->post('auth/login',       'App\Api\V1\Auth\Controllers\AuthController@loginDefault');
-        //Start Login in a user from a mobile phone using a phone_number field
+        // Login in a user from a mobile phone using a phone_number field
         $api->post('auth/login-phone', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@loginPhone');
-
 
         /**----------------------------------------------------------------------------------------------
          * Signup route
          */
-        // registering a user from either a mobile app client or the web client
+        // Registering a user from either a mobile app client or the web client
         $api->post('auth/signup',     'App\Api\V1\Auth\Controllers\AuthController@signup');
 
         /**----------------------------------------------------------------------------------------------
@@ -48,7 +49,8 @@ $api->version('v1', function ($api) {
 //        $api->post('auth/user/parish-station', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@setParishAndStation');
     });
 
-    // These routes handle user activities that require an authenticationtoken
+    // These routes handle user activities
+    // Requires an authentication token
     $api->group(['middleware' => ['api.auth', 'cors']], function ($api) {
         /**----------------------------------------------------------------------------------------------
          * Start login out a user, must provide an access token
@@ -56,16 +58,16 @@ $api->version('v1', function ($api) {
          */
         // Start the logout process
         // Requires authentication
-        // Requires a token to be invalidated
+        // Requires the token to be invalidated as a parameter
         $api->post('auth/logout', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@logout');
 
         /**----------------------------------------------------------------------------------------------
          * User routes
          */
-        // Start getting the details of the authenticated user
+        // Gets the details of the authenticated user
         $api->get('auth/user', 'App\Api\V1\Auth\Controllers\AuthController@getAuthenticatedUser');
 
-        // Start process of setting the parish and outstation of a user
+        // Set the parish and outstation of a user
         $api->post('auth/user/parish-station', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@setParishAndStation');
     });
 
@@ -78,8 +80,6 @@ $api->version('v1', function ($api) {
 
         $api->post('gcm/tokens', 'App\Api\V1\GCM\Controllers\PhoneTokenController@store');
         $api->post('gcm/push-types', 'App\Api\V1\GCM\Controllers\GcmPushTypeController@store');
-
-
     });
 
     /**-------------------------------------------------------------------------------------------------
