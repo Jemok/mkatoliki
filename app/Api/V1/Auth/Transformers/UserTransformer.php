@@ -20,6 +20,7 @@ class UserTransformer extends Transformer {
 
             return [
                 'token' => $user['token'],
+                'message' => 'success',
                 'user' => $this->getUserDetailsArray($user)
 
             ];

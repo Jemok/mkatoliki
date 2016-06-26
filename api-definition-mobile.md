@@ -37,17 +37,25 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
     Connection: close
 
 	{
-      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAwXC9hcGlcL2F1dGhcL3NpZ251cCIsImlhdCI6MTQ1OTk5MDQ2OSwiZXhwIjoxNDU5OTk0MDY5LCJuYmYiOjE0NTk5OTA0NjksImp0aSI6ImNlNDkzYjQwOTNiMTVmNjk5M2U1N2FjYzllZTRlOTAxIn0.nXsuuWU07o8YguGZvyM15fslNUUbnyiggAQ9nfLlxgQ",
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE2LCJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9zaWdudXAiLCJpYXQiOjE0NjY5MjAwMzYsImV4cCI6MTQ2NjkyMDA5NiwibmJmIjoxNDY2OTIwMDM2LCJqdGkiOiJjZTFjYWM5MjY4MGZiZGZhNTM2ZGRjMDZiZmZlNDVjYiJ9.kYisCP2Rf2bXpPZkhC8vRw_XyRAz2FP8WhiBRvWQspo",
+      "message": "success",
       "user": {
-        "id": 5,
-        "name": "Jemo",
-        "email": "user@email.com",
-        "phone_number": "0712879467",
-        "phone_notification_token": "",
-        "parish_id": 1,
-        "station_id": 1,
-        "created_at": "2016-04-07 00:54:29",
-        "updated_at": "2016-04-07 00:54:29"
+        "id": 16,
+        "name": "user",
+        "email": "user77@mkatoliki.com",
+        "phone_number": "0752767071",
+        "parish_id": null,
+        "station_id": null,
+        "created_at": {
+          "date": "2016-06-26 08:47:16",
+          "timezone_type": 3,
+          "timezone": "Africa/Khartoum"
+        },
+        "updated_at": {
+          "date": "2016-06-26 08:47:16",
+          "timezone_type": 3,
+          "timezone": "Africa/Khartoum"
+        }
       }
     }
 
@@ -90,17 +98,25 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
     Connection: close
 
 		{
-          "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjUsImlzcyI6Imh0dHA6XC9cL2xvY2FsaG9zdDo4MDAwXC9hcGlcL2F1dGhcL3NpZ251cCIsImlhdCI6MTQ1OTk5MDQ2OSwiZXhwIjoxNDU5OTk0MDY5LCJuYmYiOjE0NTk5OTA0NjksImp0aSI6ImNlNDkzYjQwOTNiMTVmNjk5M2U1N2FjYzllZTRlOTAxIn0.nXsuuWU07o8YguGZvyM15fslNUUbnyiggAQ9nfLlxgQ",
+          "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE2LCJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9zaWdudXAiLCJpYXQiOjE0NjY5MjAwMzYsImV4cCI6MTQ2NjkyMDA5NiwibmJmIjoxNDY2OTIwMDM2LCJqdGkiOiJjZTFjYWM5MjY4MGZiZGZhNTM2ZGRjMDZiZmZlNDVjYiJ9.kYisCP2Rf2bXpPZkhC8vRw_XyRAz2FP8WhiBRvWQspo",
+          "message": "success",
           "user": {
-            "id": 5,
-            "name": "Jemo",
-            "email": "user@email.com",
-            "phone_number": "0712879467",
-            "phone_notification_token": "",
-            "parish_id": 1,
-            "station_id": 1,
-            "created_at": "2016-04-07 00:54:29",
-            "updated_at": "2016-04-07 00:54:29"
+            "id": 16,
+            "name": "user",
+            "email": "user77@mkatoliki.com",
+            "phone_number": "0752767071",
+            "parish_id": null,
+            "station_id": null,
+            "created_at": {
+              "date": "2016-06-26 08:47:16",
+              "timezone_type": 3,
+              "timezone": "Africa/Khartoum"
+            },
+            "updated_at": {
+              "date": "2016-06-26 08:47:16",
+              "timezone_type": 3,
+              "timezone": "Africa/Khartoum"
+            }
           }
         }
 
