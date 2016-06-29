@@ -38,6 +38,18 @@ This will be sent from the Android app and should be saved in the server to comm
             "message" : "sync" 
           }
         }
+
+### Sending messages to user's phone notification bar
+
+        POST https://fcm.googleapis.com/fcm/send
+                
+        {
+          "registration_ids" : [1,2,3], //An array of tokens that you want to send push to
+          "notification": {
+              "title": "Portugal vs. Denmark", //title of notification
+              "text": "5 to 1" //body of notification
+          }
+        }
         
 ## References
 
