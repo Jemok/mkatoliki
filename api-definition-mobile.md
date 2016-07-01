@@ -525,6 +525,25 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
     }
 
 
+### FEEDBACK ENDPOINT
+
+**HEADER** Authorization: Bearer token_here
+**HEADER** Content-Type: application/json
+
+    HOST:  api.mkatoliki.com
+    POST: /api/feedbacks HTTP/1.1
+
+    {
+        "mood":1,
+        "comment": "Awesome"
+    }
+
+    RESPONSE 201 Created
+
+    [
+      "Feedback successfully created"
+    ]
+
 
 
 ### SUBSCRIPTION DESCRIPTION

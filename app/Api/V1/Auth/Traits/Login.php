@@ -59,11 +59,9 @@ trait Login {
      * @return mixed
      */
     private function getUserDetails($token, $login_type){
-
         $user = \Auth::user();
 
         $role_id = \Auth::user()->user_role()->first()->role_id;
-
 
         if($login_type == 'phone'){
 
