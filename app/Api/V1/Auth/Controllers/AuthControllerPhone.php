@@ -18,8 +18,14 @@ use App\Http\Controllers\Controller;
 
 class AuthControllerPhone extends Controller
 {
-    use Helpers;
+    /**
+     * Login Trait
+     */
     use Login;
+
+    /**
+     * Validate Login Trait
+     */
     use ValidateLogin;
 
     /**

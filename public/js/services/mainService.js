@@ -6,6 +6,7 @@
         .module('mkatolikiApp')
         .factory('mainService', ['Restangular', 'userService', '$http', 'localStorageService', function(Restangular, userService, $http, localStorageService){
 
+
             function getAll(last_page ,onSuccess, onError){
 
                 $http.get('api/readings/?last_page='+last_page+'&token='+localStorageService.get('token'), {
@@ -50,13 +51,21 @@
 
             function getById(readingId, onSuccess, onError){
 
-                Restangular.one('api/readings', readingId).get().then(function(response){
+                $http.get('api/readings/'+readingId+'?token='+localStorageService.get('token'), {
+                })
+                    .then(function(response){
+                        onSuccess(response);
+                    }, function(response){
+                        onError(response);
+                    });
 
-                    onSuccess(response);
-                }, function(response){
-
-                    onError(response);
-                });
+//                Restangular.one('api/readings', readingId).get().then(function(response){
+//
+//                    onSuccess(response);
+//                }, function(response){
+//
+//                    onError(response);
+//                });
             }
 
             function create(data, onSuccess, onError){
@@ -90,7 +99,8 @@
                 });
             }
 
-            Restangular.setDefaultHeaders({'Authorization' : 'Bearer' + userService.getCurrentToken()});
+            Restangular.setDefaultHeaders({'Authorization' : 'Bearer' + localStorageService.get('token')});
+
 
             return{
 

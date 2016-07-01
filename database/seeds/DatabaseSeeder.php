@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use App\Reading;
 use Illuminate\Support\Facades\DB;
 
 
@@ -19,7 +18,8 @@ class DatabaseSeeder extends Seeder
 //        'parishes',
 //        'stations',
         'subscription_categories',
-        'subscription_status'
+        'subscription_status',
+        'roles'
 
 
 
@@ -47,6 +47,9 @@ class DatabaseSeeder extends Seeder
 //        $this->call(UserStationsTableSeeder::class);
         $this->call(SubscriptionCategoryTableSeeder::class);
         $this->call(SubscriptionStatusTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+
+
 
 
 

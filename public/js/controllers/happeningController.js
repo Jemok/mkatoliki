@@ -4,16 +4,18 @@
 
     angular
         .module('mkatolikiApp')
-        .controller('HappeningController', ['$scope', '$http', 'userService', 'happeningService', 'rawJumuiyaService', function($scope, $http , userService, happeningService, rawJumuiyaService){
+        .controller('HappeningController', ['$scope', '$http', 'userService', 'happeningService', 'rawJumuiyaService', 'localStorageService', function($scope, $http , userService, happeningService, rawJumuiyaService, localStorageService){
 
             $scope.refresh = function(){
 
                 $scope.$emit('LOAD');
 
-
                 happeningService.getAll(function(response){
 
-                    $scope.happenings = response;
+                    $scope.happenings = response.data;
+
+                    console.log($scope.happenings);
+
 
                     $scope.$emit('UNLOAD');
 
@@ -33,7 +35,6 @@
                     event_date: $scope.currentDate
 
                 }, function(){
-
 
                     $scope.successTextAlert = "Event was successfully created";
                     $scope.showSuccessAlert = true;

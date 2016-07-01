@@ -22,6 +22,5 @@ class UserTableSeeder extends Seeder
             'phone_number' => $faker->phoneNumber,
             'password' => bcrypt('secret')
         ]);
-
     }
 }

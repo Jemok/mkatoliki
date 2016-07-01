@@ -4,17 +4,25 @@
 
     angular
         .module('mkatolikiApp')
-        .factory('prayerTypeService', ['Restangular', 'userService', function(Restangular, userService){
+        .factory('prayerTypeService', ['Restangular', 'userService', 'localStorageService', '$http', function(Restangular, userService, localStorageService, $http){
 
             function getAll(onSuccess, onError){
 
-                Restangular.all('api/prayer-type').getList().then(function(response){
+                $http.get('api/prayer-type/?token='+localStorageService.get('token'), {
+                })
+                    .then(function(response){
+                        onSuccess(response);
+                    }, function(response){
+                        onError(response);
+                    });
 
-                    onSuccess(response);
-                }, function(response){
-
-                    onError(response);
-                });
+//                Restangular.all('api/prayer-type').getList().then(function(response){
+//
+//                    onSuccess(response);
+//                }, function(response){
+//
+//                    onError(response);
+//                });
             }
 
             function getById(reflectionId, onSuccess, onError){
@@ -61,7 +69,7 @@
                 });
             }
 
-            Restangular.setDefaultHeaders({'Authorization' : 'Bearer' + userService.getCurrentToken()});
+//            Restangular.setDefaultHeaders({'Authorization' : 'Bearer' + userService.getCurrentToken()});
 
             return {
 

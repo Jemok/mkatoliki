@@ -4,7 +4,7 @@
 
     angular
         .module('mkatolikiApp')
-        .controller('MainController', ['$scope', '$http', '$location', 'userService', 'mainService', 'localStorageService', function($scope, $http, $location, userService, mainService, localStorageService){
+        .controller('MainController', ['$scope', '$http', '$location', 'userService', 'mainService', 'localStorageService', 'Restangular', function($scope, $http, $location, userService, mainService, localStorageService, Restangular){
 
             var in10Days = new Date();
             in10Days.setDate(in10Days.getDate() + 10);
@@ -12,6 +12,10 @@
             $scope.date1 = new Date('2016-03-29T21:00:00Z')
 
             $scope.date1 = "";
+
+            $scope.user_data = localStorageService.get('user_data');
+
+            console.log($scope.user_data);
 
             $scope.dates = {
                 //date1: new Date('2016-03-28'),
@@ -97,7 +101,7 @@
 
                 userService.logout(function(response){
 
-                    localStorageService.remove('token')
+                    localStorageService.remove('token','user_data');
 
                     console.log(response);
 

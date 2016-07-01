@@ -12,11 +12,6 @@ use Dingo\Api\Routing\Helpers;
 class PhoneTokenController extends Controller
 {
     /**
-     * The Dingo API helper
-     */
-    use Helpers;
-
-    /**
      * Handle storing of a new gcm token to the database
      * @param Request $request
      * @return mixed

@@ -12,8 +12,6 @@ use Dingo\Api\Routing\Helpers;
 
 class HappeningController extends Controller
 {
-    use Helpers;
-
     /**
      * Display a listing of the Happening resource.
      *

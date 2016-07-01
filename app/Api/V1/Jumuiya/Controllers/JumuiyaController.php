@@ -11,8 +11,6 @@ use App\Api\V1\Jumuiya\Models\Jumuiya;
 
 class JumuiyaController extends Controller
 {
-    use Helpers;
-
     /**
      * Display a listing of the jumuiya resource.
      *

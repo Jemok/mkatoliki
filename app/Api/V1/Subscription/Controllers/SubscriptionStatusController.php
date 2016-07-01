@@ -17,11 +17,6 @@ use Illuminate\Http\Request;
 class SubscriptionStatusController extends Controller {
 
     /**
-     * The Dingo API helpers
-     */
-    use Helpers;
-
-    /**
      * Handle persisting of a new Subscription status to the database
      * @param Request $request
      * @return \Dingo\Api\Http\Response|void

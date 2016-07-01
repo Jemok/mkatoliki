@@ -4,16 +4,17 @@
 
     angular
         .module('mkatolikiApp')
-        .controller('PrayerController', ['$scope', '$http', 'userService', 'prayerService', 'prayerTypeService', function($scope, $http , userService, prayerService, prayerTypeService){
+        .controller('PrayerController', ['$scope', '$http', 'userService', 'prayerService', 'prayerTypeService', 'localStorageService', function($scope, $http , userService, prayerService, prayerTypeService, localStorageService){
+
+            $scope.user_data = localStorageService.get('user_data');
 
             $scope.refresh = function(){
 
                 $scope.$emit('LOAD');
 
-
                 prayerService.getAll(function(response){
 
-                    $scope.prayers = response;
+                    $scope.prayers = response.data;
 
                     $scope.$emit('UNLOAD');
 
@@ -54,7 +55,7 @@
 
                 prayerTypeService.getAll(function(response){
 
-                    $scope.prayer_types = response;
+                    $scope.prayer_types = response.data;
 
                     $scope.$emit('UNLOAD');
 

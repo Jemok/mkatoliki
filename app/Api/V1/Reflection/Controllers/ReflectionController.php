@@ -11,8 +11,6 @@ use Dingo\Api\Routing\Helpers;
 
 class ReflectionController extends Controller
 {
-
-    use Helpers;
     /**
      * Display a listing of the reflection resource.
      *

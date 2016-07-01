@@ -15,8 +15,9 @@
                     </span>
 
             </form>
-            <div class="create">
-               <a href="#/readings-create" id="createNew" class="cta">Add New</a></div>
+            <div class="create" data-ng-show="user_data.user_role == 1">
+               <a href="#/readings-create" id="createNew" class="cta">Add New</a>
+            </div>
         </header>
     </div>
 
@@ -28,7 +29,7 @@
             <li class="nav__item active"><a href="#/" class="nav__link">Readings</a></li>
             <!--<li class="nav__item"><a href="#/prayer-type-create" class="nav__link">Prayer Types</a></li>-->
             <li class="nav__item"><a href="#/prayers" class="nav__link">Prayers</a></li>
-            <li class="nav__item"><a href="#/create-happenings" class="nav__link">Happening Today</a></li>
+            <li class="nav__item"><a href="#/happenings" class="nav__link">Happening Today</a></li>
             <li class="nav__item"><a href="#/create-raw-jumuiya" class="nav__link">Raw Jumuiya</a></li>
             <li class="nav__item"><a href="#/create-jumuiya" class="nav__link">Jumuiya Event</a></li>
             <li class="nav__item"><a href="#/create-parishes" class="nav__link">Parishes</a></li>
@@ -38,10 +39,9 @@
         </ul>
     </div>
     <div class="gc__right">
+
         <section class="row__table">
             <table class="table">
-
-
                 <tr>
                     <th>First Reading</th>
                     <th>Second Reading</th>

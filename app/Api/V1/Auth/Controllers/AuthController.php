@@ -5,6 +5,7 @@
  */
 namespace App\Api\V1\Auth\Controllers;
 
+use App\Api\V1\Account\Models\Role;
 use App\Api\V1\Auth\Traits\Login;
 use App\Api\V1\Auth\Transformers\UserTransformer;
 use App\Api\V1\Auth\Validators\ValidateLogin;
@@ -28,11 +29,6 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class AuthController extends Controller
 {
-    /**
-     * The dingo API package routing helper
-     */
-    use Helpers;
-
     /**
      * Login Trait
      */
@@ -105,6 +101,56 @@ class AuthController extends Controller
             'subscription_category_id' => SubscriptionCategory::where('subscription_category', 2)->first()->id,
             'subscription_status_id' => SubscriptionStatus::where('status_code', 1)->first()->id
         ]);
+
+        if($request->path() == 'api/auth/signup-mkatoliki-admin'){
+
+            $role = Role::where('role_power', 0)->first();
+
+            $user->user_role()->create([
+
+                'role_id' => $role->id
+            ]);
+        }
+
+        if($request->path() == 'api/auth/signup-parish-admin'){
+
+            $role = Role::where('role_power', 1)->first();
+
+            $user->user_role()->create([
+
+                'role_id' => $role->id
+            ]);
+        }
+
+        if($request->path() == 'api/auth/signup-outstation-admin'){
+
+            $role = Role::where('role_power', 2)->first();
+
+            $user->user_role()->create([
+
+                'role_id' => $role->id
+            ]);
+        }
+
+        if($request->path() == 'api/auth/signup-priest'){
+
+            $role = Role::where('role_power', 1)->first();
+
+            $user->user_role()->create([
+
+                'role_id' => $role->id
+            ]);
+        }
+
+        if($request->path() == 'api/auth/signup'){
+
+            $role = Role::where('role_power', 4)->first();
+
+            $user->user_role()->create([
+
+                'role_id' => $role->id
+            ]);
+        }
 
         $subscription->subscription_details()->create([
             'start_date' => Carbon::now(),

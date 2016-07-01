@@ -12,11 +12,6 @@ use Dingo\Api\Routing\Helpers;
 class ParishController extends Controller
 {
     /**
-     * Dingo Routing Helper
-     */
-    use Helpers;
-
-    /**
      * Display a listing of the parish resource.
      *
      * @return \Illuminate\Http\Response

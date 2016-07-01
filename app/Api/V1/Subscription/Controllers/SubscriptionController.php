@@ -19,13 +19,6 @@ use App\Api\V1\Subscription\Models\SubscriptionStatus;
 
 class SubscriptionController extends Controller
 {
-
-    /**
-     * The Dingo API helpers
-     */
-    use Helpers;
-
-
     /**
      * The merchant id from Mpesa
      * @var string

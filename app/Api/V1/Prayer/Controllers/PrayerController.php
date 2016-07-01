@@ -11,8 +11,6 @@ use Dingo\Api\Routing\Helpers;
 
 class PrayerController extends Controller
 {
-
-    use Helpers;
     /**
      * Display a listing of the prayer resource.
      *

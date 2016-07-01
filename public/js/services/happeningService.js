@@ -4,17 +4,26 @@
 
     angular
         .module('mkatolikiApp')
-        .factory('happeningService', ['Restangular', 'userService', function(Restangular, userService){
+        .factory('happeningService', ['Restangular', 'userService', 'localStorageService', '$http', function(Restangular, userService, localStorageService, $http){
+
+
 
             function getAll(onSuccess, onError){
 
-                Restangular.all('api/happenings').getList().then(function(response){
-
-                    onSuccess(response);
-                }, function(response){
-
-                    onError(response);
-                });
+                $http.get('api/happenings/?token='+localStorageService.get('token'), {
+                })
+                    .then(function(response){
+                        onSuccess(response);
+                    }, function(response){
+                        onError(response);
+                    });
+//                Restangular.all('api/happenings').getList().then(function(response){
+//
+//                    onSuccess(response);
+//                }, function(response){
+//
+//                    onError(response);
+//                });
             }
 
             function getById(happeningId, onSuccess, onError){

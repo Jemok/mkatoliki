@@ -7,7 +7,6 @@
         .controller('LoginController', ['$scope', '$http', '$location', 'userService', 'localStorageService', 'mainService', function($scope, $http, $location, userService, localStorageService, mainService){
             //Initiate the login in process
 
-
             $scope.login = function(){
                 $scope.$emit('LOAD');
 
@@ -17,8 +16,13 @@
 
                     function(response){
 
-                        localStorageService.set('token', response.data.token);
+                        var user_data = response.data.user;
 
+                        console.log(user_data);
+
+                        localStorageService.set('user_data', user_data);
+
+                        localStorageService.set('token', response.data.token);
 
                         $location.path('/');
                     },
@@ -38,7 +42,6 @@
                         if(response.data.error.status_code === 500){
 
                             $scope.loginError = response.data.error.status_code;
-
                         }
                     }
                 );

@@ -62,20 +62,27 @@ trait Login {
 
         $user = \Auth::user();
 
+        $role_id = \Auth::user()->user_role()->first()->role_id;
+
+
         if($login_type == 'phone'){
 
             $parish_id = \Auth::user()->user_parishes()->first()->parish_id;
 
             $station_id = \Auth::user()->user_stations()->first()->station_id;
 
+
             $user->token = $token;
             $user->parish_id = $parish_id;
             $user->station_id =$station_id;
+            $user->role_id = $role_id;
 
             return $user;
         }
 
+        $user->role_id = $role_id;
         $user->token = $token;
+
 
         return $user;
     }

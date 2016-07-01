@@ -193,4 +193,57 @@ class User extends Model implements AuthenticatableContract,
 
         return $this->hasOne(Phone_token::class);
     }
+
+    /**
+     * User Roles relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function roles(){
+
+        return $this->hasMany(Role::class);
+    }
+
+    /**
+     * User UserRoles relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function user_role(){
+
+        return $this->hasOne(User_roles::class);
+    }
+
+    public function isAdmin(){
+
+        if($this->user_role()->first()->role_id == 0)
+            return true;
+        return false;
+    }
+
+    public function isParishAdmin(){
+
+        if($this->user_role()->first()->role_id == 1)
+            return true;
+        return false;
+    }
+
+    public function isOutstationAdmin(){
+
+        if($this->user_role()->first()->role_id == 2)
+            return true;
+        return false;
+    }
+
+    public function isPriest(){
+
+        if($this->user_role()->first()->role_id == 3)
+            return true;
+        return false;
+    }
+
+    public function isAppUser(){
+
+        if($this->user_role()->first()->role_id == 4)
+            return true;
+        return false;
+    }
 }

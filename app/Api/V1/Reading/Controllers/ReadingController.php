@@ -13,7 +13,6 @@ use Dingo\Api\Routing\Helpers;
 
 class ReadingController extends Controller
 {
-    use Helpers;
     /**
      * Display a listing of the reading resource.
      *
@@ -29,6 +28,23 @@ class ReadingController extends Controller
         return Reading::all()->toArray();
     }
 
+
+    /**
+     * Display the specified reading resource.
+     * @param $id
+     * @return mixed
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+
+    public function show($id)
+    {
+        $reading = Reading::find($id);
+
+        if(!$reading)
+            throw new NotFoundHttpException;
+
+        return $reading;
+    }
     /**
      * Store a newly created reading resource in storage.
      *
@@ -66,22 +82,6 @@ class ReadingController extends Controller
             return $this->response->error('could_not_create_reading', 500);
     }
 
-    /**
-     * Display the specified reading resource.
-     * @param $id
-     * @return mixed
-     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     */
-
-    public function show($id)
-    {
-        $reading = Reading::find($id);
-
-        if(!$reading)
-            throw new NotFoundHttpException;
-
-        return $reading;
-    }
 
 
     /**

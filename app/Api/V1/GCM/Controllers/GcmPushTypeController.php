@@ -16,8 +16,6 @@ use Dingo\Api\Routing\Helpers;
 
 class GcmPushTypeController extends Controller {
 
-    use Helpers;
-
     /**
      * Handle storing of a new gcm push type to db
      * @param Request $request

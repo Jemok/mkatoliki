@@ -11,7 +11,6 @@ use Dingo\Api\Routing\Helpers;
 
 class RawJumuiyaController extends Controller
 {
-    use Helpers;
 
     /**
      * Display a listing of the raw-jumuiya resource.

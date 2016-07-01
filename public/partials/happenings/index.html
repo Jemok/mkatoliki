@@ -1,17 +1,7 @@
-<div class="row global__toolbar">
-    <div class="gc__right">
-        <header class="row row__filter">
-            <!--<form class="search">-->
-                <!--<input type="text" value="Event ..." class="f__input">-->
-                <!--<input type="date" value="Date ..." class="f__input">-->
 
-            <!--</form>-->
-            <div class="create">
-                <!--<button type="submit" class="cta">Search--></button><a href="#/create-happenings" class="cta">Create New</a></div>
-        </header>
-    </div>
-</div>
-<!--<div class="row global__content">-->
+<div data-ng-include="'./partials/happenings/create.html'"></div>
+
+<div class="row global__content">
     <div class="gc__sidebar">
         <ul class="nav">
             <li class="nav__header">Quick Links</li>
@@ -26,6 +16,35 @@
             <li class="nav__item"><a href="#/create-stations" class="nav__link">Stations</a></li>
         </ul>
     </div>
+        <div class="gc__right">
+            <section class="row__table">
+                <table class="table">
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Venue</th>
+                        <th>Details</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    <tr data-ng-repeat="happening in happenings | orderBy:'-id'">
+                        <td>{{happening.event_title}}</td>
+                        <td>{{happening.event_date}}</td>
+                        <td>{{happening.event_body}}</td>
+                        <td>{{happening.event_excerpt}}</td>
+                        <td>
+                            <a href="#" class="cta__link">Edit</a>
+                        </td>
+                        <td>
+                            <a href="#" class="cta__link">Delete</a>
+                        </td>
+                    </tr>
+                </table>
+            </section>
+        </div>
+    </div>
+
+
     <!--<div class="gc__right">-->
         <!--<section class="row__table">-->
             <!--<table class="table">-->
@@ -46,7 +65,7 @@
             <!--</table>-->
         <!--</section>-->
     <!--</div>-->
-<!--</div>-->
+</div>
 
 <!--<div class="row">-->
     <!--<div class="col-md-12">-->

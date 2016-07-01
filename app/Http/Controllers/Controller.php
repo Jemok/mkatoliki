@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Dingo\Api\Routing\Helpers;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -11,6 +12,11 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 abstract class Controller extends BaseController
 {
+    /**
+     * The dingo API package routing helper
+     */
+    use Helpers;
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**

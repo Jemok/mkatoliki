@@ -24,11 +24,6 @@ use Illuminate\Support\Facades\Response;
 class SubscriptionCategoryController extends Controller {
 
     /**
-     * The Dingo Api Routing Helpers;
-     */
-    use Helpers;
-
-    /**
      * Handle Persisting of a new Subscription to the database
      * @param Request $request
      * @return \Dingo\Api\Http\Response|void

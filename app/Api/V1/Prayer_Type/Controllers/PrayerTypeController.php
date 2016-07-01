@@ -12,7 +12,6 @@ use App\Api\V1\Prayer_Type\Models\Prayer_types;
 
 class PrayerTypeController extends Controller
 {
-    use Helpers;
     /**
      * Display a listing of the prayer_type resource.
      *

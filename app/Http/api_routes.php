@@ -27,14 +27,27 @@ $api->version('v1', function ($api) {
         /**----------------------------------------------------------------------------------------------
          * Signup route
          */
-        // Registering a user from either a mobile app client or the web client
-        $api->post('auth/signup',     'App\Api\V1\Auth\Controllers\AuthController@signup');
+
+        // Registering an admin from either a mobile app client or the web client
+        $api->post('auth/signup-mkatoliki-admin', 'App\Api\V1\Auth\Controllers\AuthController@signup');
+
+        // Registering a paeish admin from either a mobile app client or the web client
+        $api->post('auth/signup-parish-admin',  'App\Api\V1\Auth\Controllers\AuthController@signup');
+
+        // Registering an outstation admin from either a mobile app client or the web client
+        $api->post('auth/signup-outstation-admin', 'App\Api\V1\Auth\Controllers\AuthController@signup');
+
+        // Registering a priest from either a mobile app client or the web client
+        $api->post('auth/signup-priest', 'App\Api\V1\Auth\Controllers\AuthController@signup');
+
+        // Registering an app user from either a mobile app client or the web client
+        $api->post('auth/signup', 'App\Api\V1\Auth\Controllers\AuthController@signup');
 
         /**----------------------------------------------------------------------------------------------
          * Account recovery and reset routes
          */
         $api->post('auth/recovery',  'App\Api\V1\Auth\Controllers\AuthController@recovery');
-        $api->post('auth/reset',     'App\Api\V1\Auth\Controllers\AuthController@reset');
+        $api->post('auth/reset',  'App\Api\V1\Auth\Controllers\AuthController@reset');
 //
 //        /**----------------------------------------------------------------------------------------------
 //         * Logout route

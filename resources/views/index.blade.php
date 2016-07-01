@@ -66,10 +66,10 @@
                     <ul class="nav">
                         <li class="nav__item"><a data-ng-controller="MainController" href="" data-ng-click="logout()" class="nav__link">Logout</a></li>
                     </ul>
-
                 </div>
             </div>
 
-            <div ng-view data-ng-controller="mkatolikiController" class="row global__wrapper"> </div>
+            <div ng-view data-ng-controller="mkatolikiController" class="row global__wrapper">
+             </div>
     </body>
 </html>

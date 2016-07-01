@@ -38,6 +38,7 @@ class UserTransformer extends Transformer {
                 'phone_number' => $user['phone_number'],
                 'parish_id'    => $user['parish_id'],
                 'station_id'   => $user['station_id'],
+                'user_role'    => $user['role_id'],
                 'created_at'   => $user['created_at'],
                 'updated_at'   => $user['updated_at']
         ];
