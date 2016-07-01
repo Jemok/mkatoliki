@@ -17,6 +17,7 @@ use App\Api\V1\Subscription\Models\SubscriptionCategory;
 use App\Api\V1\Subscription\Models\SubscriptionStatus;
 use App\Api\V1\Subscription\Models\SubscriptionStatusType;
 use App\Api\V1\Subscription\Models\UserSubscription;
+use App\Feedback;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -192,6 +193,16 @@ class User extends Model implements AuthenticatableContract,
     public function phone_token(){
 
         return $this->hasOne(Phone_token::class);
+    }
+
+    /**
+     * User Feedback relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function feedbacks(){
+
+        return $this->hasMany(Feedback::class);
+
     }
 
     /**
