@@ -9,6 +9,7 @@
 namespace App\Api\V1\Auth\Validators;
 use Validator;
 use Dingo\Api\Exception\ValidationHttpException;
+use App\Api\V1\Validator\ApiValidator;
 
 trait ValidateLogin {
 
@@ -44,10 +45,8 @@ trait ValidateLogin {
             'password' => 'required',
         ]);
 
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
+        $apiValidator = new ApiValidator;
 
-        return $validator;
+        $apiValidator->validate($validator);
     }
 } 

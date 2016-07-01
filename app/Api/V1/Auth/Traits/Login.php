@@ -71,7 +71,6 @@ trait Login {
 
             $station_id = \Auth::user()->user_stations()->first()->station_id;
 
-
             $user->token = $token;
             $user->parish_id = $parish_id;
             $user->station_id =$station_id;
@@ -82,7 +81,6 @@ trait Login {
 
         $user->role_id = $role_id;
         $user->token = $token;
-
 
         return $user;
     }

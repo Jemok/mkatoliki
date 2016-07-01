@@ -48,18 +48,6 @@ $api->version('v1', function ($api) {
          */
         $api->post('auth/recovery',  'App\Api\V1\Auth\Controllers\AuthController@recovery');
         $api->post('auth/reset',  'App\Api\V1\Auth\Controllers\AuthController@reset');
-//
-//        /**----------------------------------------------------------------------------------------------
-//         * Logout route
-//         */
-//        $api->get('auth/logout', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@logout');
-//
-//        /**----------------------------------------------------------------------------------------------
-//         * User routes
-//         */
-//        //
-//        $api->get('auth/user', 'App\Api\V1\Auth\Controllers\AuthController@getAuthenticatedUser');
-//        $api->post('auth/user/parish-station', 'App\Api\V1\Auth\Controllers\AuthControllerPhone@setParishAndStation');
     });
 
     // These routes handle user activities
@@ -223,6 +211,15 @@ $api->version('v1', function ($api) {
         $api->delete('raw-jumuiyas/{id}', 'App\Api\V1\Prayer_Type\Controllers\RawJumuiyaController@destroy');
     });
 
+    /**-------------------------------------------------------------------------------------------------------
+     *
+     * Feedback api routes
+     *
+     */
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+        $api->post('feedbacks', 'App\Api\V1\Feedback\Controllers\FeedbackController@store');
+    });
+
     /**--------------------------------------------------------------------------------------------------------
      *
      * Parish cum Out-stations route
@@ -246,6 +243,7 @@ $api->version('v1', function ($api) {
         $api->get('new-data/{client_date}', 'App\Api\V1\Data\Controllers\NewDataController@index');
 
     });
+
 
     /**-------------------------------------------------------------------------------------------------------
      *

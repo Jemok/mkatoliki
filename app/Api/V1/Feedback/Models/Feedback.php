@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Api\V1\Feedback\Models;
 
 use App\Api\V1\Account\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -20,10 +20,8 @@ class Feedback extends Model
      * @var array
      */
     protected $fillable = [
-
         'mood',
         'comment'
-
     ];
 
     /**

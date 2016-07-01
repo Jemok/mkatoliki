@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Account\Models;
 
+use App\Api\V1\Feedback\Models\Feedback;
 use App\Api\V1\GCM\Models\GcmPushType;
 use App\Api\V1\GCM\Models\Phone_token;
 use App\Api\V1\Happening\Models\Happening_event;
@@ -17,7 +18,6 @@ use App\Api\V1\Subscription\Models\SubscriptionCategory;
 use App\Api\V1\Subscription\Models\SubscriptionStatus;
 use App\Api\V1\Subscription\Models\SubscriptionStatusType;
 use App\Api\V1\Subscription\Models\UserSubscription;
-use App\Feedback;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;

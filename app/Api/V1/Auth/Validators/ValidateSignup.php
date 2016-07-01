@@ -8,6 +8,7 @@
 
 namespace App\Api\V1\Auth\Validators;
 
+use App\Api\V1\Validator\ApiValidator;
 use Validator;
 use Dingo\Api\Exception\ValidationHttpException;
 
@@ -25,11 +26,9 @@ trait ValidateSignup {
         //Start the validation process
         $validator = Validator::make($userData, $signup_fields);
 
-        if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
-        }
+        $apiValidator = new ApiValidator;
 
-        return $validator;
+        $apiValidator->validate($validator);
     }
 
 } 
