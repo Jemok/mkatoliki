@@ -544,6 +544,17 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
       "Feedback successfully created"
     ]
 
+### PASSWORD RECOVERY ENDPOINT
+
+    HOST:  api.mkatoliki.com
+    POST: /api/auth/recovery HTTP/1.1
+
+    {
+        "email":"karokijames40@gmail.com"
+    }
+
+    Response 204 No Content
+
 ### SUBSCRIPTION DESCRIPTION
 
 ### ARCHITECTURE

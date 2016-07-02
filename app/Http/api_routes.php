@@ -48,6 +48,7 @@ $api->version('v1', function ($api) {
          */
         $api->post('auth/recovery',  'App\Api\V1\Auth\Controllers\AuthController@recovery');
         $api->post('auth/reset',  'App\Api\V1\Auth\Controllers\AuthController@reset');
+        $api->get('auth/reset/{token}', 'App\Api\V1\Auth\Controllers\AuthController@getReset');
     });
 
     // These routes handle user activities

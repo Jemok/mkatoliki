@@ -28,6 +28,8 @@ use App\Api\V1\Account\Repositories\UserRepository;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthController extends Controller
 {
@@ -180,6 +182,20 @@ class AuthController extends Controller
     }
 
     /**
+     * Display the password reset view for the given token.
+     * @param null $token
+     * @return $this
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     */
+    public function getReset($token = null)
+    {
+        if (is_null($token)) {
+            throw new NotFoundHttpException;
+        }
+        return view('auth.reset')->with('token', $token);
+    }
+
+    /**
      * Handles the resetting of a users authentication credentials
      * @param Request $request
      * @return \Dingo\Api\Http\Response|\Illuminate\Http\JsonResponse|void
@@ -200,7 +216,8 @@ class AuthController extends Controller
         ]);
 
         if($validator->fails()) {
-            throw new ValidationHttpException($validator->errors()->all());
+            //throw new ValidationHttpException($validator->errors()->all());
+            return redirect()->back()->withInput()->withErrors($validator);
         }
 
         //Reset the account
@@ -214,10 +231,14 @@ class AuthController extends Controller
                 if(Config::get('boilerplate.reset_token_release')) {
                     return $this->loginDefault($request);
                 }
-                return $this->response->noContent();
+                //return $this->response->noContent();
+                Session::flash('flash_message', 'Your password was rest successfully, you can now login to the mobile app using the new password');
+                return redirect()->back();
 
             default:
-                return $this->response->error('could_not_reset_password', 500);
+                //return $this->response->error('could_not_reset_password', 500);
+                Session::flash('flash_message_error', 'We could not reset your password, try resending a reset link again from the mobile app');
+                return redirect()->back();
         }
     }
 }
