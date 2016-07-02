@@ -544,8 +544,6 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
       "Feedback successfully created"
     ]
 
-
-
 ### SUBSCRIPTION DESCRIPTION
 
 ### ARCHITECTURE

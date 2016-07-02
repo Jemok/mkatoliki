@@ -6,12 +6,14 @@
 namespace App\Api\V1\Auth\Controllers;
 
 use App\Api\V1\Account\Models\Role;
+use App\Api\V1\Auth\Services\SetUserRole;
 use App\Api\V1\Auth\Traits\Login;
 use App\Api\V1\Auth\Transformers\UserTransformer;
 use App\Api\V1\Auth\Validators\ValidateLogin;
 use App\Api\V1\Auth\Validators\ValidateSignup;
 use App\Api\V1\Subscription\Models\SubscriptionCategory;
 use App\Api\V1\Subscription\Models\SubscriptionStatus;
+use App\Api\V1\Subscription\Repositories\SubscriptionRepository;
 use Carbon\Carbon;
 use JWTAuth;
 use Validator;
@@ -70,15 +72,17 @@ class AuthController extends Controller
         //Login the user
         return $this->login($credentials, $this->login_type, new UserTransformer());
     }
-    
+
     /**
      * Handles registration of a new user into the API
      * @param Request $request
      * @param UserRepository $userRepository
+     * @param SetUserRole $setUserRole
+     * @param SubscriptionRepository $subscriptionRepository
      * @return \Dingo\Api\Http\Response|\Illuminate\Http\JsonResponse|void
      */
 
-    public function signup(Request $request, UserRepository $userRepository)
+    public function signup(Request $request, UserRepository $userRepository, SetUserRole $setUserRole, SubscriptionRepository $subscriptionRepository)
     {
         // Get the sign up fields from the Sign up fields boilerplate in
         // app/config/boilerplate.php
@@ -96,83 +100,29 @@ class AuthController extends Controller
         //Save the user to the database
         $user = $userRepository->store($userData);
 
-        // Set a default subscription for the user
-        $subscription = $user->subscriptions()->create([
-            'subscription_category_id' => SubscriptionCategory::where('subscription_category', 2)->first()->id,
-            'subscription_status_id' => SubscriptionStatus::where('status_code', 1)->first()->id
-        ]);
-
-        if($request->path() == 'api/auth/signup-mkatoliki-admin'){
-
-            $role = Role::where('role_power', 0)->first();
-
-            $user->user_role()->create([
-
-                'role_id' => $role->id
-            ]);
-        }
-
-        if($request->path() == 'api/auth/signup-parish-admin'){
-
-            $role = Role::where('role_power', 1)->first();
-
-            $user->user_role()->create([
-
-                'role_id' => $role->id
-            ]);
-        }
-
-        if($request->path() == 'api/auth/signup-outstation-admin'){
-
-            $role = Role::where('role_power', 2)->first();
-
-            $user->user_role()->create([
-
-                'role_id' => $role->id
-            ]);
-        }
-
-        if($request->path() == 'api/auth/signup-priest'){
-
-            $role = Role::where('role_power', 1)->first();
-
-            $user->user_role()->create([
-
-                'role_id' => $role->id
-            ]);
-        }
-
-        if($request->path() == 'api/auth/signup'){
-
-            $role = Role::where('role_power', 4)->first();
-
-            $user->user_role()->create([
-
-                'role_id' => $role->id
-            ]);
-        }
-
-        $subscription->subscription_details()->create([
-            'start_date' => Carbon::now(),
-            'end_date'   => Carbon::now()->addHours(SubscriptionCategory::where('subscription_category', 1)->first()->days)
-        ]);
         //If there was an error, return response error message
         if(!$user->id) {
             return $this->response->error('could_not_create_user', 500);
         }
+
+        // Set the role of a user
+        $setUserRole->setRole($user, $request);
+
+        // Set a default subscription for the user
+        $subscriptionRepository->defaultSubscription($user);
+
         //Login the user
         if($hasToReleaseToken) {
-
             return $this->loginDefault($request);
         }
         //If successfully created the user, return response success
         return $this->response->created();
-
         }
 
     /**
      * Retrieves the authenticated user
-     * @return \Illuminate\Http\JsonResponse
+     * @param UserTransformer $userTransformer
+     * @return array|\Illuminate\Http\JsonResponse
      */
     public function getAuthenticatedUser(UserTransformer $userTransformer)
     {
