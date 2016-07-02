@@ -18,6 +18,11 @@ use App\Api\V1\Auth\Transformers\UserTransformer;
 
 trait Login {
 
+    protected $parish_id = 0;
+
+    protected $station_id = 0;
+
+    protected $role_id = 4;
     /**
      * @param $credentials
      * @param $login_type
@@ -61,23 +66,34 @@ trait Login {
     private function getUserDetails($token, $login_type){
         $user = \Auth::user();
 
-        $role_id = \Auth::user()->user_role()->first()->role_id;
+        if(\Auth::user()->user_role()->exists()){
+            $this->role_id = \Auth::user()->user_role()->first()->role_id;
+        }
+
 
         if($login_type == 'phone'){
 
-            $parish_id = \Auth::user()->user_parishes()->first()->parish_id;
+            if(\Auth::user()->user_parishes()->exists()){
 
-            $station_id = \Auth::user()->user_stations()->first()->station_id;
+                $this->parish_id = \Auth::user()->user_parishes()->first()->parish_id;
+            }
+
+
+
+            if(\Auth::user()->user_stations()->exists()){
+
+                $this->station_id = \Auth::user()->user_stations()->first()->station_id;
+            }
 
             $user->token = $token;
-            $user->parish_id = $parish_id;
-            $user->station_id =$station_id;
-            $user->role_id = $role_id;
+            $user->parish_id = $this->parish_id;
+            $user->station_id =$this->station_id;
+            $user->role_id = $this->role_id;
 
             return $user;
         }
 
-        $user->role_id = $role_id;
+        $user->role_id = $this->role_id;
         $user->token = $token;
 
         return $user;

@@ -43,6 +43,12 @@ $api->version('v1', function ($api) {
         // Registering an app user from either a mobile app client or the web client
         $api->post('auth/signup', 'App\Api\V1\Auth\Controllers\AuthController@signup');
 
+        //Email confirmation route
+        $api->get('auth/confirm/{token}', 'App\Api\V1\Auth\Controllers\AuthController@confirmEmail');
+        $api->get('auth/confirm/success', 'App\Api\V1\Auth\Controllers\AuthController@confirmEmailSuccess');
+
+
+
         /**----------------------------------------------------------------------------------------------
          * Account recovery and reset routes
          */

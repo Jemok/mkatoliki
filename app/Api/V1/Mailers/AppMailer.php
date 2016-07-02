@@ -18,7 +18,7 @@ class AppMailer {
      * Email sender
      * @var
      */
-    protected $from = 'mwangijames2014@outlook.com';
+    protected $from = 'karokijames40@gmail.com';
 
     /**
      * Email receiver
@@ -49,13 +49,14 @@ class AppMailer {
      * Send the email confirmation link
      * @param User $user
      */
-    public  function sendConfirmEmailLink(User $user){
+    public  function sendConfirmEmailLink($user){
 
         $this->to = $user->email;
         $this->view = 'emails.confirm';
         $this->subject = "Mkatoliki confirm email";
         $this->data = compact('user');
-        $this->deliver();
+
+        return $this->deliver();
 
     }
 
@@ -64,7 +65,7 @@ class AppMailer {
      */
     public function deliver(){
 
-        Mail::send($this->view, $this->data, function($message){
+       return Mail::send($this->view, $this->data, function($message){
 
             $message->from($this->from, 'Mkatoliki Admin')
                 ->to($this->to)

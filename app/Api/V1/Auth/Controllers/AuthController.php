@@ -30,6 +30,8 @@ use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use App\Api\V1\Mailers\AppMailer;
+use App\Api\V1\Account\Models\User;
 
 class AuthController extends Controller
 {
@@ -118,11 +120,18 @@ class AuthController extends Controller
             return $this->loginDefault($request);
         }
 
+        $mailer = new AppMailer();
 
 
-        //If successfully created the user, return response success
-        return response()->json(['message'=>'User was successfully created and a confirmation email has been sent to them'], 201);
+        if($mailer->sendConfirmEmailLink($user)){
+            //If successfully created the user, return response success
+            return response()->json(['message'=>'User was successfully created and a confirmation email has been sent to them'], 201);
         }
+
+        return response()->json(['message' => 'There was an error creating the user'], 500);
+    }
+
+
 
     /**
      * Retrieves the authenticated user
@@ -243,5 +252,14 @@ class AuthController extends Controller
                 Session::flash('flash_message_error', 'We could not reset your password, try resending a reset link again from the mobile app');
                 return redirect()->back();
         }
+    }
+
+    public function confirmEmail($token)
+    {
+        User::whereToken($token)->firstOrFail()->confirmEmail();
+
+        Session::flash('flash_message', 'Your email was confirmed successfully, you can now login in the mobile app');
+
+        return view('verification.success');
     }
 }
