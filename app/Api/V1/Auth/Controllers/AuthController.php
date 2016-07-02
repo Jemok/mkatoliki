@@ -117,8 +117,11 @@ class AuthController extends Controller
         if($hasToReleaseToken) {
             return $this->loginDefault($request);
         }
+
+
+
         //If successfully created the user, return response success
-        return $this->response->created();
+        return response()->json(['message'=>'User was successfully created and a confirmation email has been sent to them'], 201);
         }
 
     /**
