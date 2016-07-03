@@ -6,11 +6,6 @@ THE ARCHANGEL INTERACTIVE AGENCY
 PREPARED BY: JAMES KAROKI
 CREATED ON: DATE: 4/4/2016
 
-## NB: What this definition does NOT contain:
-
-Subscription via MPESA
-Password resets and account recovery
-
 NB: Client should define their local storage schema from the fields returned in the api JSON respsponses.
 NB: Tables relationships listed at the end of the api definition
 NB: Foreign keys definitions have been highlighted in the api definition responses
