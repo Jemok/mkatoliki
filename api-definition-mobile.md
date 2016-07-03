@@ -14,10 +14,9 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
 
 ### REGISTER A NEW USER
 
-User will have to confirm their email address after they register with the app, login will only be allowed after their email address has been confirmed.
+Users will have to confirm their email address after they register with the app, login will only be allowed after their email address has been confirmed.
 Client should alert the user to confirm their email addresses after registration
-The `verified` field is set to `0` by default after registration.
-When the user
+The `verified` field is set to `0` by default after registration to indicate un-verification.
 
     POST :  /api/auth/signup HTTP /1.1
     HOST:  api.matoliki.com

@@ -34,4 +34,13 @@ class GcmPush extends Model
 
         return $this->belongsTo(GcmPushType::class);
     }
+
+    /**
+     * GcmPush GcmMessage relationships
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function gcm_messages(){
+
+        return $this->hasMany(GcmMessages::class);
+    }
 }

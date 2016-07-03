@@ -14,10 +14,20 @@ use App\Api\V1\GCM\Services\GcmPushService;
 
 class SubscriptionMpesaObserver {
 
+    /**
+     * Mpesa subscription message title
+     * @var string
+     */
+    protected $title = "Mpesa subscription";
+
+    /**
+     * Type of gcm message to be sent after processing
+     * @var string
+     */
+    private $gcm_message_type = 'notification';
+
     public function saved($model){
-
         $this->handle(new GcmPushService(), $model);
-
     }
 
     public function handle(GcmPushService $gcmPushService, $model){
@@ -38,15 +48,14 @@ class SubscriptionMpesaObserver {
             $message = 'Your subscription failed'; // $model->description ;
 
         }else{
-
             $message = "Sorry we could not complete transaction";
         }
 
         $user_id = Subscription::where('id', '=', $model->subscription_id)->first()->user_id;
 
-        $to = Phone_token::where('user_id', '=', $user_id)->first()->token;
+        $to = Phone_token::where('user_id', '=', $user_id)->get(['token']);
 
-        $gcmPushService->push($to, $message);
+        $gcmPushService->push($to, $message, $this->title);
     }
 
 } 

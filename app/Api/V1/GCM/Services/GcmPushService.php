@@ -15,27 +15,41 @@ use App\Api\V1\GCM\Repositories\GcmPushRepository;
 
 class GcmPushService {
 
+    protected $s = [];
+
     /**
      * Push a global message to all phones using GCM
      */
-    public function push($to, $message){
+    public function push($to, $message, $title){
         $client = new Client(['timeout'  => 60.0]);
 
+        //var_dump($to);
+
+        foreach($to as $t){
+
+            $this->s[] = $t->token;
+        }
+
         try{
-            $response = $client->post('https://gcm-http.googleapis.com/gcm/send',
+            $response = $client->post('https://fcm.googleapis.com/fcm/send',
             [
                     'headers' => [
                         'User-Agent' => 'MkatolikiApp',
                         'Authorization' => 'key=AIzaSyCAGRXrBB__ZhlQIV0thCY7zM2AziWbIcY',
                         'Content-Type'     => 'application/json'
                     ],
+
+
                     'json' => [
-                        'to'   => $to,
-                        'data' => [
-                            'message' => $message
+                        'registration_ids'   => $this->s,
+                        'notification' => [
+                            'title' => $title,
+                            'text'  => $message
                         ]
                     ]
             ]);
+
+
 
             $body = $response->getBody();
 
@@ -43,18 +57,23 @@ class GcmPushService {
 
             $message = json_decode($json_message);
 
-            //type code 1 for personal
-            //typecode 2 for global
+            //dd($message->results);
+
+            //type code 1 for personal/notification
+            //typecode 2 for global sync
+            //typecode 3 for group sync
 
             $gcm_push_type_id = GcmPushType::where('type_code', '=', 1)->first()->id;
 
             $gcm_repository = new GcmPushRepository();
 
-            $gcm_repository->store($message->results[0]->message_id, $message->multicast_id, $message->success, $message->failure, $message->canonical_ids, $gcm_push_type_id);
+            $gcm_repository->store("",$message->results, $message->multicast_id, $message->success, $message->failure, $message->canonical_ids, $gcm_push_type_id);
 
         }catch (RequestException $e){
 
         }
     }
+
+
 
 } 

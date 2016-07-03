@@ -55,8 +55,6 @@ class SubscriptionController extends Controller
      * Dingo API routing helpers
      */
 
-    use Helpers;
-
     /**
      * Handle persisting of a new subscription to the database
      * @param Request $request

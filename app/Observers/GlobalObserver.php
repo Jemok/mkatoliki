@@ -28,7 +28,7 @@ class GlobalObserver {
         $client = new Client(['timeout'  => 300.0]);
 
         try{
-            $response = $client->post('https://gcm-http.googleapis.com/gcm/send',
+            $response = $client->post('https://fcm.googleapis.com/fcm/send',
                 [
                     'headers' => [
                         'User-Agent' => 'MkatolikiApp',
@@ -38,7 +38,7 @@ class GlobalObserver {
                     'json' => [
                         'to'   => '/topics/global',
                         'data' => [
-                            'message' => 'update'
+                            'message' => 'sync'
                         ]
                     ]
                 ]);
@@ -53,8 +53,7 @@ class GlobalObserver {
 
             $gcm_push_type_id = GcmPushType::where('type_code', '=', 2)->first()->id;
 
-
-            $gcm_repository->store($message->message_id, "", "", "", "", $gcm_push_type_id);
+            $gcm_repository->store($message->message_id,"","", "", "", "", $gcm_push_type_id);
 
         }catch (RequestException $e){
         }
