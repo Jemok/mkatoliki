@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Account\Models;
 
+use App\Api\V1\Announcement\Models\Announcement;
 use App\Api\V1\Feedback\Models\Feedback;
 use App\Api\V1\GCM\Models\GcmPushType;
 use App\Api\V1\GCM\Models\Phone_token;
@@ -212,6 +213,15 @@ class User extends Model implements AuthenticatableContract,
     public function roles(){
 
         return $this->hasMany(Role::class);
+    }
+
+    /**
+     * User Announcement relationship
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function announcements(){
+
+        return $this->hasMany(Announcement::class);
     }
 
     /**

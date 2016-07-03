@@ -2,6 +2,8 @@
 
 namespace App\Api\V1\Announcement\Controllers;
 
+use App\Api\V1\Announcement\Repositories\AnnouncementRepository;
+use App\Api\V1\Announcement\Validators\ValidateAnnouncement;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -30,14 +32,19 @@ class AnnouncementsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * Persist a new announcement to the database
+     * @param Request $request
+     * @param ValidateAnnouncement $validateAnnouncement
+     * @param AnnouncementRepository $announcementRepository
+     * @return \Illuminate\Http\JsonResponse|void
      */
-    public function store(Request $request)
+    public function store(Request $request, ValidateAnnouncement $validateAnnouncement, AnnouncementRepository $announcementRepository)
     {
+        $validateAnnouncement->validateAnnouncement($request->all());
 
+        if($announcementRepository->store($request))
+            return response()->json(['Announcement successfully created'], 201);
+        return $this->response->error('could not create Announcement', 500);
     }
 
     /**

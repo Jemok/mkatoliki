@@ -227,6 +227,15 @@ $api->version('v1', function ($api) {
         $api->post('feedbacks', 'App\Api\V1\Feedback\Controllers\FeedbackController@store');
     });
 
+    /**-------------------------------------------------------------------------------------------------------
+     *
+     * Announcement api routes
+     *
+     */
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+        $api->post('announcements', 'App\Api\V1\Announcement\Controllers\AnnouncementsController@store');
+    });
+
     /**--------------------------------------------------------------------------------------------------------
      *
      * Parish cum Out-stations route
