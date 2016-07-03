@@ -14,6 +14,9 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
 
 ### REGISTER A NEW USER
 
+User will have to confirm their email address after they register with the app, login will only be allowed after their email address has been confirmed.
+Client should alert the user to confirm their email addresses after registration
+
     POST :  /api/auth/signup HTTP /1.1
     HOST:  api.matoliki.com
     Content-Type:  application/json
@@ -36,6 +39,7 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
     }
 
 ### USER LOGIN IN FOR THE FIRST TIME AFTER REGISTRATION
+User `parish_id` and `stattion_id` will be set to the value `0` by default.
 The API will return the below response,
 if `parish_id:0` or `station_id:0` then show the user the screen for setting a parish and an outstation.
 
@@ -548,6 +552,8 @@ if `parish_id:0` or `station_id:0` then show the user the screen for setting a p
     ]
 
 ### PASSWORD RECOVERY ENDPOINT
+
+**HEADER** Content-Type: application/json
 
     HOST:  api.mkatoliki.com
     POST: /api/auth/recovery HTTP/1.1
