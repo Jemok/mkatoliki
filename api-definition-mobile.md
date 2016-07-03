@@ -496,7 +496,24 @@ API RESPONSE FOR A NORMAL VERIFIED ACCOUNT
                    }
                  }
                }
-             ]
+             ],
+             "announcements": [
+                   {
+                     "id": 11,
+                     "title": "An announcement",
+                     "announcement": "Our best announcement ever",
+                     "date": "2016-06-13 13:18:44",
+                     "station_id": 1
+                   },
+                   {
+                     "id": 12,
+                     "title": "An announcement",
+                     "announcement": "Our best announcement ever",
+                     "date": "2016-06-13 13:18:44",
+                     "station_id": 1
+                   },
+                  ....
+                 ]
       }
     }
 
