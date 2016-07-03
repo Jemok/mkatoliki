@@ -252,6 +252,5 @@ class NewDataController extends Controller
        // return  $users =  User::where('id', '=', \Auth::user()->id)->where('id', '>', 20)->get()->toArray();
 
         return  $users =  User::where('id', '=', \Auth::user()->id)->get()->toArray();
-
     }
 }

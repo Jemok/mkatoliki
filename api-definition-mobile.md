@@ -30,11 +30,19 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
         "password" : "password_here"
     }
 
-    RESPONSE 200  OK
+    RESPONSE 201  Created
 
-    HTTP /1.1 200 OK
+    HTTP /1.1 201 Created
     HOST: api.mkatoliki.com
     Connection: close
+
+    {
+      "message": "User was successfully created and a confirmation email has been sent to them"
+    }
+
+### USER LOGIN IN FOR THE FIRST TIME AFTER REGISTRATION
+The API will return the below response,
+if `parish_id:0` or `station_id:0` then show the user the screen for setting a parish and an outstation.
 
 	{
       "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE2LCJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9zaWdudXAiLCJpYXQiOjE0NjY5MjAwMzYsImV4cCI6MTQ2NjkyMDA5NiwibmJmIjoxNDY2OTIwMDM2LCJqdGkiOiJjZTFjYWM5MjY4MGZiZGZhNTM2ZGRjMDZiZmZlNDVjYiJ9.kYisCP2Rf2bXpPZkhC8vRw_XyRAz2FP8WhiBRvWQspo",
@@ -44,8 +52,8 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
         "name": "user",
         "email": "user77@mkatoliki.com",
         "phone_number": "0752767071",
-        "parish_id": null,
-        "station_id": null,
+        "parish_id": 0,
+        "station_id": 0,
         "created_at": {
           "date": "2016-06-26 08:47:16",
           "timezone_type": 3,
@@ -105,8 +113,8 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
             "name": "user",
             "email": "user77@mkatoliki.com",
             "phone_number": "0752767071",
-            "parish_id": null,
-            "station_id": null,
+            "parish_id": 1,
+            "station_id": 1,
             "created_at": {
               "date": "2016-06-26 08:47:16",
               "timezone_type": 3,
