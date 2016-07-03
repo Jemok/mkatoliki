@@ -8,6 +8,7 @@
 
 namespace App\Api\V1\Auth\Traits;
 
+use Illuminate\Support\Facades\Auth;
 use JWTAuth;
 use Validator;
 use Config;
@@ -32,7 +33,7 @@ trait Login {
     public function login($credentials, $login_type, UserTransformer $userTransformer)
     {
         try {
-            if (! $token = JWTAuth::attempt($credentials)) {
+            if (! $auth_token = JWTAuth::attempt($credentials)) {
                 return $this->response->errorUnauthorized();
             }
         } catch (JWTException $e) {
@@ -40,16 +41,16 @@ trait Login {
         }
 
         //If API successfully authenticated the user, get the authenticated user
-        if(isset($token) && !empty($token)){
+        if(isset($auth_token) && !empty($auth_token)){
 
             if($login_type == 'phone'){
 
-               $user = $this->getUserDetails($token, 'phone');
+               $user = $this->getUserDetails($auth_token, 'phone');
 
                return $userTransformer->transform($user);
             }
 
-            $user = $this->getUserDetails($token, 'web');
+            $user = $this->getUserDetails($auth_token, 'web');
 
             return $userTransformer->transform($user);
         }
@@ -58,18 +59,43 @@ trait Login {
     }
 
     /**
+     * Get the needed authorization credentials from the request.
+     * @param Request $request
+     * @param $login_type
+     * @return array
+     */
+    protected function getCredentials(Request $request, $login_type)
+    {
+        if($login_type == 'phone'){
+            return [
+                'phone_number' =>  $request->phone_number,
+                'password' => $request->password,
+                'verified' =>  1
+            ];
+        }
+
+        if($login_type == 'web'){
+            return [
+                'email' =>  $request->email,
+                'password' => $request->password,
+                'verified' =>  1
+            ];
+        }
+        //return $request->only($this->loginUsername(), 'password');
+    }
+
+    /**
      * Get the details of the user currently logged in
      * @param $token
      * @param $login_type
      * @return mixed
      */
-    private function getUserDetails($token, $login_type){
+    private function getUserDetails($auth_token, $login_type){
         $user = \Auth::user();
 
         if(\Auth::user()->user_role()->exists()){
             $this->role_id = \Auth::user()->user_role()->first()->role_id;
         }
-
 
         if($login_type == 'phone'){
 
@@ -78,23 +104,23 @@ trait Login {
                 $this->parish_id = \Auth::user()->user_parishes()->first()->parish_id;
             }
 
-
-
             if(\Auth::user()->user_stations()->exists()){
 
                 $this->station_id = \Auth::user()->user_stations()->first()->station_id;
             }
 
-            $user->token = $token;
+            $user->auth_token = $auth_token;
             $user->parish_id = $this->parish_id;
             $user->station_id =$this->station_id;
-            $user->role_id = $this->role_id;
+            $user->role_id = Auth::user()->user_role()->first()->role_id;
 
             return $user;
         }
 
-        $user->role_id = $this->role_id;
-        $user->token = $token;
+        $user->role_id = Auth::user()->user_role()->first()->role_id;
+        $user->token = $auth_token;
+        $user->parish_id = $this->parish_id;
+        $user->station_id =$this->station_id;
 
         return $user;
     }

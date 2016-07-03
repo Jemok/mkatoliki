@@ -6,7 +6,7 @@ THE ARCHANGEL INTERACTIVE AGENCY
 PREPARED BY: JAMES KAROKI
 CREATED ON: DATE: 4/4/2016
 
-NB: Client should define their local storage schema from the fields returned in the api JSON respsponses.
+NB: Client should define their local storage schema from the fields returned in the api JSON responses.
 NB: Tables relationships listed at the end of the api definition
 NB: Foreign keys definitions have been highlighted in the api definition responses
 
@@ -16,6 +16,8 @@ NB: Foreign keys definitions have been highlighted in the api definition respons
 
 User will have to confirm their email address after they register with the app, login will only be allowed after their email address has been confirmed.
 Client should alert the user to confirm their email addresses after registration
+The `verified` field is set to `0` by default after registration.
+When the user
 
     POST :  /api/auth/signup HTTP /1.1
     HOST:  api.matoliki.com
@@ -35,57 +37,27 @@ Client should alert the user to confirm their email addresses after registration
     Connection: close
 
     {
-      "message": "User was successfully created and a confirmation email has been sent to them"
-    }
-
-### USER LOGIN IN FOR THE FIRST TIME AFTER REGISTRATION
-User `parish_id` and `stattion_id` will be set to the value `0` by default.
-The API will return the below response,
-if `parish_id:0` or `station_id:0` then show the user the screen for setting a parish and an outstation.
-
-	{
-      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE2LCJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9zaWdudXAiLCJpYXQiOjE0NjY5MjAwMzYsImV4cCI6MTQ2NjkyMDA5NiwibmJmIjoxNDY2OTIwMDM2LCJqdGkiOiJjZTFjYWM5MjY4MGZiZGZhNTM2ZGRjMDZiZmZlNDVjYiJ9.kYisCP2Rf2bXpPZkhC8vRw_XyRAz2FP8WhiBRvWQspo",
-      "message": "success",
       "user": {
-        "id": 16,
+        "id": 80,
         "name": "user",
-        "email": "user77@mkatoliki.com",
-        "phone_number": "0752767071",
-        "parish_id": 0,
-        "station_id": 0,
+        "email": "karokijames40@gmail.com",
+        "verified": 0,
+        "phone_number": "8767775078",
+        "parish_id": 0, //set to 0 by default
+        "station_id": 0, // set to 0 by default
+        "user_role": 5,
         "created_at": {
-          "date": "2016-06-26 08:47:16",
+          "date": "2016-07-03 14:22:50",
           "timezone_type": 3,
           "timezone": "Africa/Khartoum"
         },
         "updated_at": {
-          "date": "2016-06-26 08:47:16",
+          "date": "2016-07-03 14:22:50",
           "timezone_type": 3,
           "timezone": "Africa/Khartoum"
         }
       }
     }
-
-    RESPONSE  ERROR 422 (Unprocessable entity)
-
-    HTTP /1.1 422 Unprocessable entity
-    HOST: api.mkatoliki.com
-    Connection: close
-	{
-		“error”:{
-			“message” : “422 Unprocessable Entity”,
-			“errors”       : [
-						[
-						“error_one”
-						],
-						[
-						“error_two”
-						], ...
-					],
-			“status_code” : 422
-			}
-	}
-
 
 ### LOGIN A USER
 
@@ -97,6 +69,54 @@ if `parish_id:0` or `station_id:0` then show the user the screen for setting a p
         "phone_number" : "phone_number_here",
         "password"     : "password_here"
     }
+
+API RESPONSE IF USER IS LOGIN IN FOR THE FIRST TIME AFTER REGISTRATION AND THEIR EMAIL IS VERIFIED
+
+    RESPONSE 200 OK
+
+    HTTP/1.1 200 OK
+    HOST: api.mkatoliki.com
+    Connection: close
+
+User `parish_id` and `stattion_id` will be set to the value `0` by default.
+The API will return the below response,
+if `parish_id:0` or `station_id:0` then show the user the screen for setting a parish and an outstation.
+
+    	{
+          "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE2LCJpc3MiOiJodHRwOlwvXC9sb2NhbGhvc3Q6ODAwMFwvYXBpXC9hdXRoXC9zaWdudXAiLCJpYXQiOjE0NjY5MjAwMzYsImV4cCI6MTQ2NjkyMDA5NiwibmJmIjoxNDY2OTIwMDM2LCJqdGkiOiJjZTFjYWM5MjY4MGZiZGZhNTM2ZGRjMDZiZmZlNDVjYiJ9.kYisCP2Rf2bXpPZkhC8vRw_XyRAz2FP8WhiBRvWQspo",
+          "message": "success",
+          "user": {
+            "id": 16,
+            "name": "user",
+            "email": "user77@mkatoliki.com",
+            "phone_number": "0752767071",
+            "parish_id": 0,
+            "station_id": 0,
+            "created_at": {
+              "date": "2016-06-26 08:47:16",
+              "timezone_type": 3,
+              "timezone": "Africa/Khartoum"
+            },
+            "updated_at": {
+              "date": "2016-06-26 08:47:16",
+              "timezone_type": 3,
+              "timezone": "Africa/Khartoum"
+            }
+          }
+        }
+
+API RESPONSE IF USER IS LOGIN IN FOR THE FIRST TIME AFTER REGISTRATION AND THEIR EMAIL IS NOT VERIFIED
+
+        RESPONSE 401 UNAUTHORIZED
+
+        {
+          "error": {
+            "message": "Unauthorized",
+            "status_code": 401,
+            }
+        }
+
+API RESPONSE FOR A NORMAL VERIFIED ACCOUNT
 
     RESPONSE 200 OK
 
@@ -157,6 +177,8 @@ if `parish_id:0` or `station_id:0` then show the user the screen for setting a p
 		“status_code” : 422
 			      }
 	}
+
+
 
 ### Get the Authenticated user
 

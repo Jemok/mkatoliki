@@ -65,10 +65,10 @@ class AuthController extends Controller
 
     public function loginDefault(Request $request)
     {
-        //Only Email and Password are required for login(for web app)
-        $credentials = $request->only(['email', 'password']);
-
         $this->login_type = 'web';
+
+        //Only Email and Password are required for login(for web app)
+        $credentials = $this->getCredentials($request, $this->login_type);
 
         //Validate Incoming input from request
         $this->validateLogin($credentials, $this->login_type);
@@ -86,7 +86,7 @@ class AuthController extends Controller
      * @return \Dingo\Api\Http\Response|\Illuminate\Http\JsonResponse|void
      */
 
-    public function signup(Request $request, UserRepository $userRepository, SetUserRole $setUserRole, SubscriptionRepository $subscriptionRepository)
+    public function signup(Request $request, UserRepository $userRepository, SetUserRole $setUserRole, SubscriptionRepository $subscriptionRepository, UserTransformer $userTransformer)
     {
         // Get the sign up fields from the Sign up fields boilerplate in
         // app/config/boilerplate.php
@@ -122,16 +122,16 @@ class AuthController extends Controller
 
         $mailer = new AppMailer();
 
+        $user->role_id = $user->user_role()->first()->role_id;
 
         if($mailer->sendConfirmEmailLink($user)){
             //If successfully created the user, return response success
-            return response()->json(['message'=>'User was successfully created and a confirmation email has been sent to them'], 201);
+            return $userTransformer->transform($user);
+            //return response()->json(['message'=>'User was successfully created and a confirmation email has been sent to them', 'user_id' =>$user->id, 'verified' => (int) $user->verified], 201);
         }
 
         return response()->json(['message' => 'There was an error creating the user'], 500);
     }
-
-
 
     /**
      * Retrieves the authenticated user

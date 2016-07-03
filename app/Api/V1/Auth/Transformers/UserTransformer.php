@@ -16,10 +16,10 @@ class UserTransformer extends Transformer {
 
     public function transform($user){
 
-        if(isset($user['token']) && !empty($user['token'])){
+        if(isset($user['auth_token']) && !empty($user['auth_token'])){
 
             return [
-                'token' => $user['token'],
+                'token' => $user['auth_token'],
                 'message' => 'success',
                 'user' => $this->getUserDetailsArray($user)
 
@@ -35,10 +35,11 @@ class UserTransformer extends Transformer {
                 'id' => $user['id'],
                 'name' => $user['name'],
                 'email' => $user['email'],
+                'verified' =>  (int) $user['verified'],
                 'phone_number' => $user['phone_number'],
-                'parish_id'    => $user['parish_id'],
-                'station_id'   => $user['station_id'],
-                'user_role'    => $user['role_id'],
+                'parish_id'    => (int) $user['parish_id'],
+                'station_id'   => (int) $user['station_id'],
+                'user_role'    => (int) $user['role_id'],
                 'created_at'   => $user['created_at'],
                 'updated_at'   => $user['updated_at']
         ];

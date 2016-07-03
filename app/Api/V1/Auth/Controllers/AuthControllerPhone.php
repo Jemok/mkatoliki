@@ -45,7 +45,9 @@ class AuthControllerPhone extends Controller
         $this->login_type = 'phone';
 
         //Only phone_number and password are required for login(for mobile app)
-        $credentials = $request->only(['phone_number', 'password']);
+        //$credentials = $request->only(['phone_number', 'password']);
+
+        $credentials = $this->getCredentials($request, $this->login_type);
 
         //Validate Incoming input from request
         $this->validateLogin($credentials, $this->login_type);
@@ -53,6 +55,8 @@ class AuthControllerPhone extends Controller
         //Login the user
         return $this->login($credentials, $this->login_type, new UserTransformer());
     }
+
+
 
     /**
      * Logout users out of the application
