@@ -256,10 +256,20 @@ class AuthController extends Controller
 
     public function confirmEmail($token)
     {
-        User::whereToken($token)->firstOrFail()->confirmEmail();
+        //User::whereToken($token)->firstOrFail()->confirmEmail();
+        if(User::whereToken($token)->exists()){
 
-        Session::flash('flash_message', 'Your email was confirmed successfully, you can now login in the mobile app');
+            User::whereToken($token)->firstOrFail()->confirmEmail();
 
-        return view('verification.success');
+            Session::flash('flash_message', 'Your email was confirmed successfully, you can now login in the mobile app');
+
+            return view('verification.success');
+
+        }
+
+        Session::flash('flash_message', 'Your email is already confirmed, try login in the mobile app');
+
+        return view('verification.fail');
+
     }
 }
