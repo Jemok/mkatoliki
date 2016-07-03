@@ -18,11 +18,14 @@ class CreateAnnouncementsTableMigration extends Migration
             $table->text('announcement');
             $table->dateTime('date');
             $table->integer('user_id')->unsigned()->index();
+            $table->integer('station_id')->unsigned()->index();
 
             $table->foreign('user_id')
                   ->references('id')
                   ->on('users');
-
+            $table->foreign('station_id')
+                  ->references('id')
+                  ->on('stations');
             $table->timestamps();
         });
     }

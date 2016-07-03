@@ -4,6 +4,7 @@ namespace App\Api\V1\Announcement\Models;
 
 use App\Api\V1\Account\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use App\Observers\GlobalObserver;
 
 class Announcement extends Model
 {
@@ -21,7 +22,8 @@ class Announcement extends Model
 
         'title',
         'announcement',
-        'date'
+        'date',
+        'station_id'
     ];
 
     /**
@@ -31,5 +33,16 @@ class Announcement extends Model
     public function user(){
 
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * The boot methods
+     */
+
+    public static function boot(){
+
+        parent::boot();
+
+        Announcement::observe(new GlobalObserver());
     }
 }

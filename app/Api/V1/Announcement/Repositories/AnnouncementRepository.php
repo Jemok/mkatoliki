@@ -8,6 +8,7 @@
 
 namespace App\Api\V1\Announcement\Repositories;
 use App\Api\V1\Announcement\Models\Announcement;
+use App\Api\V1\Station\Models\Station;
 
 
 class AnnouncementRepository {
@@ -34,7 +35,10 @@ class AnnouncementRepository {
     public function store($request){
 
         return \Auth::user()->announcements()->create([
-           $request->all()
+           'title' => $request->title,
+           'announcement' => $request->announcement,
+           'date'         => $request->date,
+           'station_id' => Station::where('user_id', \Auth::user()->id)->first()->id
         ]);
     }
 } 

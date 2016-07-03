@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Data\Controllers;
 
+use App\Api\V1\Announcement\Models\Announcement;
 use App\Api\V1\Happening\Transformers\HappeningTransformer;
 use App\Api\V1\Jumuiya\Transformers\JumuiyaTransformer;
 use App\Api\V1\Parish\Transformers\ParishTransformer;
@@ -12,6 +13,7 @@ use App\Api\V1\Reflection\Transformers\ReflectionTransformer;
 use App\Api\V1\Station\Transformers\StationTransformer;
 use App\Api\V1\Reading\Transformers\ReadingTransformer;
 use App\Api\V1\Subscription\Transformers\SubscriptionTransformer;
+use App\Api\V1\Announcement\Transformers\AnnouncementTransformer;
 use App\Api\V1\Happening\Models\Happening_event;
 use App\Api\V1\Jumuiya\Models\Jumuiya;
 use App\Api\V1\Account\Models\User;
@@ -45,6 +47,7 @@ class NewDataController extends Controller
     protected $userParishesTransformer;
     protected $userOutstationsTransformer;
     protected $subscriptionTransformer;
+    protected $announcementTransformer;
 
    public function __construct(ReadingTransformer $readingTransformer,
                                PrayerTransformer $prayerTransformer,
@@ -55,7 +58,8 @@ class NewDataController extends Controller
                                ParishTransformer $parishTransformer,
                                StationTransformer $stationTransformer,
                                PrayerTypeTransformer $prayerTypeTransformer,
-                               SubscriptionTransformer $subscriptionTransformer
+                               SubscriptionTransformer $subscriptionTransformer,
+                               AnnouncementTransformer $announcementTransformer
 
 
     ){
@@ -70,6 +74,7 @@ class NewDataController extends Controller
        $this->stationTransformer = $stationTransformer;
        $this->prayerTypeTransformer = $prayerTypeTransformer;
        $this->subscriptionTransformer = $subscriptionTransformer;
+       $this->announcementTransformer = $announcementTransformer;
    }
 
    public function index($client_date){
@@ -90,7 +95,8 @@ class NewDataController extends Controller
                    'parishes'       =>  $this->parishesTransformer->transformCollection($this->getAllParishes()),
                    'out-stations'       =>  $this->stationTransformer->transformCollection($this->getAllStations()),
                    'prayer_types'     => $this->prayerTypeTransformer->transformCollection($this->getAllPrayerTypes()),
-                   'subscriptions'    => $this->subscriptionTransformer->transformCollection($this->getAllSubscriptions())
+                   'subscriptions'    => $this->subscriptionTransformer->transformCollection($this->getAllSubscriptions()),
+                   'announcements'    => $this->announcementTransformer->transformCollection($this->getAllAnnouncementsForUser())
                ],
                'meta' => [
                     'to_server_last_date'  => new \DateTime()
@@ -111,8 +117,8 @@ class NewDataController extends Controller
             'parishes'       =>  $this->parishesTransformer->transformCollection($this->getNewParishes($client_date)),
             'out-stations'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
             'prayer_types'    =>   $this->prayerTypeTransformer->transformCollection($this->getNewPrayerTypes($client_date)),
-            'subscriptions'   => $this->subscriptionTransformer->transformCollection($this->getNewSubscriptions($client_date))
-
+            'subscriptions'   => $this->subscriptionTransformer->transformCollection($this->getNewSubscriptions($client_date)),
+            'announcements'   => $this->announcementTransformer->transformCollection($this->getNewAnnouncementsForUser($client_date))
             ],
             'meta' => [
                'to_server_last_date'  => new \DateTime()
@@ -182,8 +188,15 @@ class NewDataController extends Controller
        // return  User::where('id', \Auth::user()->id)->where('updated_at', '>', $date)->where('id', '>', 20)->get()->toArray();
 
         return  User::where('id', \Auth::user()->id)->get()->toArray();
+    }
 
+    public function getNewAnnouncementsForUser($date){
 
+        $user_station_id = \Auth::user()->user_stations()->first()->station_id;
+
+        return Announcement::where('updated_at', '>', $date)
+                            ->where('station_id', $user_station_id)
+                            ->get()->toArray();
     }
 
     public function respond($data, $headers = [])
@@ -244,7 +257,13 @@ class NewDataController extends Controller
     public function getAllStations(){
 
         return Station::all()->toArray();
+    }
 
+    public function getAllAnnouncementsForUser(){
+
+        $user_station_id = \Auth::user()->user_stations()->first()->station_id;
+
+        return Announcement::where('station_id', $user_station_id)->get()->toArray();
     }
 
     public function getAllSubscriptions(){
