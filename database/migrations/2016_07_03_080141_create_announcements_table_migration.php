@@ -17,8 +17,8 @@ class CreateAnnouncementsTableMigration extends Migration
             $table->string('title');
             $table->text('announcement');
             $table->dateTime('date');
-            $table->integer('user_id');
-            $table->integer('station_id');
+            $table->integer('user_id')->unsigned()->index();
+            $table->integer('station_id')->unsigned()->index();
 
             $table->foreign('user_id')
                   ->references('id')
