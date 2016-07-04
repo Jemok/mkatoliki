@@ -31,6 +31,7 @@ class GcmPushRepository {
             'gcm_push_type_id' => $gcm_push_type_id,
         ]);
 
+
         if(!$message_id){
             $this->storeGcmPushMessages($messages, $gcm_push);
         }
