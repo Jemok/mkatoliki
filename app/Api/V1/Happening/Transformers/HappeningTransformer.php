@@ -18,7 +18,9 @@ class HappeningTransformer extends Transformer {
             'happening_event_title' => $happening['event_title'],
             'happening_event_body'  => $happening['event_body'],
             'happening_event_excerpt' => $happening['event_excerpt'],
-            'happening_event_date'   => $happening['event_date']
+            'happening_event_date'   => $happening['event_date'],
+            'happening_event_location' => $happening['location'],
+            'station_id'                => $happening['station_id']
         ];
     }
 } 

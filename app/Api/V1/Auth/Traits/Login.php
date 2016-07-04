@@ -23,7 +23,7 @@ trait Login {
 
     protected $station_id = 0;
 
-    protected $role_id = 4;
+    protected $role_id = 5;
     /**
      * @param $credentials
      * @param $login_type
@@ -112,12 +112,18 @@ trait Login {
             $user->auth_token = $auth_token;
             $user->parish_id = $this->parish_id;
             $user->station_id =$this->station_id;
-            $user->role_id = Auth::user()->user_role()->first()->role_id;
+            if(Auth::user()->user_role()->exists()){
+                $user->role_id = Auth::user()->user_role()->first()->role_id;
+            }
+            $user->role_id = $this->role_id;
 
             return $user;
         }
 
-        $user->role_id = Auth::user()->user_role()->first()->role_id;
+        if(Auth::user()->user_role()->exists()){
+            $user->role_id = Auth::user()->user_role()->first()->role_id;
+        }
+        $user->role_id = $this->role_id;
         $user->token = $auth_token;
         $user->parish_id = $this->parish_id;
         $user->station_id =$this->station_id;

@@ -3,6 +3,7 @@
 namespace App\Api\V1\Announcement\Models;
 
 use App\Api\V1\Account\Models\User;
+use App\Observers\GroupObserver;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\GlobalObserver;
 
@@ -43,6 +44,6 @@ class Announcement extends Model
 
         parent::boot();
 
-        Announcement::observe(new GlobalObserver());
+        Announcement::observe(new GroupObserver());
     }
 }
