@@ -79,7 +79,9 @@
                     location: $scope.currentLocation,
                     happening_on: $scope.currentHappeningOn,
                     raw_jumuiya_id: $scope.currentRawJumuiyaId,
-                    'more_details': $scope.currentDetails
+                    more_details: $scope.currentDetails,
+                    mass: $scope.currentMass,
+                    day_event_name: $scope.currentDayEventName
 
 
                 }, function(){

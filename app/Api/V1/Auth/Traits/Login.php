@@ -97,7 +97,7 @@ trait Login {
             $this->role_id = \Auth::user()->user_role()->first()->role_id;
         }
 
-        if($login_type == 'phone'){
+        if($login_type == 'phone' || $login_type == 'web'){
 
             if(\Auth::user()->user_parishes()->exists()){
 
