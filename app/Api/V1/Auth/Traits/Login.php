@@ -70,7 +70,7 @@ trait Login {
             return [
                 'phone_number' =>  $request->phone_number,
                 'password' => $request->password,
-                'verified' =>  1
+                'verified' =>  0
             ];
         }
 
@@ -78,7 +78,7 @@ trait Login {
             return [
                 'email' =>  $request->email,
                 'password' => $request->password,
-                'verified' =>  1
+                'verified' =>  0
             ];
         }
         //return $request->only($this->loginUsername(), 'password');

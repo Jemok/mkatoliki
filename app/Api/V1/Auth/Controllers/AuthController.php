@@ -115,20 +115,27 @@ class AuthController extends Controller
         // Set a default subscription for the user
         $subscriptionRepository->defaultSubscription($user);
 
+        $mailer = new AppMailer();
+
+        $user->role_id = $user->user_role()->first()->role_id;
+
+        $mailer->sendConfirmEmailLink($user);
+
         //Login the user
         if($hasToReleaseToken) {
             return $this->loginDefault($request);
         }
 
-        $mailer = new AppMailer();
 
-        $user->role_id = $user->user_role()->first()->role_id;
-
-        if($mailer->sendConfirmEmailLink($user)){
-            //If successfully created the user, return response success
-            return $userTransformer->transform($user);
-            //return response()->json(['message'=>'User was successfully created and a confirmation email has been sent to them', 'user_id' =>$user->id, 'verified' => (int) $user->verified], 201);
-        }
+//        $mailer = new AppMailer();
+//
+//        $user->role_id = $user->user_role()->first()->role_id;
+//
+//        if($mailer->sendConfirmEmailLink($user)){
+//            //If successfully created the user, return response success
+//            return $userTransformer->transform($user);
+//            //return response()->json(['message'=>'User was successfully created and a confirmation email has been sent to them', 'user_id' =>$user->id, 'verified' => (int) $user->verified], 201);
+//        }
 
         return response()->json(['message' => 'There was an error creating the user'], 500);
     }

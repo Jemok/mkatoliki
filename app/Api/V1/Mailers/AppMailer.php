@@ -56,7 +56,7 @@ class AppMailer {
         $this->subject = "Mkatoliki confirm email";
         $this->data = compact('user');
 
-        return $this->deliver();
+        $this->deliver();
 
     }
 
@@ -65,11 +65,17 @@ class AppMailer {
      */
     public function deliver(){
 
-       return Mail::send($this->view, $this->data, function($message){
+       try{
+       Mail::send($this->view, $this->data, function($message){
 
             $message->from($this->from, 'Mkatoliki Admin')
                 ->to($this->to)
                 ->subject($this->subject);
         });
+       }catch (\Exception $e){
+
+           return response()->json(['message' => 'Internal Server Error'], 500);
+
+       }
     }
 } 
