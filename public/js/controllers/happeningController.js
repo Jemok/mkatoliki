@@ -32,7 +32,8 @@
                     event_title: $scope.currentTitle,
                     event_body: $scope.currentBody,
                     event_excerpt: $scope.currentExcerpt,
-                    event_date: $scope.currentDate
+                    event_date: $scope.currentDate,
+                    event_location: $scope.currentLocation
 
                 }, function(){
 

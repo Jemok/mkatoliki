@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Happening\Controllers;
 
+use App\Api\V1\Happening\Repositories\HappeningRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -25,24 +26,15 @@ class HappeningController extends Controller
 
 
     /**
-     * Store a newly created happening resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param HappeningRepository $happeningRepository
+     * @return \Illuminate\Http\JsonResponse|void
      */
-    public function store(Request $request)
+    public function store(Request $request, HappeningRepository $happeningRepository)
     {
-        $happening = new Happening_event;
-
-        $happening->event_title = $request->get('event_title');
-        $happening->event_body = $request->get('event_body');
-        $happening->event_excerpt = $request->get('event_excerpt');
-        $happening->event_date = $request->get('event_date');
-
-        if($this->currentUser()->happenings()->save($happening))
-            return $this->response->created();
-        else
-            return $this->response->error('could_not_create_happening', 500);
+        if($happeningRepository->store($request))
+            return response()->json(['Happeing event successfully created'], 201);
+        return $this->response->error('could_not_create_happening', 500);
     }
 
     /**

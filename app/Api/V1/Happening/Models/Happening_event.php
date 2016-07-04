@@ -29,7 +29,9 @@ class Happening_event extends Model
         'event_title',
         'event_body',
         'event_excerpt',
-        'event_date'
+        'event_date',
+        'location',
+        'station_id'
     ];
 
     /**
