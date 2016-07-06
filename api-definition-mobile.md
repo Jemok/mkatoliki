@@ -374,14 +374,18 @@ API RESPONSE FOR A NORMAL VERIFIED ACCOUNT
               "event_title": "event_title",
               "event_body": "event_body",
               "event_excerpt": "event_excerpt",
-              "event_date": "event_date"
+              "event_date": "event_date",
+              "happening_event_location":"location",
+              "station_id":1
            },
            {
                "id": 2
                "event_title": "event_title",
                "event_body": "event_body",
                "event_excerpt": "event_excerpt",
-               "event_date": "event_date"
+               "event_date": "event_date",
+               "happening_event_location":"location",
+               "station_id":1
            }
         ],
         "raw_jumuiyas": [
@@ -601,6 +605,46 @@ API RESPONSE FOR A NORMAL VERIFIED ACCOUNT
     }
 
     Response 204 No Content
+
+### SEARCH CHURCH ENDPOINT
+**HEADER** Authorization: Bearer token_here
+**HEADER** Content-Type: application/json
+
+    HOST:  api.mkatoliki.com
+    POST: /api/search/stations HTTP/1.1
+
+    {
+        "query":"Ullam quos."
+    }
+
+    RESPONSE 200 OK
+
+    [
+      {
+        "id": 2,
+        "station_name": "Et.",
+        "parish_id": 20,
+        "parish_name": "Doloremque repellat."
+      },
+      {
+        "id": 4,
+        "station_name": "Est et.",
+        "parish_id": 24,
+        "parish_name": "Dolorem."
+      },
+      ...
+    ]
+
+    RESPONSE 404 NOT FOUND
+
+    {
+      "message": "no matching station found"
+    }
+
+
+
+
+
 
 
 ### SUBSCRIPTION DESCRIPTION
