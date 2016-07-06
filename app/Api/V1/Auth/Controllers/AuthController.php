@@ -6,11 +6,13 @@
 namespace App\Api\V1\Auth\Controllers;
 
 use App\Api\V1\Account\Models\Role;
+use App\Api\V1\Auth\Services\CheckIfUserExists;
 use App\Api\V1\Auth\Services\SetUserRole;
 use App\Api\V1\Auth\Traits\Login;
 use App\Api\V1\Auth\Transformers\UserTransformer;
 use App\Api\V1\Auth\Validators\ValidateLogin;
 use App\Api\V1\Auth\Validators\ValidateSignup;
+use App\Api\V1\Auth\Validators\ValidateUserChecks;
 use App\Api\V1\Subscription\Models\SubscriptionCategory;
 use App\Api\V1\Subscription\Models\SubscriptionStatus;
 use App\Api\V1\Subscription\Repositories\SubscriptionRepository;
@@ -278,5 +280,21 @@ class AuthController extends Controller
 
         return view('verification.fail');
 
+    }
+
+    public function check(Request $request, CheckIfUserExists $checkIfUserExists, ValidateUserChecks $validateUserChecks){
+
+            if($request->path() == 'api/auth/check/email'){
+
+                $validateUserChecks->validateUserCheckEmail($request->all());
+
+                return $checkIfUserExists->checkEmail($request);
+
+            }elseif($request->path() == 'api/auth/check/phone-number'){
+
+                $validateUserChecks->validateUserCheckPhoneNumber($request->all());
+
+                return $checkIfUserExists->checkPhone($request);
+            }
     }
 }

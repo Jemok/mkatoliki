@@ -628,11 +628,53 @@ API RESPONSE FOR A NORMAL VERIFIED ACCOUNT
       "message": "no matching station found"
     }
 
+### CHECK EMAIL AVAILABILITY ENDPOINT
+**HEADER** Content-Type: application/json
 
+    HOST:  api.mkatoliki.com
+    POST: /api/auth/check/email HTTP/1.1
 
+    {
+        "email":"usr@mkatoliki.comm"
+    }
 
+    RESPONSE 200 OK (email is not taken)
 
+    {
+      "message": "Email is not used",
+      "value": 0
+    }
 
+    RESPONSE 422 Unprocessable entity (email has already been used)
+
+    {
+      "message": "Email is used",
+      "value": 1
+    }
+
+### CHECK PHONE NUMBER AVAILABILITY ENDPOINT
+**HEADER** Content-Type: application/json
+
+    HOST:  api.mkatoliki.com
+    POST: /api/auth/check/phone-number HTTP/1.1
+
+    {
+        "email":""
+    }
+
+    RESPONSE 200 OK (number is not taken)
+
+    {
+      "message": "Number is not used",
+      "value": 0
+    }
+
+    RESPONSE 422 Unprocessable entity (number has already been used)
+
+    {
+      "message": "Number is already used",
+      "value": 1
+    }
 
 ### SUBSCRIPTION DESCRIPTION
 

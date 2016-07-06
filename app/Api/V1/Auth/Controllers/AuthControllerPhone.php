@@ -6,6 +6,7 @@ namespace App\Api\V1\Auth\Controllers;
 
 use App\Api\V1\Account\Models\User_parishes;
 use App\Api\V1\Account\Models\User_stations;
+use App\Api\V1\Auth\Services\CheckIfUserExists;
 use App\Api\V1\Auth\Transformers\LogoutTransformer;
 use App\Api\V1\Auth\Transformers\UserTransformer;
 use JWTAuth;
@@ -55,7 +56,6 @@ class AuthControllerPhone extends Controller
         //Login the user
         return $this->login($credentials, $this->login_type, new UserTransformer());
     }
-
 
 
     /**

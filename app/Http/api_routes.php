@@ -47,6 +47,9 @@ $api->version('v1', function ($api) {
         $api->get('auth/confirm/{token}', 'App\Api\V1\Auth\Controllers\AuthController@confirmEmail');
         $api->get('auth/confirm/success', 'App\Api\V1\Auth\Controllers\AuthController@confirmEmailSuccess');
 
+        //Check if either phone_number or email has already been used
+        $api->post('auth/check/phone-number', 'App\Api\V1\Auth\Controllers\AuthController@check');
+        $api->post('auth/check/email', 'App\Api\V1\Auth\Controllers\AuthController@check');
 
 
         /**----------------------------------------------------------------------------------------------
