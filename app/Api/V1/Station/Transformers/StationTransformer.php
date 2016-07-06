@@ -7,6 +7,7 @@
  */
 
 namespace App\Api\V1\Station\Transformers;
+use App\Api\V1\Parish\Models\Parish;
 use App\Api\V1\Transformers\Transformer;
 
 
@@ -16,9 +17,10 @@ class StationTransformer extends Transformer {
     {
         return [
 
-            'id'           => $station['id'],
+            'id'            => $station['id'],
             'station_name'  => $station['station_name'],
-            'parish_id'     => $station['parish_id']
+            'parish_id'     => $station['parish_id'],
+            'parish_name'   => Parish::where('id', $station['parish_id'])->first()->parish_name
         ];
     }
 

@@ -218,6 +218,12 @@ $api->version('v1', function ($api) {
         $api->delete('raw-jumuiyas/{id}', 'App\Api\V1\Prayer_Type\Controllers\RawJumuiyaController@destroy');
     });
 
+    $api->group(['middleware' => ['api.auth', 'cors']], function($api){
+
+        $api->post('search/stations', 'App\Api\V1\Station\Controllers\StationController@search');
+
+    });
+
     /**-------------------------------------------------------------------------------------------------------
      *
      * Feedback api routes

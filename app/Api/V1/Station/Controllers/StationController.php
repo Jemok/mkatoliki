@@ -2,6 +2,9 @@
 
 namespace App\Api\V1\Station\Controllers;
 
+use App\Api\V1\Facades\Search;
+use App\Api\V1\Search\ValidateSearch;
+use App\Api\V1\Station\Transformers\StationTransformer;
 use Illuminate\Http\Request;
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -42,6 +45,23 @@ class StationController extends Controller
             return $this->response->created();
         else
             return $this->response->error('could_not_create_station', 500);
+    }
+
+    public function search(Request $request, StationTransformer $stationTransformer, ValidateSearch $validateSearch){
+
+            if($validateSearch->validateSearch($request->all())){
+
+                $stations = Search::stations($request->get('query'));
+
+                if(!$stations){
+                    return response()->json(['message'=> 'no matching station found'], 404);
+                }
+
+                return $stationTransformer->transformCollection($stations);
+
+            }
+
+
     }
 
     /**

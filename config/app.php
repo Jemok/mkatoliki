@@ -150,7 +150,9 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class
+        App\Providers\RouteServiceProvider::class,
+        App\Api\V1\Search\SearchServiceProvider::class
+
     ],
 
     /*
@@ -205,6 +207,8 @@ return [
          */
         'JWTAuth'       => Tymon\JWTAuth\Facades\JWTAuth::class,
         'JWTFactory'    => Tymon\JWTAuth\Facades\JWTFactory::class,
+        'Search'        => App\Api\V1\Facades\Search::class
+
     ],
 
 ];

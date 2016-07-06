@@ -86,7 +86,7 @@ trait Login {
 
     /**
      * Get the details of the user currently logged in
-     * @param $token
+     * @param $auth_token
      * @param $login_type
      * @return mixed
      */
