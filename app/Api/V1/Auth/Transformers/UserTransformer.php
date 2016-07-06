@@ -9,7 +9,9 @@
 namespace App\Api\V1\Auth\Transformers;
 
 
+use App\Api\V1\Station\Models\Station;
 use App\Api\V1\Transformers\Transformer;
+use App\Api\V1\Parish\Models\Parish;
 
 class UserTransformer extends Transformer {
 
@@ -38,10 +40,37 @@ class UserTransformer extends Transformer {
                 'verified' =>  (int) $user['verified'],
                 'phone_number' => $user['phone_number'],
                 'parish_id'    => (int) $user['parish_id'],
+                'parish_name'  => $this->getParishName($user['parish_id']),
                 'station_id'   => (int) $user['station_id'],
+                'station_name' => $this->getStationName($user['station_id']),
                 'user_role'    => (int) $user['role_id'],
                 'created_at'   => $user['created_at'],
                 'updated_at'   => $user['updated_at']
         ];
+    }
+
+    protected function getStationName($station_id){
+
+        if(Station::where('id', $station_id)->exists()){
+
+            return Station::where('id', $station_id)->first()->station_name;
+
+        }
+
+        return 'not set';
+
+    }
+
+
+    protected function getParishName($parish_id){
+
+        if(Parish::where('id', $parish_id)->exists()){
+
+            return Parish::where('id', $parish_id)->first()->parish_name;
+
+        }
+
+        return 'not set';
+
     }
 } 
