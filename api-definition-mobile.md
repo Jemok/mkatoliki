@@ -418,28 +418,15 @@ API RESPONSE FOR A NORMAL VERIFIED ACCOUNT
             "raw_jumuiya_id": 1 (NB: foreing_key for relationship with the raw_jumuiyas table)
           },...
         ],
-        "parishes": [
-          {
-            "id": 1,
-            "parish_name": "parish_name"
-          },
-          {
-            "id": 2,
-            "parish_name": "parish_name"
-          },...
-        ],
-        "out-stations": [
-          {
-            "id": 1,
-            "station_name": "station_name",
-            "parish_id": 1 (NB: foreing_key for relationship with the parish table)
-          },
-          {
-            "id": 2,
-            "station_name": "station_name",
-            "parish_id": 1 (NB: foreing_key for relationship with the parish table)
-          },..
-        ],
+         "user_churches": [
+              {
+                "id": 4,
+                "station_name": "Est et.",
+                "parish_id": 24,
+                "parish_name": "Dolorem."
+              }
+              ....
+          ],
         "prayer_types": [
               {
                 "id": 1,

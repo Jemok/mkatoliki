@@ -92,8 +92,8 @@ class NewDataController extends Controller
                    'happenings'  => $this->happeningTransformer->transformCollection($this->getAllHappenings()),
                    'raw_jumuiyas'  => $this->rawJumuiyaTransformer->transformCollection($this->getAllRawJumuiyas()),
                    'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getAllJumuiya()),
-                   'parishes'       =>  $this->parishesTransformer->transformCollection($this->getAllParishes()),
-                   'out-stations'       =>  $this->stationTransformer->transformCollection($this->getAllStations()),
+                   //'parishes'       =>  $this->parishesTransformer->transformCollection($this->getAllParishes()),
+                   'user_churches'       =>  $this->stationTransformer->transformCollection($this->getAllStations()),
                    'prayer_types'     => $this->prayerTypeTransformer->transformCollection($this->getAllPrayerTypes()),
                    'subscriptions'    => $this->subscriptionTransformer->transformCollection($this->getAllSubscriptions()),
                    'announcements'    => $this->announcementTransformer->transformCollection($this->getAllAnnouncementsForUser())
@@ -114,8 +114,8 @@ class NewDataController extends Controller
             'happenings'  => $this->happeningTransformer->transformCollection($this->getNewHappenings($client_date)),
             'raw_jumuiyas'  => $this->rawJumuiyaTransformer->transformCollection($this->getNewRawJumuiyas($client_date)),
             'jumuiya_events'  => $this->jumuiyaTransformer->transformCollection($this->getNewJumuiya($client_date)),
-            'parishes'       =>  $this->parishesTransformer->transformCollection($this->getNewParishes($client_date)),
-            'out-stations'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
+            //'parishes'       =>  $this->parishesTransformer->transformCollection($this->getNewParishes($client_date)),
+            'user_churches'       =>  $this->stationTransformer->transformCollection($this->getNewStations($client_date)),
             'prayer_types'    =>   $this->prayerTypeTransformer->transformCollection($this->getNewPrayerTypes($client_date)),
             'subscriptions'   => $this->subscriptionTransformer->transformCollection($this->getNewSubscriptions($client_date)),
             'announcements'   => $this->announcementTransformer->transformCollection($this->getNewAnnouncementsForUser($client_date))
@@ -179,7 +179,9 @@ class NewDataController extends Controller
 
     public function getNewStations($date){
 
-        return Station::where('updated_at', '>', $date)->get()->toArray();
+        $user_station_ids = \Auth::user()->user_stations()->get(['station_id']);
+
+        return Station::whereIn('id', $user_station_ids)->where('updated_at', '>', $date)->get()->toArray();
 
     }
 
@@ -256,7 +258,9 @@ class NewDataController extends Controller
 
     public function getAllStations(){
 
-        return Station::all()->toArray();
+        $user_station_ids = \Auth::user()->user_stations()->get(['station_id']);
+
+        return Station::whereIn('id', $user_station_ids)->get()->toArray();
     }
 
     public function getAllAnnouncementsForUser(){
