@@ -6,9 +6,20 @@ use App\Api\V1\Account\Models\User;
 use App\Api\V1\Jumuiya\Models\Jumuiya;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\GlobalObserver;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Raw_jumuiya extends Model
 {
+    use SoftDeletes;
+
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
     /**
      * The table used by this model
      * @var string

@@ -7,10 +7,20 @@ use App\Api\V1\Raw_Jumuiya\Models\Raw_jumuiya;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\GlobalObserver;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Jumuiya extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
     /**
      * Fields that can be mass assigned
      * @var array

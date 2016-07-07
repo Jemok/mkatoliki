@@ -6,15 +6,26 @@ use App\Api\V1\Account\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\GlobalObserver;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Happening_event extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
     /**
      * The table associated with this model
      * @var string
      */
     protected $table = 'happening_events';
+
 
     /**
      * All the fields that might be mass assigned

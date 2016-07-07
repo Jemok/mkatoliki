@@ -2,6 +2,7 @@
 
 namespace App\Api\V1\Data\Controllers;
 
+use App\Api\V1\Account\Models\User_stations;
 use App\Api\V1\Announcement\Models\Announcement;
 use App\Api\V1\Happening\Transformers\HappeningTransformer;
 use App\Api\V1\Jumuiya\Transformers\JumuiyaTransformer;
@@ -48,6 +49,15 @@ class NewDataController extends Controller
     protected $userOutstationsTransformer;
     protected $subscriptionTransformer;
     protected $announcementTransformer;
+    protected $reading_ids = [];
+    protected $prayer_ids = [];
+    protected $reflection_ids = [];
+    protected $happening_ids = [];
+    protected $raw_jumuiya_ids = [];
+    protected $jumuiya_ids = [];
+    protected $prayer_type_ids = [];
+    protected $church_ids = [];
+    protected $announcement_ids = [];
 
    public function __construct(ReadingTransformer $readingTransformer,
                                PrayerTransformer $prayerTransformer,
@@ -60,8 +70,6 @@ class NewDataController extends Controller
                                PrayerTypeTransformer $prayerTypeTransformer,
                                SubscriptionTransformer $subscriptionTransformer,
                                AnnouncementTransformer $announcementTransformer
-
-
     ){
 
        $this->readingTransformer = $readingTransformer;
@@ -120,6 +128,36 @@ class NewDataController extends Controller
             'subscriptions'   => $this->subscriptionTransformer->transformCollection($this->getNewSubscriptions($client_date)),
             'announcements'   => $this->announcementTransformer->transformCollection($this->getNewAnnouncementsForUser($client_date))
             ],
+            'trash' => [
+                'readings' => [
+                    'ids' => $this->getTrashedReadings($client_date)
+                ],
+                'prayers' => [
+                    'ids' => $this->getTrashedPrayers($client_date)
+                ],
+                'reflections' => [
+                    'ids' => $this->getTrashedReflections($client_date)
+                ],
+                'happenings' => [
+                    'ids' => $this->getTrashedHappenings($client_date)
+                ],
+                'raw_jumuiyas' => [
+
+                    'ids' => $this->getTrashedRawJumuiyas($client_date)
+                ],
+                'jumuiyas_events' => [
+                    'ids' => $this->getTrashedJumuiyas($client_date)
+                ],
+                'user_churches' => [
+                    'ids' => $this->getTrashedUserChurches($client_date)
+                ],
+                'prayer_types' => [
+                    'ids' => $this->getTrashedPrayerTypes($client_date)
+                ],
+                'announcements' => [
+                    'ids' => $this->getTrashedAnnouncements($client_date)
+                ]
+            ],
             'meta' => [
                'to_server_last_date'  => new \DateTime()
            ]
@@ -130,51 +168,36 @@ class NewDataController extends Controller
    }
 
    public function getNewReadings($date){
-
        return Reading::where('updated_at', '>', $date)->get()->toArray();
-
    }
 
+
+
     public function getNewPrayerTypes($date){
-
         return Prayer_types::where('updated_at', '>', $date)->get()->toArray();
-
     }
 
    public function getNewPrayers($date){
-
         return Prayer::where('updated_at', '>', $date)->get()->toArray();
-
    }
-
    public function getNewJumuiya($date){
-
         return Jumuiya::where('updated_at', '>', $date)->get()->toArray();
-
    }
 
    public function getNewReflections($date){
-
         return Reflection::where('updated_at', '>', $date)->get()->toArray();
-
    }
 
    public function getNewHappenings($date){
-
         return Happening_event::where('updated_at', '>', $date)->get()->toArray();
-
    }
 
     public function getNewRawJumuiyas($date){
-
         return Raw_jumuiya::where('updated_at', '>', $date)->get()->toArray();
-
     }
 
     public function getNewParishes($date){
-
         return Parish::where('updated_at', '>', $date)->get()->toArray();
-
     }
 
     public function getNewStations($date){
@@ -206,6 +229,80 @@ class NewDataController extends Controller
         return Response::json($data, '200', $headers);
     }
 
+    /************************************************************************************************/
+
+    public function getTrashedReadings($date){
+        $readings = Reading::withTrashed()->where('deleted_at', '>', $date)->get(['id']);
+        foreach ($readings as $reading) {
+            $this->reading_ids[] =$reading->id;
+        }
+        return $this->reading_ids;
+    }
+
+    public function getTrashedPrayers($date){
+        $prayers = Prayer::withTrashed()->where('deleted_at', '>', $date)->get(['id']);
+        foreach($prayers as $prayer){
+            $this->prayer_ids[] = $prayer->id;
+        }
+        return $this->prayer_ids;
+    }
+
+    public function getTrashedReflections($date){
+        $reflections = Reflection::withTrashed()->where('deleted_at', '>', $date)->get(['id']);
+        foreach($reflections as $reflection){
+            $this->reflection_ids[] = $reflection->id;
+        }
+        return $this->reflection_ids;
+    }
+
+    public function getTrashedHappenings($date){
+        $happenings = Happening_event::withTrashed()->where('deleted_at', '>', $date)->get(['id']);
+        foreach($happenings as $happening){
+            $this->happening_ids[] = $happening->id;
+        }
+        return $this->happening_ids;
+    }
+
+    public function getTrashedRawJumuiyas($date){
+        $raw_jumuiyas = Raw_jumuiya::withTrashed()->where('deleted_at', '>', $date)->get(['id']);
+        foreach($raw_jumuiyas as $raw_jumuiya){
+            $this->raw_jumuiya_ids[] = $raw_jumuiya->id;
+        }
+        return $this->raw_jumuiya_ids;
+    }
+
+    public function getTrashedJumuiyas($date){
+
+        $jumuiyas = Jumuiya::withTrashed()->where('deleted_at', '>', $date)->get(['id']);
+        foreach ($jumuiyas as $jumuiya) {
+            $this->jumuiya_ids = $jumuiya->id;
+        }
+        return $this->jumuiya_ids;
+    }
+
+    public function getTrashedPrayerTypes($date){
+        $prayer_types = Prayer_types::withTrashed()->where('deleted_at', '>', $date)->get(['id']);
+        foreach($prayer_types as $prayer_type){
+            $this->prayer_type_ids[] = $prayer_type->id;
+        }
+        return $this->prayer_type_ids;
+    }
+
+    public function getTrashedUserChurches($date){
+        $churches = User_stations::withTrashed()->where('deleted_at', '>', $date)->where('user_id', \Auth::user()->id)->get(['id']);
+        foreach($churches as $church){
+            $this->church_ids[] = $church->id;
+        }
+        return $this->church_ids;
+    }
+
+    public function getTrashedAnnouncements($date){
+        $announcements = Announcement::withTrashed()->where('deleted_at', '>', $date)->get(['id']);
+        foreach($announcements as $announcement){
+            $this->announcement_ids[] = $announcement->id;
+        }
+        return $this->announcement_ids;
+    }
     /************************************************************************************************/
 
     public function getAllReadings(){

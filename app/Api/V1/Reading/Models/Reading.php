@@ -7,15 +7,24 @@ use App\Api\V1\Reflection\Models\Reflection;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Observers\GlobalObserver;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Reading extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
     /**
      * List of fields that can be mass assigned
      * @var array
      */
     protected $fillable = [
-
         'reading_date',
         'reading_day',
 
@@ -37,9 +46,7 @@ class Reading extends Model
         'gospel_book',
         'gospel_body',
         'user_id'
-
     ];
-
 
     /**
      * Reading User One to many relationship

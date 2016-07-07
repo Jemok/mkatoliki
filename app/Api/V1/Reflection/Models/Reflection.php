@@ -7,9 +7,19 @@ use App\Api\V1\Reading\Models\Reading;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 use App\Observers\GlobalObserver;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Reflection extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
     /**
      * Fields that can be mass assigned
      * @var array
