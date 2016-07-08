@@ -503,7 +503,48 @@ API RESPONSE FOR A NORMAL VERIFIED ACCOUNT
                      "station_id": 1
                    },
                   ....
-                 ]
+                 ],
+                 ,
+                   "trash": {
+                     "readings": {
+                       "ids": ["5","7","8","9"
+                       ]
+                     },
+                     "prayers": {
+                       "ids": ["1","2","3"
+                       ]
+                     },
+                     "reflections": {
+                       "ids": ["1","2","3","4"
+                       ]
+                     },
+                     "happenings": {
+                       "ids": ["1","2","3"
+                       ]
+                     },
+                     "raw_jumuiyas": {
+                       "ids": []
+                     },
+                     "jumuiyas_events": {
+                       "ids": []
+                     },
+                     "user_churches": {
+                       "ids": []
+                     },
+                     "prayer_types": {
+                       "ids": ["3"
+                       ]
+                     },
+                     "announcements": {
+                       "ids": []
+                     }
+                   },
+                   "meta": {
+                       "to_server_last_date": {
+                         "date": "2016-07-08 11:37:51",
+                         "timezone_type": 3,
+                         "timezone": "Africa/Khartoum"
+             }
       }
     }
 
@@ -659,7 +700,7 @@ API RESPONSE FOR A NORMAL VERIFIED ACCOUNT
     POST: /api/auth/check/phone-number HTTP/1.1
 
     {
-        "email":""
+        "phone_number":"0712675071"
     }
 
     RESPONSE 200 OK (number is not taken)
